@@ -17,12 +17,12 @@ using namespace GameL;
 //イニシャライズ
 void CObjHero::Init()
 {
-	m_px = 64.0f; //位置
-	m_py = 64.0f;
+	m_px = 64.0f*11; //位置
+	m_py = 64.0f*11;
 	m_vx = 0.0f; //移動ベクトル
 	m_vy = 0.0f;
 
-	m_hero_life = 30;//主人公の体力用変数
+	m_hero_life = 3;//主人公の体力用変数
 
 
 
@@ -52,14 +52,14 @@ void CObjHero::Init()
 
 
 
-	m_ani_time = 6;
+	m_ani_time = 4;
 	m_time = 10;
 	m_flg =false;
 
 	m_ani_frame = 1;//静止フレームを初期にする
 
 	m_speed_power = 1.0f;
-	m_ani_max_time = 6;
+	m_ani_max_time = 4;
 	m_ani_move = 0;
 
 	m_posture = 1.0f; //右向き0.0ｆ　左向き1.0ｆ
@@ -83,12 +83,6 @@ void CObjHero::Action()
 
 	if (m_hero_stop == false)
 	{
-		//メニューキー
-		if (Input::GetVKey('M') == true)
-		{
-			Scene::SetScene(new CSceneMenu);
-		}
-
 
 		//Zキー入力で速度アップ
 		if (m_stamina_limid >= 10 && Input::GetVKey(VK_LSHIFT) == true ||
@@ -96,7 +90,7 @@ void CObjHero::Action()
 		{
 
 			//ダッシュ時の速度
-			m_speed_power = 1.5f;
+			m_speed_power = 0.9f;
 			m_ani_max_time = 4;
 
 			m_stamina_limid -= 0.5f;
@@ -104,7 +98,7 @@ void CObjHero::Action()
 		else
 		{
 			//通常速度
-			m_speed_power = 1.0f;
+			m_speed_power = 0.6f;
 			m_ani_max_time = 4;
 
 			if (m_stamina_limid < 90.0f)
@@ -205,13 +199,13 @@ void CObjHero::Action()
 		//2番目のアイテムを使う処理
 		else if (Input::GetVKey('2') == true && UI->GetItemflag_2() == true)
 		{
-			if (m_hero_life <= 29)
+			if (m_hero_life <= 2)
 			{
 				use_Item_flag_2 = true;
 				m_hero_life = 30;
 				UI->Settakeflag_2(false);
 			}
-			else if (m_hero_life == 30)
+			else if (m_hero_life == 3)
 			{
 				;
 			}
@@ -337,13 +331,15 @@ void CObjHero::Action()
 			m_hero_life -= 1;
 
 			m_flg = true;
+			
 
-			if (m_hero_life == 20)
+			m_time = 300;
+			if (m_hero_life == 2)
 			{
 				Conflict_flag = true;
 			}
 
-			if (m_hero_life == 10)
+			if (m_hero_life == 1)
 			{
 				Conflict_flag2 = true;
 			}
@@ -356,6 +352,8 @@ void CObjHero::Action()
 
 		}
 
+	   
+
 		if (m_flg == true && m_time > 0)
 		{
 			m_time--;
@@ -363,8 +361,9 @@ void CObjHero::Action()
 		else if (m_time == 0)
 		{
 			m_flg = false;
-			m_time = 10;
+
 		}
+	
 	
 }
 

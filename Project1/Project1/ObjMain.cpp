@@ -30,8 +30,8 @@ CObjMain::CObjMain(int map[ROOM_X][ROOM_Y])
 //イニシャライズ
 void CObjMain::Init()
 {
-	m_scroll_x = 64.0f;
-	m_scroll_y = 64.0f;
+	m_scroll_x = -64.0f*7;
+	m_scroll_y = -64.0f*7;
 
 	map_chg = 0;
 	room_chg = 0;
@@ -805,7 +805,9 @@ void CObjMain::BlockHit(
 			{
 
 
-				if (m_map[i][j] <= 99 && m_map[i][j] >=3  && m_map[i][j] != 7 && m_map[i][j] != 21 && m_map[i][j] != 25 && m_map[i][j] != 26 && m_map[i][j] != 34 && m_map[i][j] != 35 )
+				if (m_map[i][j] <= 99 && m_map[i][j] >=3&&m_map[i][j]!=4 && m_map[i][j] != 5 && 
+					m_map[i][j] != 7 && m_map[i][j] != 21 && m_map[i][j] != 25 && m_map[i][j] != 26 
+					&& m_map[i][j] != 35 )
 				{
 					//要素番号を座標に変更
 					float bx = j * 64.0f;
@@ -945,7 +947,7 @@ void CObjMain::BlockHit(
 
 										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
 										save_x[map_chg][0] = hero->GetX();
-										save_y[map_chg][0] = hero->GetY() + 32.0f;
+										save_y[map_chg][0] = hero->GetY() - 32.0f;
 										save_scroll_x[map_chg][0] = main->GetScrollX();
 										save_scroll_y[map_chg][0] = main->GetScrollY();
 
@@ -998,7 +1000,7 @@ void CObjMain::BlockHit(
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-										save_x[map_chg][0] = hero->GetX() - 32.0f;
+										save_x[map_chg][0] = hero->GetX() + 32.0f;
 										save_y[map_chg][0] = hero->GetY();
 										save_scroll_x[map_chg][0] = main->GetScrollX();
 										save_scroll_y[map_chg][0] = main->GetScrollY();
@@ -1775,7 +1777,7 @@ void CObjMain::Draw()
 
 
 					//床テクスチャ
-					if (m_map[i][j] == 1 || m_map[i][j] == 4 || m_map[i][j] == 7 || m_map[i][j] == 13 || m_map[i][j] == 21||m_map[i][j]==25 || m_map[i][j] == 26)
+					if (m_map[i][j] == 1 || m_map[i][j] == 4 || m_map[i][j] == 7 || m_map[i][j] == 13 || m_map[i][j] == 21||m_map[i][j]==25 || m_map[i][j] == 26|| m_map[i][j] == 5)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;

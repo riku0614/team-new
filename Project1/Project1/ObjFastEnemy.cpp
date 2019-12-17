@@ -39,6 +39,11 @@ void CObjFastEnemy::Init()
 	m_hit_right = false;
 
 
+	m_ani_frame = 0;
+
+	m_ani_time = 4;
+
+	m_ani_max_time = 4;
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_FASTENEMY, 1);
 
@@ -65,50 +70,25 @@ void CObjFastEnemy::Action()
 	}
 
 
+	//アニメーションのリセット
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
 
-	////衝突判定による移動フラグの切り替え
-	//else if (m_hit_left == true)
-	//{
-	//	m_flg = 1;
-	//}
-	//else if (m_hit_down == true)
-	//{
-	//	m_flg = 2;
-	//}
-	//else if (m_hit_right == true)
-	//{
-	//	m_flg = 3;
-	//}
-	//else if (m_hit_up == true)
-	//{
-	//	m_flg = 0;
-	//}
-
-	////移動
-	//else if (m_flg == 0)
-	//{
-	//	m_ex += 3.0f;
-
-	//}
-	//else if (m_flg == 1)
-	//{
-	//	m_ey += 3.0f;
-	//}
-	//else if (m_flg == 2)
-	//{
-	//	m_ex -= 3.0f;
-	//}
-	//else if (m_flg == 3)
-	//{
-	//	m_ey -= 3.0f;
-	//}
+	//アニメーションフレームのリセット
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
 
 	m_ex += m_vx * 6.5f;
 	m_ey += m_vy * 6.5f;
-
+	m_ani_time++;
 	//高速移動によるblock判定
 	bool b;
 	float pxx, pyy, r;
@@ -181,25 +161,34 @@ void CObjFastEnemy::Action()
 //ドロー
 void CObjFastEnemy::Draw()
 {
-	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	if (main->RoomFlag() == false)
+	{
+		int AniData[4] =
+		{
+			0,1,1,0,
 
-	RECT_F src; //描画元切り取り位置
-	RECT_F dst; //描画先表示位置
+		};
+		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
-	//切り取り位置の設定
-	src.m_top = 0.0f;
-	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+		RECT_F src; //描画元切り取り位置
+		RECT_F dst; //描画先表示位置
 
-	//表示位置の設定
-	dst.m_top = 0.0f + m_ey + scroll->GetScrollY();
-	dst.m_left = (64.0) + m_ex + scroll->GetScrollX();
-	dst.m_right = (64 - 64.0f) + m_ex + scroll->GetScrollX();
-	dst.m_bottom = 64.0f + m_ey + scroll->GetScrollY();
+		//切り取り位置の設定
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 512.0f;
+		src.m_right = 512.0 + AniData[m_ani_frame] * 512.0f;
+		src.m_bottom = 512.0f;
 
-	//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
-	Draw::Draw(32, &src, &dst, c, 0.0f);
+
+		//表示位置の設定
+		dst.m_top = 0.0f + m_ey + main->GetScrollY();
+		dst.m_left = (128.0) + m_ex + main->GetScrollX();
+		dst.m_right = (128 - 128.0f) + m_ex + main->GetScrollX();
+		dst.m_bottom = 128.0f + m_ey + main->GetScrollY();
+
+		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
+		Draw::Draw(49, &src, &dst, c, 0.0f);
+	}
 
 }

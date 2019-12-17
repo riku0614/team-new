@@ -125,7 +125,7 @@ void CObjGameUI::Draw()
 		CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
 		/*ダメージエフェクト*/
-		if (hero->action_flag() == true && hero->GetLife() <= 20)
+		if (hero->action_flag() == true && hero->GetLife() == 2)
 		{
 			//切り取り位置の設定
 			src.m_top = 0.0f;
@@ -143,7 +143,7 @@ void CObjGameUI::Draw()
 
 			Draw::Draw(47, &src, &dst, c, 0.0f);
 		}
-		if (hero->action_flag2() == true && hero->GetLife() <= 10)
+		if (hero->action_flag2() == true && hero->GetLife() == 1)
 		{
 			//切り取り位置の設定
 			src.m_top = 0.0f;

@@ -38,6 +38,11 @@ void CObjSpwanEnemy::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
+	m_ani_frame = 0;
+
+	m_ani_time = 4;
+
+	m_ani_max_time = 4;
 
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_FASTENEMY, 1);
@@ -66,42 +71,7 @@ void CObjSpwanEnemy::Action()
 
 
 
-	////衝突判定による移動フラグの切り替え
-	//else if (m_hit_left == true)
-	//{
-	//	m_flg = 1;
-	//}
-	//else if (m_hit_down == true)
-	//{
-	//	m_flg = 2;
-	//}
-	//else if (m_hit_right == true)
-	//{
-	//	m_flg = 3;
-	//}
-	//else if (m_hit_up == true)
-	//{
-	//	m_flg = 0;
-	//}
 
-	////移動
-	//else if (m_flg == 0)
-	//{
-	//	m_ex += 3.0f;
-
-	//}
-	//else if (m_flg == 1)
-	//{
-	//	m_ey += 3.0f;
-	//}
-	//else if (m_flg == 2)
-	//{
-	//	m_ex -= 3.0f;
-	//}
-	//else if (m_flg == 3)
-	//{
-	//	m_ey -= 3.0f;
-	//}
 
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
@@ -109,6 +79,20 @@ void CObjSpwanEnemy::Action()
 	m_ex += m_vx * 3.5f;
 	m_ey += m_vy * 3.5f;
 
+	m_ani_time++;
+
+	//アニメーションのリセット
+	if (m_ani_time > m_ani_max_time)
+	{
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//アニメーションフレームのリセット
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 	//高速移動によるblock判定
 	bool b;
 	float pxx, pyy, r;
@@ -128,6 +112,8 @@ void CObjSpwanEnemy::Action()
 
 	//ray判定
 	b = pbb->HeroBlockCrossPoint(m_ex - pbb->GetScrollX() + 64, m_ey - pbb->GetScrollY() + 64, vx, 0.0f, &pxx, &pyy, &r);
+
+
 
 	if (b == true)
 	{

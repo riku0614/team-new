@@ -73,6 +73,9 @@ private:
 	int m_id;
 	int k_id;
 	
+	int m_ani_frame;
+	int m_ani_time;
+	int m_ani_max_time;
 	float damage_time;//ダメージブースト用時間変数
 	bool boost_flag;//ダメージブーストを一回しか発動させないためのフラグ
 

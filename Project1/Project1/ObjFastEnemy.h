@@ -62,6 +62,9 @@ private:
 	int k_id;
 	int f_id;
 
+	int m_ani_frame;
+	int m_ani_time;
+	int m_ani_max_time;
 
 	float px, py;//Œð“_
 };

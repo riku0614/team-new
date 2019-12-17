@@ -119,7 +119,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"black.png", 46, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダメージエフェクト1.png", 47, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダメージエフェクト2.png", 48, TEX_SIZE_1024);
-	
+	Draw::LoadImageW(L"敵結合.png", 49, TEX_SIZE_1024);
 
 
 	//出力させる文字のグラフィック作成

@@ -98,14 +98,20 @@ void CObjbar::Draw()
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] == BAR)
+				if (r_map[i][j] == BAR )
 				{
-					//表示位置の設定
-					dst.m_top = i * 64.0f + hy;
-					dst.m_left = j * 64.0f + hx;
-					dst.m_right = dst.m_left + 32.0f;
-					dst.m_bottom = dst.m_top + 32.0f;
-
+					if (main->GetStoryFlag() == true)
+					{
+						;
+					}
+					else
+					{
+						//表示位置の設定
+						dst.m_top = i * 64.0f + hy;
+						dst.m_left = j * 64.0f + hx;
+						dst.m_right = dst.m_left + 32.0f;
+						dst.m_bottom = dst.m_top + 32.0f;
+					}
 					Draw::Draw(8, &src, &dst, c, 0.0f);
 				}
 			}
@@ -117,7 +123,7 @@ void CObjbar::Draw()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == BAR)
+				if (m_map[i][j] == BAR&&main->GetStoryFlag()==false)
 				{
 					//表示位置の設定
 					dst.m_top = i * 64.0f + hy;
