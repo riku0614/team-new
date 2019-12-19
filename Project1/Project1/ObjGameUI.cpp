@@ -23,9 +23,9 @@ void CObjGameUI::Init()
 	take_flag_3 = false;
 
 
-	m_id = 0;
-	h_id = 0;
-	b_id = 0;
+	m_id = 99;
+	h_id = 99;
+	b_id = 99;
 }
 
 //アクション
@@ -46,20 +46,20 @@ void CObjGameUI::Action()
 	if (hero->SetItemflag() == true) //アイテム欄の1番目
 	{
 		hero->SetFlug(false);
-		m_id = 0;
+		m_id = 99;
 	}
 
 
 	if (hero->SetItemflag_2() == true) //アイテム欄の2番目
 	{
 		hero->SetFlug_2(false);
-		h_id = 0;
+		h_id = 99;
 	}
 	
 	if (hero->SetItemflag_3() == true) //アイテム欄の3番目
 	{
 		hero->SetFlug_3(false);
-		b_id = 0;
+		b_id = 99;
 	}
 }
 
@@ -180,36 +180,35 @@ void CObjGameUI::Draw()
 		//主人公のアイテムと当たったフラグを持ってくる
 		CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-		if (main)
+		
+		//アイテムの表示（1番）
+		if (hero->GetKeyID()==ITEM_KEY)
+		{
+			RECT_F src;	//描画元切り取り位置
+			RECT_F dst;	//描画先表示位置
 
-			//アイテムの表示（1番）
-			if (hero->Getflag() == true)
-			{
-				RECT_F src;	//描画元切り取り位置
-				RECT_F dst;	//描画先表示位置
-
-				src.m_top = 10.0f;
-				src.m_left = 10.0f;
-				src.m_right = 40.0f;
-				src.m_bottom = 40.0f;
-
-
-				//表示位置設定
-				dst.m_top = 562.0f;
-				dst.m_left = 686.0f;
-				dst.m_right = dst.m_left + 40.0f;
-				dst.m_bottom = dst.m_top + 45.0f;
-
-				//描画設定
-				Draw::Draw(9, &src, &dst, c, 0.0f);
-
-				take_flag = true; //1番目のアイテムを持っているかどうかのフラグをtrueにする→主人公にてアイテムを使用できるかどうかの判定
+			src.m_top = 10.0f;
+			src.m_left = 10.0f;
+			src.m_right = 40.0f;
+			src.m_bottom = 40.0f;
 
 
-			}
+			//表示位置設定
+			dst.m_top = 562.0f;
+			dst.m_left = 686.0f;
+			dst.m_right = dst.m_left + 40.0f;
+			dst.m_bottom = dst.m_top + 45.0f;
+
+			//描画設定
+			Draw::Draw(9, &src, &dst, c, 0.0f);
+
+			take_flag = true; //1番目のアイテムを持っているかどうかのフラグをtrueにする→主人公にてアイテムを使用できるかどうかの判定
+
+
+		}
 
 		//2番のアイテム表示
-		if (hero->Getflag_2() == true)
+		if (hero->GatHealID()==ITEM_HEAL)
 		{
 			RECT_F src;	//描画元切り取り位置
 			RECT_F dst;	//描画先表示位置
@@ -233,7 +232,7 @@ void CObjGameUI::Draw()
 		}
 
 		//3番のアイテム表示
-		if (hero->Getflag_3() == true)
+		if (hero->GetBarID()==ITEM_BAR)
 		{
 			RECT_F src;	//描画元切り取り位置
 			RECT_F dst;	//描画先表示位置
@@ -262,6 +261,36 @@ void CObjGameUI::Draw()
 			Font::StrDraw(L"8階", 730, 10, 30, c);
 		}
 		else if (main->MapChangeData() == 1)
+		{
+			//階の表示
+			Font::StrDraw(L"7階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 2)
+		{
+			//階の表示
+			Font::StrDraw(L"6階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 3)
+		{
+			//階の表示
+			Font::StrDraw(L"5階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 4)
+		{
+			//階の表示
+			Font::StrDraw(L"4階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 5)
+		{
+			//階の表示
+			Font::StrDraw(L"3階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 6)
+		{
+			//階の表示
+			Font::StrDraw(L"2階", 730, 10, 30, c);
+		}
+		else if (main->MapChangeData() == 7)
 		{
 			//階の表示
 			Font::StrDraw(L"1階", 730, 10, 30, c);

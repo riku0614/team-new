@@ -42,8 +42,6 @@ void CObjMain::Init()
 	first_stop = true;
 
 	
-	map_Item = false;
-	map_Item_2 = false;
 	pepepe = false;
 	pepepe_2 = false;
 	room_chg_stop = false;
@@ -159,37 +157,35 @@ void CObjMain::Action()
 	//７階以降のマップの処理
 	if (map_chg >= 1)
 	{
-		if (map_chg > 0 && stop_flg == true)
+		if (map_chg >=1 && stop_flg == true&&first_stop==true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
 
 			//音楽スタート
 			Audio::Start(5);
-			if (stop_flg2 == true)
-			{
-				//マップ切り替え関数を呼び出す
-				MapChanger(map_chg, m_map, p);
-				stop_flg = false;
-			}
-			else
-			{
-				memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
-			}
-			//主人公の初期位置の値を関数で指定する
-			spawn_point[map_chg] = SpawnChanger(map_chg);
-
+			
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+			//マップ切り替え関数を呼び出す
+			MapChanger(map_chg, m_map, p);
+			
+			hero->SetFlug(false);
+	
+			//主人公の初期位置の値を関数で指定する
+			spawn_point[map_chg] = SpawnChangerX(map_chg);
+
+			
 			hero->SetX(spawn_point[map_chg]);
 			hero->SetY(0.0f);
-			m_scroll_x = spawn_point[map_chg] * 1.0f;
+			m_scroll_x = -spawn_point[map_chg] ;
 			m_scroll_y = 0.0f;
-			
-		
 
-			
-
+		}
+		else if(stop_flg==true&&room_in==false)
+		{
+			memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
 		}
 		//廊下マップからマップへの切り替え処理
 		else if (room_in == false && stop_flg == true)
@@ -270,101 +266,101 @@ void CObjMain::Action()
 
 	}
 
-	//敵キャラの生成（廊下用）
-	if (stop_flg == true)
-	{
-		for (int i = 0; i < MAP_X; i++)
-		{
-			for (int j = 0; j < MAP_Y; j++)
-			{
-				if (m_map[i][j] == 5)
-				{
+	////敵キャラの生成（廊下用）
+	//if (stop_flg == true)
+	//{
+	//	for (int i = 0; i < MAP_X; i++)
+	//	{
+	//		for (int j = 0; j < MAP_Y; j++)
+	//		{
+	//			if (m_map[i][j] == 5)
+	//			{
 
-					//敵オブジェクト作成
-					CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
-					Objs::InsertObj(obje, OBJ_ENEMY, 11);
-
-
+	//				//敵オブジェクト作成
+	//				CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
+	//				Objs::InsertObj(obje, OBJ_ENEMY, 11);
 
 
-				}
-			}
+	//				m_map[i][j] = 1;
 
-		}
-	}
+	//			}
+	//		}
 
-	for (int i = 0; i < MAP_X; i++)
-	{
-		for (int j = 0; j < MAP_Y; j++)
-		{
-			if (m_map[i][j] == 34)
-			{
-				if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
-				{
+	//	}
+	//}
 
-					//フラグを踏んだら敵が出現するオブジェクト作成
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+	//for (int i = 0; i < MAP_X; i++)
+	//{
+	//	for (int j = 0; j < MAP_Y; j++)
+	//	{
+	//		if (m_map[i][j] == 34)
+	//		{
+	//			if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
+	//			{
 
-					m_map[i][j] = 1;
-				}
-			}
-		}
-	}
-	for (int i = 0; i < ROOM_X; i++)
-	{
-		for (int j = 0; j < ROOM_Y; j++)
-		{
-			if (r_map[i][j] == 34)
-			{
-				if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
-				{
+	//				//フラグを踏んだら敵が出現するオブジェクト作成
+	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
-					//フラグを踏んだら敵が出現するオブジェクト作成
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+	//				m_map[i][j] = 1;
+	//			}
+	//		}
+	//	}
+	//}
+	//for (int i = 0; i < ROOM_X; i++)
+	//{
+	//	for (int j = 0; j < ROOM_Y; j++)
+	//	{
+	//		if (r_map[i][j] == 34)
+	//		{
+	//			if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
+	//			{
 
-					r_map[i][j] = 1;
-				}
-			}
-		}
-	}
-	for (int i = 0; i < MAP_X; i++)
-	{
-		for (int j = 0; j < MAP_Y; j++)
-		{
-			if (m_map[i][j] == 35)
-			{
-				if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
-				{
+	//				//フラグを踏んだら敵が出現するオブジェクト作成
+	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
-					//フラグを踏んだら敵が出現するオブジェクト作成
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+	//				r_map[i][j] = 1;
+	//			}
+	//		}
+	//	}
+	//}
+	//for (int i = 0; i < MAP_X; i++)
+	//{
+	//	for (int j = 0; j < MAP_Y; j++)
+	//	{
+	//		if (m_map[i][j] == 35)
+	//		{
+	//			if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
+	//			{
 
-					m_map[i][j] = 1;
-				}
-			}
-		}
-	}
-	for (int i = 0; i < ROOM_X; i++)
-	{
-		for (int j = 0; j < ROOM_Y; j++)
-		{
-			if (r_map[i][j] == 35)
-			{
-				if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
-				{
+	//				//フラグを踏んだら敵が出現するオブジェクト作成
+	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
-					//フラグを踏んだら敵が出現するオブジェクト作成
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+	//				m_map[i][j] = 1;
+	//			}
+	//		}
+	//	}
+	//}
+	//for (int i = 0; i < ROOM_X; i++)
+	//{
+	//	for (int j = 0; j < ROOM_Y; j++)
+	//	{
+	//		if (r_map[i][j] == 35)
+	//		{
+	//			if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
+	//			{
 
-					r_map[i][j] = 1;
-				}
-			}
-		}
-	}
+	//				//フラグを踏んだら敵が出現するオブジェクト作成
+	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+
+	//				r_map[i][j] = 1;
+	//			}
+	//		}
+	//	}
+	//}
 	//アイテム「鍵」の表示処理：教室用
 	if (stop_flg == true && room_in == false)
 	{
@@ -816,7 +812,7 @@ void CObjMain::BlockHit(
 
 
 					//スクロールの影響
-					float scroll_x = scroll_on_x ? m_scroll_x : 0;
+     				float scroll_x = scroll_on_x ? m_scroll_x : 0;
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 
 					//主人公とブロックの当たり判定
@@ -857,9 +853,11 @@ void CObjMain::BlockHit(
 									stop_flg2 = true;
 									first_stop = true;
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									*k_id = 99;
+									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
-									hero->SetFlug(false);
+									*k_id = 99;
+									hero->SetUseItem(true);
+									UI->Settakeflag(false);
 									if (map_chg == 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
@@ -918,9 +916,11 @@ void CObjMain::BlockHit(
 									}
 
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									*k_id = 99;
+									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
-									hero->SetFlug(false);
+									*k_id = 99;
+									hero->SetUseItem(true);
+									UI->Settakeflag(false);
 
 									stop_flg = true;
 									stop_flg2 = true;
@@ -967,12 +967,14 @@ void CObjMain::BlockHit(
 								{
 									stop_flg = true;
 									stop_flg2 = true;
-									
 									first_stop = true;
-									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									*k_id = 99;
 
-									hero->SetFlug(false);
+									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+
+									*k_id = 99;
+									hero->SetUseItem(true);
+									UI->Settakeflag(false);
 
 									if (map_chg == 7)
 									{
@@ -1026,9 +1028,15 @@ void CObjMain::BlockHit(
 									stop_flg2 = true;
 									first_stop = true;
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+									
 									*k_id = 99;
 
-									hero->SetFlug(false);
+									
+									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+
+									hero->SetUseItem(true);
+									UI->Settakeflag(false);
+
 									if (map_chg == 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
@@ -1170,6 +1178,8 @@ void CObjMain::BlockHit(
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
 											gui->SetID(99);
+											
+											hero->SetBarID(99);
 
 											room_in = false;
 											stop_flg = true;
@@ -1235,6 +1245,8 @@ void CObjMain::BlockHit(
 										hero->SetFlug_3(false);
 										gui->SetID(99);
 
+										hero->SetBarID(99);
+
 										room_in = false;
 										stop_flg = true;
 
@@ -1296,6 +1308,8 @@ void CObjMain::BlockHit(
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
 											gui->SetID(99);
+
+											hero->SetBarID(99);
 
 											hero->SetX(hero->GetX() - 32.0f);
 
@@ -1387,6 +1401,7 @@ void CObjMain::BlockHit(
 											hero->SetFlug_3(false);
 											gui->SetID(99);
 
+											hero->SetBarID(99);
 										}
 										
 
@@ -1499,11 +1514,12 @@ void CObjMain::ItemHit(
 								*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / 64;
 								iy = by / 64;
-
+								
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
 									m_map[iy][ix] = 1;
+									
 
 									delete_flg = false;
 								}
@@ -1523,6 +1539,8 @@ void CObjMain::ItemHit(
 								{
 									m_map[iy][ix] = 1;
 
+									
+
 									delete_flg = false;
 								}
 								*vy = 0.0f;
@@ -1540,6 +1558,8 @@ void CObjMain::ItemHit(
 								{
 									m_map[iy][ix] = 1;
 
+									
+
 									delete_flg = false;
 								}
 								*vx = -(*vx)*0.1f;//-VX*反発係数
@@ -1555,6 +1575,8 @@ void CObjMain::ItemHit(
 								if (delete_flg == true)
 								{
 									m_map[iy][ix] = 1;
+
+									
 
 									delete_flg = false;
 								}
@@ -1652,6 +1674,8 @@ void CObjMain::ItemHit(
 								if (delete_flg == true)
 								{
 									r_map[iy][ix] = 1;
+
+
 
 									delete_flg = false;
 								}

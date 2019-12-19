@@ -52,12 +52,14 @@ public:
 	bool SetItemflag() { return use_Item_flag; }
 	bool SetItemflag_2() { return use_Item_flag_2; }
 	bool SetItemflag_3() { return use_Item_flag_3; }
+	void SetUseItem(bool f) { use_Item_flag = f; }
 
 	bool action_flag() { return Conflict_flag; }
 	bool action_flag2() { return Conflict_flag2; }
 
-	int GetKeyID() { return m_id; }
+	int GetKeyID() { return k_id; }
 	int GatHealID() { return h_id; }
+	void SetBarID(int id) { b_id = id; }
 	bool GetEnemyFlag() { return enemy_flg; }
 	int GetBarID() { return b_id; }
 

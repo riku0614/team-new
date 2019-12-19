@@ -16,4 +16,4 @@ class CSceneMain : public CScene
 	
 	private:
 		int m_time;
-		};
+};

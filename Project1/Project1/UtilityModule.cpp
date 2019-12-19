@@ -126,7 +126,7 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p,int r)
 戻り値　float
 ステージごとの主人公の初期位置を返す変数
 */
-float SpawnChanger(int m)
+float SpawnChangerX(int m)
 {
 	if (m == 0)
 	{
@@ -134,31 +134,31 @@ float SpawnChanger(int m)
 	}
 	else if (m == 1)
 	{
-		return 64.0 * 30;
+		return 64.0f * 2;
 	}
 	else if (m == 2)
 	{
-		return 64.0;
+		return 64.0f * 30.0f;
 	}
 	else if (m == 3)
 	{
-		return 64.0;
+		return 64.0f * 70.0f;
 	}
 	else if (m == 4)
 	{
-		return 64.0;
+		return 64.0f;
 	}
 	else if (m == 5)
 	{
-		return 64.0;
+		return 64.0f;
 	}
 	else if (m == 6)
 	{
-		return 64.0;
+		return 64.0f;
 	}
 	else if (m == 7)
 	{
-		return 64.0;
+		return 64.0f;
 	}
 
 }

@@ -27,7 +27,6 @@ void CObjHero::Init()
 
 
 
-	peperon_flag = false;
 	use_Item_flag = false;
 	
 	Conflict_flag = false;
@@ -90,7 +89,7 @@ void CObjHero::Action()
 		{
 
 			//ダッシュ時の速度
-			m_speed_power = 0.9f;
+			m_speed_power = 1.5f;
 			m_ani_max_time = 4;
 
 			m_stamina_limid -= 0.5f;
@@ -98,7 +97,7 @@ void CObjHero::Action()
 		else
 		{
 			//通常速度
-			m_speed_power = 0.6f;
+			m_speed_power = 1.0f;
 			m_ani_max_time = 4;
 
 			if (m_stamina_limid < 90.0f)
@@ -153,7 +152,7 @@ void CObjHero::Action()
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
 			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
 		{
-			Main->SetKeyFlag(true);
+		    Main->SetKeyFlag(true);
 			peperon_flag = true;
 			k_id = ITEM_KEY;
 			Main->SetDelete(true);
@@ -413,10 +412,10 @@ void CObjHero::Draw()
 		Input::GetVKey(VK_RSHIFT) == true && Input::GetVKey('A') == true && m_stamina_limid > 0)
 	{
 		//切り取り位置設定
-		src.m_top = 64.0f;
+		src.m_top = 0.0f;
 		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + +AniData[m_ani_frame] * 64.0f;
-		src.m_bottom = 128.0f;
+		src.m_bottom = 64.0f;
 		
 	}
 	else if (Input::GetVKey(VK_LSHIFT) == true && Input::GetVKey('S') == true && m_stamina_limid > 0 ||
