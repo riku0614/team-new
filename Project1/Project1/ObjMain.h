@@ -140,7 +140,8 @@ class CObjMain : public CObj
 		int size;        
 		unsigned int m_time;      //フォントを表示する秒数
 
-		float spawn_point[MAP_NUMBER]; //map毎の初期値を関数から入れる用の変数
+		float spawn_pointX[MAP_NUMBER]; //map毎の初期値を関数から入れる用の変数
+		float spawn_pointY[MAP_NUMBER];
 		int jx;
 		int jy;
 		

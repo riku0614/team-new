@@ -120,7 +120,7 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p,int r)
 	memcpy(r_map, map, sizeof(int)*(ROOM_X * ROOM_Y));
 
 }
-//SpawnChanger関数
+//SpawnChangerX関数
 /*
 引数１　int m     :map切り替え用変数
 戻り値　float
@@ -128,17 +128,51 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p,int r)
 */
 float SpawnChangerX(int m)
 {
-	if (m == 0)
+	if (m == 1)
 	{
-		return 0.0f;
+		return 64.0f;
 	}
-	else if (m == 1)
+	else if (m == 2)
+	{
+		return 64.0f * 60.0f;
+	}
+	else if (m == 3)
+	{
+		return 64.0f * 70.0f;
+	}
+	else if (m == 4)
+	{
+		return 64.0f;
+	}
+	else if (m == 5)
+	{
+		return 64.0f;
+	}
+	else if (m == 6)
+	{
+		return 64.0f;
+	}
+	else if (m == 7)
+	{
+		return 64.0f*33.0f;
+	}
+
+}
+//SpawnChangerY関数
+/*
+引数１　int m     :map切り替え用変数
+戻り値　float
+ステージごとの主人公の初期位置を返す変数
+*/
+float SpawnChangerY(int m)
+{
+	if (m == 1)
 	{
 		return 64.0f * 2;
 	}
 	else if (m == 2)
 	{
-		return 64.0f * 30.0f;
+		return 64.0f * 67.0f;
 	}
 	else if (m == 3)
 	{

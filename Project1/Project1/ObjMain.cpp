@@ -36,7 +36,8 @@ void CObjMain::Init()
 	map_chg = 0;
 	room_chg = 0;
 	stop_flg = true;
-	spawn_point[7] = NULL;
+	spawn_pointX[7] = NULL;
+	spawn_pointY[7] = NULL;
 	room_in = true;
 	delete_flg = false;
 	first_stop = true;
@@ -60,13 +61,13 @@ void CObjMain::Init()
 
 	//廊下マップデータ
 	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案1.csv", &size);
-	p[1] = Save::ExternalDataOpen(L"マップ３.csv", &size);
-	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案2.csv", &size);
+	p[1] = Save::ExternalDataOpen(L"マップ３.csv", &size); 
+	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案7.csv", &size);
 	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案3.csv", &size);
     p[4] = Save::ExternalDataOpen(L"チーム開発マップ案４.csv", &size);
 	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案5.csv", &size);
     p[6] = Save::ExternalDataOpen(L"チーム開発マップ案6.csv", &size);
-	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案7.csv", &size);
+	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案2.csv", &size);
 	
 	
 }
@@ -133,7 +134,7 @@ void CObjMain::Action()
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 			hero->SetX(0.0f);
-			hero->SetY(64.0f * 3);
+			hero->SetY(64.0f * 4);
 			m_scroll_x = 0.0f;
 			m_scroll_y = 0.0f;
 
@@ -174,13 +175,13 @@ void CObjMain::Action()
 			hero->SetFlug(false);
 	
 			//主人公の初期位置の値を関数で指定する
-			spawn_point[map_chg] = SpawnChangerX(map_chg);
-
+			spawn_pointX[map_chg] = SpawnChangerX(map_chg);
+			spawn_pointY[map_chg] = SpawnChangerY(map_chg);
 			
-			hero->SetX(spawn_point[map_chg]);
+			hero->SetX(0.0f);
 			hero->SetY(0.0f);
-			m_scroll_x = -spawn_point[map_chg] ;
-			m_scroll_y = 0.0f;
+			m_scroll_x = -spawn_pointX[map_chg] ;
+			m_scroll_y = -spawn_pointY[map_chg];
 
 		}
 		else if(stop_flg==true&&room_in==false)
@@ -230,29 +231,28 @@ void CObjMain::Action()
 	float hy = hero->GetY();
 
 	//後方スクロールライン
-	if (hx < 75)
+	if (hx < 80)
 	{
-		hero->SetX(75);
+		hero->SetX(80);
 		m_scroll_x -= hero->GetVX();
 	}
-
 	//前方スクロールライン
-	if (hx > 400)
+	if (hx > 450)
 	{
-		hero->SetX(400);
+		hero->SetX(450);
 		m_scroll_x -= hero->GetVX();
 	}
 	//上方スクロールライン
-	if (hy < 75)
+	if (hy < 80)
 	{
-		hero->SetY(75);
+		hero->SetY(80);
 		m_scroll_y -= hero->GetVY();
 	}
 
 	//下方スクロールライン
-	if (hy > 400)
+	if (hy > 350)
 	{
-		hero->SetY(400);
+		hero->SetY(350);
 		m_scroll_y -= hero->GetVY();
 
 
@@ -266,101 +266,66 @@ void CObjMain::Action()
 
 	}
 
-	////敵キャラの生成（廊下用）
-	//if (stop_flg == true)
-	//{
-	//	for (int i = 0; i < MAP_X; i++)
-	//	{
-	//		for (int j = 0; j < MAP_Y; j++)
-	//		{
-	//			if (m_map[i][j] == 5)
-	//			{
+	//敵キャラの生成（廊下用）
+	if (stop_flg == true)
+	{
+		for (int i = 0; i < MAP_X; i++)
+		{
+			for (int j = 0; j < MAP_Y; j++)
+			{
+				if (m_map[i][j] == 5)
+				{
 
-	//				//敵オブジェクト作成
-	//				CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
-	//				Objs::InsertObj(obje, OBJ_ENEMY, 11);
+					//敵オブジェクト作成
+					CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
+					Objs::InsertObj(obje, OBJ_ENEMY, 11);
 
 
-	//				m_map[i][j] = 1;
+					m_map[i][j] = 1;
 
-	//			}
-	//		}
+				}
+			}
 
-	//	}
-	//}
+		}
+	}
 
-	//for (int i = 0; i < MAP_X; i++)
-	//{
-	//	for (int j = 0; j < MAP_Y; j++)
-	//	{
-	//		if (m_map[i][j] == 34)
-	//		{
-	//			if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
-	//			{
+	for (int i = 0; i < MAP_X; i++)
+	{
+		for (int j = 0; j < MAP_Y; j++)
+		{
+			if (m_map[i][j] == 34)
+			{
+				if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
+				{
 
-	//				//フラグを踏んだら敵が出現するオブジェクト作成
-	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+					//フラグを踏んだら敵が出現するオブジェクト作成
+					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
-	//				m_map[i][j] = 1;
-	//			}
-	//		}
-	//	}
-	//}
-	//for (int i = 0; i < ROOM_X; i++)
-	//{
-	//	for (int j = 0; j < ROOM_Y; j++)
-	//	{
-	//		if (r_map[i][j] == 34)
-	//		{
-	//			if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
-	//			{
+					m_map[i][j] = 1;
+				}
+			}
+		}
+	}
+	
+	for (int i = 0; i < MAP_X; i++)
+	{
+		for (int j = 0; j < MAP_Y; j++)
+		{
+			if (m_map[i][j] == 35)
+			{
+				if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
+				{
 
-	//				//フラグを踏んだら敵が出現するオブジェクト作成
-	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
+					//フラグを踏んだら敵が出現するオブジェクト作成
+					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
-	//				r_map[i][j] = 1;
-	//			}
-	//		}
-	//	}
-	//}
-	//for (int i = 0; i < MAP_X; i++)
-	//{
-	//	for (int j = 0; j < MAP_Y; j++)
-	//	{
-	//		if (m_map[i][j] == 35)
-	//		{
-	//			if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
-	//			{
-
-	//				//フラグを踏んだら敵が出現するオブジェクト作成
-	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
-
-	//				m_map[i][j] = 1;
-	//			}
-	//		}
-	//	}
-	//}
-	//for (int i = 0; i < ROOM_X; i++)
-	//{
-	//	for (int j = 0; j < ROOM_Y; j++)
-	//	{
-	//		if (r_map[i][j] == 35)
-	//		{
-	//			if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
-	//			{
-
-	//				//フラグを踏んだら敵が出現するオブジェクト作成
-	//				CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
-	//				Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
-
-	//				r_map[i][j] = 1;
-	//			}
-	//		}
-	//	}
-	//}
+					m_map[i][j] = 1;
+				}
+			}
+		}
+	}
 	//アイテム「鍵」の表示処理：教室用
 	if (stop_flg == true && room_in == false)
 	{
@@ -968,6 +933,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
+									map_chg ++;
 
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
@@ -976,7 +942,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -989,7 +955,7 @@ void CObjMain::BlockHit(
 									save_scroll_x[map_chg][1] = main->GetScrollX();
 									save_scroll_y[map_chg][1] = main->GetScrollY();
 
-									map_chg++;
+									
 								}
 								else if (m_map[i][j] == 18&& *c_id == CHAR_HERO)
 								{
@@ -1031,6 +997,7 @@ void CObjMain::BlockHit(
 									
 									*k_id = 99;
 
+									map_chg++;
 									
 									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
@@ -1049,7 +1016,7 @@ void CObjMain::BlockHit(
 									save_y[map_chg][1] = hero->GetY() - 32.0f;
 									save_scroll_x[map_chg][1] = main->GetScrollX();
 									save_scroll_y[map_chg][1] = main->GetScrollY();
-									map_chg++;
+									
 								}
 							
 								else if (m_map[i][j] == 15 && *c_id == CHAR_HERO)

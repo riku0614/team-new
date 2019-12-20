@@ -49,6 +49,8 @@ void CSceneGameClear::InitScene()
 
 	Draw::LoadImageW(L"ED画面3.png", 3, TEX_SIZE_1024);
 
+	Draw::LoadImageW(L"ED画面4.png", 4, TEX_SIZE_1024);
+
 	//タイトルオブジェクト作成
 	CObjGameClear* objc = new CObjGameClear();		//ゲームクリアオブジェクト作成
 	Objs::InsertObj(objc, OBJ_GAMECLEAR, 10);	//ゲームクリアオブジェクト登録

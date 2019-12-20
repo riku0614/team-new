@@ -168,7 +168,7 @@ void CObjSpwanEnemy::Action()
 void CObjSpwanEnemy::Draw()
 {
 	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+	float c[4] = { 0.0f,0.0f,1.0f,1.0f };
 
 	RECT_F src; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
 	RECT_F dst; //•`‰ææ•\¦ˆÊ’u
