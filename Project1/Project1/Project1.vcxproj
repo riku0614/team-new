@@ -148,7 +148,6 @@
     <ClInclude Include="ObjItem.h" />
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
-    <ClInclude Include="ObjRoom.h" />
     <ClInclude Include="ObjRoomGimmick.h" />
     <ClInclude Include="ObjSpawnEnemy.h" />
     <ClInclude Include="ObjText.h" />
@@ -195,7 +194,6 @@
     <ClCompile Include="ObjItem.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
-    <ClCompile Include="ObjRoom.cpp" />
     <ClCompile Include="ObjRoomGimmick.cpp" />
     <ClCompile Include="ObjSpawnEnemy.cpp" />
     <ClCompile Include="ObjText.cpp" />

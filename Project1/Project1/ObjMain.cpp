@@ -43,6 +43,7 @@ void CObjMain::Init()
 	first_stop = true;
 
 	
+
 	pepepe = false;
 	pepepe_2 = false;
 	room_chg_stop = false;
@@ -75,6 +76,7 @@ void CObjMain::Init()
 //アクション
 void CObjMain::Action()
 {
+	
 
 	//教室マップを６回回したらセーブしたマップへのロードに切り替える
 	if (room_chg >= 7)
@@ -99,9 +101,9 @@ void CObjMain::Action()
 			hero->SetX(20.0f*64.0f);
 			hero->SetY(4.0f*64.0f);
 			m_scroll_x = -15.0f*64.0f;
-			m_scroll_y = -5.0f*64.0f;
+			m_scroll_y = 5.0f*64.0f;
 
-			//新規にマップをロードするする処理とセーブしたマップをロードする処理の切り替え
+			//新規にマップをロードする処理とセーブしたマップをロードする処理の切り替え
 			if (room_chg_stop == false)
 			{
 				RoomMapChanger(r_map, r, room_chg);
@@ -203,7 +205,7 @@ void CObjMain::Action()
 			hero->SetY(4.0f*64.0f);
 			m_scroll_x = -15.0f*64.0f;
 			m_scroll_y = -5.0f*64.0f;
-			//新規にマップをロードするする処理とセーブしたマップをロードする処理の切り替え
+			//新規にマップをロードする処理とセーブしたマップをロードする処理の切り替え
 			if (room_chg_stop == false)
 			{
 				RoomMapChanger(r_map, r, room_chg);
@@ -745,6 +747,7 @@ void CObjMain::BlockHit(
 )
 {
 	
+
 	//主人公の衝突状態確認用フラグの初期化
 	*up = false;
 	*down = false;
@@ -838,7 +841,7 @@ void CObjMain::BlockHit(
 									save_scroll_y[map_chg][1] = main->GetScrollY();
 									map_chg++;
 								}
-								else if (m_map[i][j] == 17  && *c_id == CHAR_HERO)
+								else if (m_map[i][j] == 17  && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
@@ -899,24 +902,11 @@ void CObjMain::BlockHit(
 									save_scroll_y[map_chg][1] = main->GetScrollY();
 									map_chg++;
 								}
-								else if (m_map[i][j] == 16  && *c_id == CHAR_HERO)
+								else if (m_map[i][j] == 16  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
-										room_in = true;
-										room_chg++;
-								;
-										
-										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
-										save_x[map_chg][0] = hero->GetX();
-										save_y[map_chg][0] = hero->GetY() - 32.0f;
-										save_scroll_x[map_chg][0] = main->GetScrollX();
-										save_scroll_y[map_chg][0] = main->GetScrollY();
-
-										memcpy(save_map, m_map, sizeof(int)*(MAP_X * MAP_Y));
+										keepout_font_flg = true;
 									}
 
 								}
@@ -950,14 +940,14 @@ void CObjMain::BlockHit(
 									CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
 									//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
-									save_x[map_chg][1] = hero->GetX() ;
+									save_x[map_chg][1] = hero->GetX()-64.0f;
 									save_y[map_chg][1] = hero->GetY();
 									save_scroll_x[map_chg][1] = main->GetScrollX();
 									save_scroll_y[map_chg][1] = main->GetScrollY();
 
 									
 								}
-								else if (m_map[i][j] == 18&& *c_id == CHAR_HERO)
+								else if (m_map[i][j] == 18&& *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
@@ -968,7 +958,7 @@ void CObjMain::BlockHit(
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-										save_x[map_chg][0] = hero->GetX() + 32.0f;
+										save_x[map_chg][0] = hero->GetX() - 32.0f;
 										save_y[map_chg][0] = hero->GetY();
 										save_scroll_x[map_chg][0] = main->GetScrollX();
 										save_scroll_y[map_chg][0] = main->GetScrollY();
@@ -1019,25 +1009,12 @@ void CObjMain::BlockHit(
 									
 								}
 							
-								else if (m_map[i][j] == 15 && *c_id == CHAR_HERO)
+								else if (m_map[i][j] == 15 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
-
-										room_in = true;
-										stop_flg = true;
-										room_chg++;
-
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
-										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-
-										save_x[map_chg][0] = hero->GetX();
-										save_y[map_chg][0] = hero->GetY();
-										save_scroll_x[map_chg][0] = main->GetScrollX();
-										save_scroll_y[map_chg][0] = main->GetScrollY();
-
-										memcpy(save_map, m_map, sizeof(int)*(MAP_X * MAP_Y));
+										keepout_font_flg = true;
+										
 									}
 
 								}
@@ -1109,7 +1086,7 @@ void CObjMain::BlockHit(
 									hero->SetHeroStop(true);
 								}
 								//通常の時
-								else if (r_map[i][j] == 17 && *c_id == CHAR_HERO)
+								else if (r_map[i][j] == 17 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == true && room_chg >= 1)
 									{
@@ -1175,7 +1152,7 @@ void CObjMain::BlockHit(
 								hero->SetHeroStop(true);
 							}
 							//通常の時
-							else if (r_map[i][j] == 16 && *c_id == CHAR_HERO)
+							else if (r_map[i][j] == 16 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 							{
 								if (room_in == true && room_chg >= 1)
 								{
@@ -1239,7 +1216,7 @@ void CObjMain::BlockHit(
 									hero->SetHeroStop(true);
 								}
 								//通常の時
-								else if (r_map[i][j] == 18 && *c_id == CHAR_HERO)
+								else if (r_map[i][j] == 18 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == true && open_flg==true)
 									{
@@ -1331,7 +1308,7 @@ void CObjMain::BlockHit(
 								}
 
 								//通常の時
-								else if (r_map[i][j] == 15 && *c_id == CHAR_HERO)
+								else if (r_map[i][j] == 15 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == true)
 									{
@@ -2262,7 +2239,20 @@ void CObjMain::Draw()
 
 		m_time = 0;
 	}
+	//あかない扉を調べた時のフォント表示
+	else if (keepout_font_flg == true && m_time <= 150)
+	{
 
+		Font::StrDraw(L"扉は固く閉ざされている...", 350.0f, 530.0f, 25, c);
+
+		m_time++;
+	}
+	else if (keepout_font_flg == true && m_time > 150)
+	{
+		keepout_font_flg = false;
+
+		m_time = 0;
+	}
 	//上のアイテム（錆びたバールのようなもの）バージョン
 	else if (font_bar_flg == true && m_time <= 150)
 	{

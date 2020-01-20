@@ -75,9 +75,6 @@
     <ClInclude Include="ObjMenu.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="ObjRoom.h">
-      <Filter>ソース ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="ObjRoomGimmick.h">
       <Filter>ソース ファイル</Filter>
     </ClInclude>
@@ -210,9 +207,6 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ObjMenu.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRoom.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="ObjRoomGimmick.cpp">
