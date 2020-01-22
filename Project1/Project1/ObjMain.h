@@ -123,6 +123,7 @@ class CObjMain : public CObj
 		bool font_close_flg;
 		bool font_open_flg2;
 		bool font_nothing_flg;
+		bool keepout_font_flg;
 
 
 		bool open_flg;//鍵やバールで開ける処理用のフラグ
@@ -140,7 +141,8 @@ class CObjMain : public CObj
 		int size;        
 		unsigned int m_time;      //フォントを表示する秒数
 
-		float spawn_point[MAP_NUMBER]; //map毎の初期値を関数から入れる用の変数
+		float spawn_pointX[MAP_NUMBER]; //map毎の初期値を関数から入れる用の変数
+		float spawn_pointY[MAP_NUMBER];
 		int jx;
 		int jy;
 		

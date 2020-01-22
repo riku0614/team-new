@@ -170,7 +170,7 @@ void CObjFastEnemy::Draw()
 			0,1,1,0,
 
 		};
-		float c[4] = { 1.0f,1.0f,1.0f,1.0f };
+		float c[4] = { 1.0f,0.0f,0.0f,1.0f };
 
 		RECT_F src; //•`‰æŒ³Ø‚èæ‚èˆÊ’u
 		RECT_F dst; //•`‰ææ•\¦ˆÊ’u

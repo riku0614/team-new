@@ -316,52 +316,52 @@ void CObjHero::Action()
 
 	
 	
-	//主人公機オブジェクトと接触したら敵削除
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg==false||
-		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
-		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
-	{
-		//音楽情報の読み込み
-		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
+	////主人公機オブジェクトと接触したら敵削除
+	//if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg==false||
+	//	hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
+	//	hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
+	//{
+	//	//音楽情報の読み込み
+	//	Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
 
-			//音楽スタート
-			Audio::Start(6);
+	//		//音楽スタート
+	//		Audio::Start(6);
 
-			m_hero_life -= 1;
+	//		m_hero_life -= 1;
 
-			m_flg = true;
-			
+	//		m_flg = true;
+	//		
 
-			m_time = 300;
-			if (m_hero_life == 2)
-			{
-				Conflict_flag = true;
-			}
+	//		m_time = 300;
+	//		if (m_hero_life == 2)
+	//		{
+	//			Conflict_flag = true;
+	//		}
 
-			if (m_hero_life == 1)
-			{
-				Conflict_flag2 = true;
-			}
+	//		if (m_hero_life == 1)
+	//		{
+	//			Conflict_flag2 = true;
+	//		}
 
-			if (m_hero_life == 0)
-			{
+	//		if (m_hero_life == 0)
+	//		{
 
-				Scene::SetScene(new CSceneGameOver);
-			}
+	//			Scene::SetScene(new CSceneGameOver);
+	//		}
 
-		}
+	//	}
 
-	   
+	//   
 
-		if (m_flg == true && m_time > 0)
-		{
-			m_time--;
-		}
-		else if (m_time == 0)
-		{
-			m_flg = false;
+	//	if (m_flg == true && m_time > 0)
+	//	{
+	//		m_time--;
+	//	}
+	//	else if (m_time == 0)
+	//	{
+	//		m_flg = false;
 
-		}
+	//	}
 	
 	
 }
