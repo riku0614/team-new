@@ -107,6 +107,7 @@ void CObjHero::Action()
 
 		}
 
+
 		//キーの入力方向
 		
 		if (Input::GetVKey('A') == true&&Input::GetVKey('D')!=true)
@@ -313,6 +314,12 @@ void CObjHero::Action()
 
 	//敵と当たったらフラグを持てる
 	CObjGameUI*ui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+
+	//'G'キーを押したら、タイトル画面へ移行
+	if (Input::GetVKey('G') == true)
+	{
+		Scene::SetScene(new CSceneTitle);
+	}
 
 	
 	
