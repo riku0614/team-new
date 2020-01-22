@@ -77,6 +77,8 @@ void CObjMain::Init()
 void CObjMain::Action()
 {
 	
+	
+	
 
 	//教室マップを６回回したらセーブしたマップへのロードに切り替える
 	if (room_chg >= 7)
@@ -757,8 +759,14 @@ void CObjMain::BlockHit(
 	//踏んでいるブロックの種類の初期化
 	*bt = 0;
 
+	//関数内で使うオブジェクトアドレス一覧
+	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	CObjItem* item = (CObjItem*)Objs::GetObj(OBJ_ITEM);
 	CObjGimmick* gmk = (CObjGimmick*)Objs::GetObj(OBJ_GIMMICK);
+	CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+	CObjClickTitle* Title = (CObjClickTitle*)Objs::GetObj(OBJ_CLICK_TITLE);
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
 	//m=mapの全要素にアクセス
 	//廊下用
 	if (room_in == false)
@@ -784,7 +792,7 @@ void CObjMain::BlockHit(
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 64.0f > bx) && (*x + (-scroll_x) < bx + 64.0f) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + 64.0f))
+					if ((*x + (-scroll_x) + 63.0f > bx) && (*x + (-scroll_x) < bx + 64.0f) && (*y+1.0f + (-scroll_y) + 64.0f >by) && (*y+1.0f + (-scroll_y) < by + 64.0f))
 					{
 						//上下左右判定
 
@@ -809,23 +817,22 @@ void CObjMain::BlockHit(
 						if (len < 88.0f)
 						{
 							//角度で左右を判定
-							if ((r < 45 && r >= 0) || r > 315)
+							if ((r < 45 && r >= 0) || r > 315||hero->GetY()==by&&hero->GetX()<=bx+16.0f&&hero->GetX() >= bx + 16.0f)
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
-								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
+								*x = (bx-0.1f) + 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
+								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E'))
 								{
+
 									stop_flg = true;
 									map_chg++;
 									stop_flg2 = true;
 									first_stop = true;
-									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
+									
 									if (map_chg == 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
@@ -852,9 +859,7 @@ void CObjMain::BlockHit(
 										
 										room_chg++;
 								
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
-										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+									
 
 
 
@@ -867,7 +872,7 @@ void CObjMain::BlockHit(
 									}
 
 								}
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 							}
 							if (r > 45 && r < 135)
 							{
@@ -876,16 +881,18 @@ void CObjMain::BlockHit(
 								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
 								if (m_map[i][j] == 2)
 									*bt = m_map[i][j];
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
+								
+									*vy = 0.0f;
+								
+								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E'))
 								{
 									if (map_chg == 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
 
-									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
+									
+									
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -893,7 +900,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+									
 
 									//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
 									save_x[map_chg][1] = hero->GetX();
@@ -910,14 +917,14 @@ void CObjMain::BlockHit(
 									}
 
 								}
-								*vy = 0.0f;
+							
 							}
 							if (r > 135 && r < 225)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY&&Input::GetVKey('E')==true)
 								{
 									stop_flg = true;
@@ -925,9 +932,7 @@ void CObjMain::BlockHit(
 									first_stop = true;
 									map_chg ++;
 
-									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
+									
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -937,7 +942,7 @@ void CObjMain::BlockHit(
 										Scene::SetScene(new CSceneGameClear);
 									}
 
-									CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+									
 
 									//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
 									save_x[map_chg][1] = hero->GetX()-64.0f;
@@ -954,10 +959,7 @@ void CObjMain::BlockHit(
 										room_in = true;
 										stop_flg = true;
 
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
-										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-
+									
 										save_x[map_chg][0] = hero->GetX() - 32.0f;
 										save_y[map_chg][0] = hero->GetY();
 										save_scroll_x[map_chg][0] = main->GetScrollX();
@@ -973,24 +975,24 @@ void CObjMain::BlockHit(
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
-								*y = by + 64.0f + (scroll_y);//ブロックの位置-主人公の
+								*y =(by-0.1f) + 64.0f + (scroll_y);//ブロックの位置-主人公の
 								if (*vy < 0)
 								{
 									*vy = 0.0f;
 								}
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
+								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E'))
 								{
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+									
 									
 									*k_id = 99;
 
 									map_chg++;
 									
-									CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
+									
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
@@ -1000,7 +1002,7 @@ void CObjMain::BlockHit(
 									}
 
 									//主人公が階段に当たった瞬間に位置とスクロール情報を保存する
-									CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+									
 
 									save_x[map_chg][1] = hero->GetX();
 									save_y[map_chg][1] = hero->GetY() - 32.0f;
@@ -1037,7 +1039,7 @@ void CObjMain::BlockHit(
 			{
 
 
-				if (r_map[i][j] <= 99 && r_map[i][j] > 1 && r_map[i][j] != 7 && r_map[i][j] != 26 && r_map[i][j] != 34 && r_map[i][j] != 35 )
+				if (r_map[i][j] <= 99 && r_map[i][j] > 1 && r_map[i][j] != 7 && r_map[i][j] != 26 && r_map[i][j] != 34 && r_map[i][j] != 35 && r_map[i][j] != 3)
 				{
 					//要素番号を座標に変更
 					float bx = j * 64.0f;
@@ -1069,7 +1071,7 @@ void CObjMain::BlockHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < 87.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r > 0) || r > 315)
@@ -1077,7 +1079,7 @@ void CObjMain::BlockHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 								
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
@@ -1141,10 +1143,12 @@ void CObjMain::BlockHit(
 						{
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
-							*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
+							*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の
+							*vy = 0.0f;
+							
 							if (r_map[i][j] == 2)
 								*bt = m_map[i][j];
-							*vy = 0.0f;
+						
 							if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 							{
 								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -1202,12 +1206,12 @@ void CObjMain::BlockHit(
 
 							
 						}
-							if (r > 135 && r < 225)
+							if (r > 135 && r < 225 )
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
@@ -1426,7 +1430,7 @@ void CObjMain::ItemHit(
 					float scroll_x = scroll_on_x ? m_scroll_x : 0;
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 64.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
+					if ((*x + (-scroll_x) + 63.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
 					{
 						//上下左右判定
 
@@ -1468,7 +1472,7 @@ void CObjMain::ItemHit(
 									delete_flg = false;
 								}
 
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 							}
 							if (r > 45 && r < 135)
 							{
@@ -1487,7 +1491,7 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								*vy = 0.0f;
+								
 							}
 							if (r > 135 && r < 225)
 							{
@@ -1506,7 +1510,7 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 							}
 							if (r > 225 && r < 315)
 							{
@@ -1515,6 +1519,10 @@ void CObjMain::ItemHit(
 								*y = by + ITEM_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
 								ix = bx / 64;
 								iy = by / 64;
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1524,11 +1532,7 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								if (*vy < 0)
-								{
-									*vy = 0.0f;
-								}
-
+								
 
 							}
 							//鍵
@@ -1623,7 +1627,7 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 
 							}
 							if (r > 45 && r < 135)
@@ -1657,7 +1661,7 @@ void CObjMain::ItemHit(
 
 								delete_flg = false;
 							}
-							*vx = -(*vx)*0.1f;//-VX*反発係数
+							
 						}
 						if (r > 225 && r < 315)
 						{

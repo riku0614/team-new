@@ -138,19 +138,19 @@ float SpawnChangerX(int m)
 	}
 	else if (m == 3)
 	{
-		return 64.0f * 70.0f;
+		return 64.0f * 60.0f;
 	}
 	else if (m == 4)
 	{
-		return 64.0f;
+		return 64.0f*34.0f;
 	}
 	else if (m == 5)
 	{
-		return 64.0f;
+		return 64.0f*30.0f;
 	}
 	else if (m == 6)
 	{
-		return 64.0f;
+		return 64.0f*40.0f;
 	}
 	else if (m == 7)
 	{
@@ -180,7 +180,7 @@ float SpawnChangerY(int m)
 	}
 	else if (m == 4)
 	{
-		return 64.0f;
+		return 64.0f * 25.0f;
 	}
 	else if (m == 5)
 	{

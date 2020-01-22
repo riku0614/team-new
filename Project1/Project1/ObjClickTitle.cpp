@@ -18,11 +18,13 @@ void CObjClickTitle::Init()
 {
 	m_yj = 0.0f;
 	m_f = true;
-
+	save_data = 0;
+	stage_data = 0;
 }
 //ƒAƒNƒVƒ‡ƒ“
 void CObjClickTitle::Action()
 {
+
 	if (Input::GetVKey('M'))
 	{
 		;
@@ -30,7 +32,13 @@ void CObjClickTitle::Action()
 	//Enter‚ğ‰Ÿ‚µ‚½‚Æ‚«‚Ìˆ—
 	if (m_yj == 0.0f && Input::GetVKey(VK_RETURN))
 	{
+		
 		Scene::SetScene(new CSceneMain);
+	}
+	if (m_yj == 50 && Input::GetVKey(VK_RETURN))
+	{
+		
+			Scene::SetScene(new CSceneMain);
 	}
 	
 	//'W'key‚ğ‰Ÿ‚µ‚½‚Ì–îˆóˆ—
