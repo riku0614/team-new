@@ -18,11 +18,13 @@ void CObjClickTitle::Init()
 {
 	m_yj = 0.0f;
 	m_f = true;
-
+	save_data = 0;
+	stage_data = 0;
 }
 //アクション
 void CObjClickTitle::Action()
 {
+
 	if (Input::GetVKey('M'))
 	{
 		;
@@ -30,7 +32,13 @@ void CObjClickTitle::Action()
 	//Enterを押したときの処理
 	if (m_yj == 0.0f && Input::GetVKey(VK_RETURN))
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneMain);//タイトルへ
+	}
+
+	//ゲームを終了する処理
+	if (m_yj == 100.0f && Input::GetVKey(VK_RETURN))
+	{
+		;
 	}
 	
 	//'W'keyを押した時の矢印処理
