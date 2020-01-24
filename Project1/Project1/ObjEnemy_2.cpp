@@ -201,6 +201,11 @@ void CObjEnemy2::Action()
 	{
 		Hits::DeleteHitBox(this);
 	}
+	if (main->GetFlug() == true && main->GetFlug2() == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 }
 
 //ƒhƒ[

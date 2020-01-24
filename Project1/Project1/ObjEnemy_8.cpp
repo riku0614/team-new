@@ -5,7 +5,7 @@
 #include "GameL/HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy_4.h"
+#include "ObjEnemy_7.h"
 #include "SceneMain.h"
 #include "UtilityModule.h"
 
@@ -13,13 +13,13 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy4::CObjEnemy4(float x, float y)
+CObjEnemy8::CObjEnemy8(float x, float y)
 {
 	m_ex = x;
 	m_ey = y;
 }
 //イニシャライズ
-void CObjEnemy4::Init()
+void CObjEnemy8::Init()
 {
 
 	m_vx = 0.0f;
@@ -56,7 +56,7 @@ void CObjEnemy4::Init()
 }
 
 //アクション
-void CObjEnemy4::Action()
+void CObjEnemy8::Action()
 {
 
 	//マップ情報の取得
@@ -201,15 +201,10 @@ void CObjEnemy4::Action()
 	{
 		Hits::DeleteHitBox(this);
 	}
-	if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
 }
 
 //ドロー
-void CObjEnemy4::Draw()
+void CObjEnemy8::Draw()
 {
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	if (main->RoomFlag() == false)
@@ -242,7 +237,6 @@ void CObjEnemy4::Draw()
 		Draw::Draw(49, &src, &dst, c, 0.0f);
 	}
 }
-
 
 
 

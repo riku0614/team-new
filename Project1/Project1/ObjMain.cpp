@@ -266,33 +266,14 @@ void CObjMain::Action()
 	if (stop_flg == true)
 	{
 		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
+		EnemySpawnChanger(map_chg, m_map, room_in);
+
 		stop_flg2 = false;
 
+
 	}
 
-	//敵キャラの生成（廊下用）
-	if (stop_flg == true)
-	{
-		for (int i = 0; i < MAP_X; i++)
-		{
-			for (int j = 0; j < MAP_Y; j++)
-			{
-				if (m_map[i][j] == 5)
-				{
-
-					//敵オブジェクト作成
-					CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
-					Objs::InsertObj(obje, OBJ_ENEMY, 11);
-
-
-					m_map[i][j] = 1;
-
-				}
-			}
-
-		}
-	}
-
+	
 	for (int i = 0; i < MAP_X; i++)
 	{
 		for (int j = 0; j < MAP_Y; j++)

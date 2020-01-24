@@ -201,6 +201,9 @@
     <ClInclude Include="ObjEnemy_7.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemy_8.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -354,6 +357,9 @@
       <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_7.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_8.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
   </ItemGroup>
