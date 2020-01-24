@@ -177,6 +177,12 @@
     <ClInclude Include="UtilityModule.h">
       <Filter>ソース ファイル\関数系</Filter>
     </ClInclude>
+    <ClInclude Include="ObjFastEnemy.h">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSpawnEnemy.h">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClInclude>
     <ClInclude Include="ObjEnemy_2.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
     </ClInclude>
@@ -194,12 +200,6 @@
     </ClInclude>
     <ClInclude Include="ObjEnemy_7.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjFastEnemy.h">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSpawnEnemy.h">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -332,6 +332,12 @@
     <ClCompile Include="UtilityModule.cpp">
       <Filter>ソース ファイル\関数系</Filter>
     </ClCompile>
+    <ClCompile Include="ObjFastEnemy.cpp">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSpawnEnemy.cpp">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClCompile>
     <ClCompile Include="ObjEnemy_2.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
@@ -349,12 +355,6 @@
     </ClCompile>
     <ClCompile Include="ObjEnemy_7.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjFastEnemy.cpp">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSpawnEnemy.cpp">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
