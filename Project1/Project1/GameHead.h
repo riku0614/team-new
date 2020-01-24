@@ -16,6 +16,7 @@ enum OBJ_NAME
 	OBJ_ENEMY5,
 	OBJ_ENEMY6,
 	OBJ_ENEMY7,
+	OBJ_ENEMY8,
 	OBJ_FASTENEMY,
 	OBJ_SPWANENEMY,
 	OBJ_MAIN,
@@ -104,6 +105,7 @@ enum ITEM_ID
 #include "ObjEnemy_5.h"
 #include "ObjEnemy_6.h"
 #include "ObjEnemy_7.h"
+#include "ObjEnemy_8.h"
 
 #include "ObjGameUI.h"
 #include "ObjGameOver.h"

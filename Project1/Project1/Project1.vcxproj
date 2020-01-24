@@ -138,6 +138,7 @@
     <ClInclude Include="ObjEnemy_5.h" />
     <ClInclude Include="ObjEnemy_6.h" />
     <ClInclude Include="ObjEnemy_7.h" />
+    <ClInclude Include="ObjEnemy_8.h" />
     <ClInclude Include="ObjFastEnemy.h" />
     <ClInclude Include="ObjGameClear.h" />
     <ClInclude Include="ObjGameOver.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="ObjEnemy_5.cpp" />
     <ClCompile Include="ObjEnemy_6.cpp" />
     <ClCompile Include="ObjEnemy_7.cpp" />
+    <ClCompile Include="ObjEnemy_8.cpp" />
     <ClCompile Include="ObjFastEnemy.cpp" />
     <ClCompile Include="ObjGameClear.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
