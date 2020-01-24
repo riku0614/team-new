@@ -1834,15 +1834,6 @@ void CObjMain::Draw()
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 33)
-					{
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
-
-						Draw::Draw(40, &src, &dst, c, 0.0f);
-					}
 					if (m_map[i][j] == 34)
 					{
 						src.m_top = 0.0f;
@@ -1851,6 +1842,15 @@ void CObjMain::Draw()
 						src.m_bottom = src.m_top + 64.0f;
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
+					}
+					if (m_map[i][j] == 33)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(40, &src, &dst, c, 0.0f);
 					}//角壁２・4つ↑
 				}
 			}
@@ -1875,7 +1875,8 @@ void CObjMain::Draw()
 
 
 					//床テクスチャ
-					if (r_map[i][j] >= 1&&r_map[i][j]<= 8|| r_map[i][j] == 5||r_map[i][j]==7|| r_map[i][j] == 8|| r_map[i][j] == 13||r_map[i][j]==31||r_map[i][j]==26)
+					if (r_map[i][j] >= 1&&r_map[i][j]<= 8|| r_map[i][j] == 5||r_map[i][j]==7|| r_map[i][j] == 8|| r_map[i][j] == 13||r_map[i][j]==31 
+						|| r_map[i][j] == 26 ||r_map[i][j] == 36 || r_map[i][j] == 37 || r_map[i][j] == 38 || r_map[i][j] == 39)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2066,7 +2067,7 @@ void CObjMain::Draw()
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
 					//本
-					if (r_map[i][j] == 30)
+					if (r_map[i][j] == 40)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2076,18 +2077,47 @@ void CObjMain::Draw()
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
 					//教卓
-					if (r_map[i][j] == 13)
+					if (r_map[i][j] == 36)
 					{
-
-						//描画切り取り位置
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 64.0f;
 						src.m_bottom = src.m_top + 64.0f;
 
-						
-						Draw::Draw(40, &src, &dst, c, 0.0f);
+						Draw::Draw(50, &src, &dst, c, 0.0f);
 					}
+					//教卓
+					if (r_map[i][j] == 37)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(51, &src, &dst, c, 0.0f);
+					}
+					//教卓
+					if (r_map[i][j] == 38)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(52, &src, &dst, c, 0.0f);
+					}
+					//教卓
+					if (r_map[i][j] == 39)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(53, &src, &dst, c, 0.0f);
+					}
+
+
 				}
 			}
 		}
