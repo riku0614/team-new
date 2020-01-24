@@ -120,7 +120,11 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"ダメージエフェクト1.png", 47, TEX_SIZE_1024);
 	Draw::LoadImageW(L"ダメージエフェクト2.png", 48, TEX_SIZE_1024);
 	Draw::LoadImageW(L"敵結合.png", 49, TEX_SIZE_1024);
-
+	Draw::LoadImageW(L"教卓右下.png", 50, TEX_SIZE_1024);
+	Draw::LoadImageW(L"教卓右上.png", 51, TEX_SIZE_1024);
+	Draw::LoadImageW(L"教卓左上.png", 52, TEX_SIZE_1024);
+	Draw::LoadImageW(L"教卓左下.png", 53, TEX_SIZE_1024);
+	
 
 	//出力させる文字のグラフィック作成
 	Font::SetStrTex(L"鍵を入手した...");
