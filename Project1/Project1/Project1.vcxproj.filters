@@ -177,9 +177,6 @@
     <ClInclude Include="ObjHero.h">
       <Filter>ソース ファイル\主人公</Filter>
     </ClInclude>
-    <ClInclude Include="ObjRoom.h">
-      <Filter>ソース ファイル\教室</Filter>
-    </ClInclude>
     <ClInclude Include="UtilityModule.h">
       <Filter>ソース ファイル\関数系</Filter>
     </ClInclude>
@@ -316,9 +313,6 @@
     </ClCompile>
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル\主人公</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRoom.cpp">
-      <Filter>ソース ファイル\教室</Filter>
     </ClCompile>
     <ClCompile Include="UtilityModule.cpp">
       <Filter>ソース ファイル\関数系</Filter>
