@@ -1667,10 +1667,10 @@ void CObjMain::Draw()
 
 
 					//表示位置の設定
-					dst.m_top = i * 64.0f + m_scroll_y;
-					dst.m_left = j * 64.0f + m_scroll_x;
-					dst.m_right = dst.m_left + 64.0;
-					dst.m_bottom = dst.m_top + 64.0;
+					dst.m_top = i * DRAW_SIZE + m_scroll_y;
+					dst.m_left = j * DRAW_SIZE + m_scroll_x;
+					dst.m_right = dst.m_left + DRAW_SIZE;
+					dst.m_bottom = dst.m_top + DRAW_SIZE;
 
 
 					//床テクスチャ
@@ -1678,8 +1678,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
@@ -1689,8 +1689,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
@@ -1699,8 +1699,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(7, &src, &dst, c, 0.0f);
 					}
@@ -1709,8 +1709,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
@@ -1718,8 +1718,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}	
@@ -1727,8 +1727,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
@@ -1736,8 +1736,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(20, &src, &dst, c, 0.0f);
 					}//壁テクスチャ４つ↑
@@ -1785,7 +1785,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
@@ -1794,7 +1794,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
@@ -1803,7 +1803,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
@@ -1812,7 +1812,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑
@@ -1822,8 +1822,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(38, &src, &dst, c, 0.0f);
 					}
@@ -1831,8 +1831,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
@@ -1840,8 +1840,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
@@ -1849,8 +1849,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
 					}
@@ -1858,8 +1858,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
@@ -1880,8 +1880,8 @@ void CObjMain::Draw()
 
 
 					//表示位置の設定
-					dst.m_top = i * 64.0f + m_scroll_y;
-					dst.m_left = j * 64.0f + m_scroll_x;
+					dst.m_top = i * DRAW_SIZE + m_scroll_y;
+					dst.m_left = j * DRAW_SIZE + m_scroll_x;
 					dst.m_right = dst.m_left + 64.0;
 					dst.m_bottom = dst.m_top + 64.0;
 
@@ -1892,8 +1892,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
@@ -1922,8 +1922,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(43, &src, &dst, c, 0.0f);
 					}
@@ -1932,8 +1932,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
@@ -1941,8 +1941,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
@@ -1950,8 +1950,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}
@@ -1959,8 +1959,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(20, &src, &dst, c, 0.0f);
 					}//壁テクスチャ４つ↑
@@ -2009,7 +2009,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
@@ -2018,7 +2018,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
@@ -2027,7 +2027,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
@@ -2036,7 +2036,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑2
@@ -2064,8 +2064,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 						
 						Draw::Draw(29, &src, &dst, c, 0.0f);
 					}
@@ -2073,8 +2073,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
@@ -2083,8 +2083,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
@@ -2093,8 +2093,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(50, &src, &dst, c, 0.0f);
 					}
@@ -2103,8 +2103,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(51, &src, &dst, c, 0.0f);
 					}
@@ -2113,8 +2113,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(52, &src, &dst, c, 0.0f);
 					}
@@ -2123,8 +2123,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(53, &src, &dst, c, 0.0f);
 					}
