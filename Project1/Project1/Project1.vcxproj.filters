@@ -210,6 +210,9 @@
     <ClInclude Include="ScenePRO.h">
       <Filter>ソース ファイル\プロローグ関係</Filter>
     </ClInclude>
+    <ClInclude Include="ObjEnemy_8.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -370,6 +373,9 @@
     </ClCompile>
     <ClCompile Include="ScenePRO.cpp">
       <Filter>ソース ファイル\プロローグ関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_8.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

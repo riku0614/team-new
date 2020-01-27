@@ -5,7 +5,7 @@
 #include "GameL/HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy_6.h"
+#include "ObjEnemy_7.h"
 #include "SceneMain.h"
 #include "UtilityModule.h"
 
@@ -13,13 +13,13 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy6::CObjEnemy6(float x, float y)
+CObjEnemy8::CObjEnemy8(float x, float y)
 {
 	m_ex = x;
 	m_ey = y;
 }
 //イニシャライズ
-void CObjEnemy6::Init()
+void CObjEnemy8::Init()
 {
 
 	m_vx = 0.0f;
@@ -56,23 +56,18 @@ void CObjEnemy6::Init()
 }
 
 //アクション
-void CObjEnemy6::Action()
+void CObjEnemy8::Action()
 {
 
 	//マップ情報の取得
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-	if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
-	else if (main->RoomFlag() == false && main->GetFlug() == true)
+	if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
-	else if (main->GetFlug() == true && main->FirstFlag() == true)
+	if (main->GetFlug() == true && main->FirstFlag() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -209,7 +204,7 @@ void CObjEnemy6::Action()
 }
 
 //ドロー
-void CObjEnemy6::Draw()
+void CObjEnemy8::Draw()
 {
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	if (main->RoomFlag() == false)
@@ -242,7 +237,6 @@ void CObjEnemy6::Draw()
 		Draw::Draw(49, &src, &dst, c, 0.0f);
 	}
 }
-
 
 
 

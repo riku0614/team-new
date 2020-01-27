@@ -61,14 +61,14 @@ void CObjMain::Init()
 	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 
 	//廊下マップデータ
-	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案1.csv", &size);
-	p[1] = Save::ExternalDataOpen(L"マップ３.csv", &size); 
-	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案7.csv", &size);
-	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案3.csv", &size);
-    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案４.csv", &size);
-	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案5.csv", &size);
-    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案6.csv", &size);
-	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案2.csv", &size);
+	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
+	p[1] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size); 
+	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
+	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
+    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
+	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
+    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
+	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 	
 }
@@ -265,34 +265,17 @@ void CObjMain::Action()
 	//ギミックのヒットボックスをマップごとに変更する処理
 	if (stop_flg == true)
 	{
-		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
 		stop_flg2 = false;
 
+		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
+		EnemySpawnChanger(map_chg, m_map, room_in);
+
+		
+
+
 	}
 
-	//敵キャラの生成（廊下用）
-	if (stop_flg == true)
-	{
-		for (int i = 0; i < MAP_X; i++)
-		{
-			for (int j = 0; j < MAP_Y; j++)
-			{
-				if (m_map[i][j] == 5)
-				{
-
-					//敵オブジェクト作成
-					CObjEnemy* obje = new CObjEnemy((j - 1)*64.0f + m_scroll_x, (i - 1)*64.0f + m_scroll_y);
-					Objs::InsertObj(obje, OBJ_ENEMY, 11);
-
-
-					m_map[i][j] = 1;
-
-				}
-			}
-
-		}
-	}
-
+	
 	for (int i = 0; i < MAP_X; i++)
 	{
 		for (int j = 0; j < MAP_Y; j++)
@@ -1853,6 +1836,15 @@ void CObjMain::Draw()
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
+					if (m_map[i][j] == 34)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(41, &src, &dst, c, 0.0f);
+					}
 					if (m_map[i][j] == 33)
 					{
 						src.m_top = 0.0f;
@@ -1862,7 +1854,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 34)
+					if (m_map[i][j] == 50)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1870,7 +1862,8 @@ void CObjMain::Draw()
 						src.m_bottom = src.m_top + 64.0f;
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
-					}//角壁２・4つ↑
+					}
+					//角壁２・5つ↑
 				}
 			}
 
@@ -1894,7 +1887,8 @@ void CObjMain::Draw()
 
 
 					//床テクスチャ
-					if (r_map[i][j] >= 1&&r_map[i][j]<= 8|| r_map[i][j] == 5||r_map[i][j]==7|| r_map[i][j] == 8|| r_map[i][j] == 13||r_map[i][j]==31||r_map[i][j]==26)
+					if (r_map[i][j] >= 1&&r_map[i][j]<= 8|| r_map[i][j] == 5||r_map[i][j]==7|| r_map[i][j] == 8|| r_map[i][j] == 13||r_map[i][j]==31 
+						|| r_map[i][j] == 26 ||r_map[i][j] == 36 || r_map[i][j] == 37 || r_map[i][j] == 38 || r_map[i][j] == 39)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2085,7 +2079,7 @@ void CObjMain::Draw()
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
 					//本
-					if (r_map[i][j] == 30)
+					if (r_map[i][j] == 40)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2095,18 +2089,47 @@ void CObjMain::Draw()
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
 					//教卓
-					if (r_map[i][j] == 13)
+					if (r_map[i][j] == 36)
 					{
-
-						//描画切り取り位置
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 64.0f;
 						src.m_bottom = src.m_top + 64.0f;
 
-						
-						Draw::Draw(40, &src, &dst, c, 0.0f);
+						Draw::Draw(50, &src, &dst, c, 0.0f);
 					}
+					//教卓
+					if (r_map[i][j] == 37)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(51, &src, &dst, c, 0.0f);
+					}
+					//教卓
+					if (r_map[i][j] == 38)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(52, &src, &dst, c, 0.0f);
+					}
+					//教卓
+					if (r_map[i][j] == 39)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(53, &src, &dst, c, 0.0f);
+					}
+
+
 				}
 			}
 		}

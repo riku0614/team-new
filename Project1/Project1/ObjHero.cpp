@@ -110,7 +110,7 @@ void CObjHero::Action()
 
 		//キーの入力方向
 		
-		if (Input::GetVKey('A') == true&&Input::GetVKey('D')!=true)
+		if (Input::GetVKey('A') == true && Input::GetVKey('D') != true)
 		{
 			m_vx -= m_speed_power;
 			m_posture = 1.0f;
@@ -151,7 +151,13 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true )
+
+
 		{
 		    Main->SetKeyFlag(true);
 			peperon_flag = true;
@@ -165,7 +171,11 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
 		{
 			Main->SetHealFlag(true);
 			peperon_flag_2 = true;
@@ -178,7 +188,11 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
 		{
 			Main->SetBarFlag(true);
 			peperon_flag_3 = true;
@@ -329,34 +343,6 @@ void CObjHero::Action()
 		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
 	{
 
-
-		//音楽情報の読み込み
-		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
-
-			//音楽スタート
-			Audio::Start(6);
-
-			m_hero_life -= 1;
-
-			m_flg = true;
-			
-
-			m_time = 300;
-			if (m_hero_life == 2)
-			{
-				Conflict_flag = true;
-			}
-
-			if (m_hero_life == 1)
-			{
-				Conflict_flag2 = true;
-			}
-
-			if (m_hero_life == 0)
-			{
-
-				Scene::SetScene(new CSceneGameOver);
-			}
 
 		}
 
