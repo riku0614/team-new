@@ -22,7 +22,7 @@ void CObjHero::Init()
 	m_vx = 0.0f; //移動ベクトル
 	m_vy = 0.0f;
 
-	m_hero_life = 999;//主人公の体力用変数
+	m_hero_life = 3;//主人公の体力用変数
 
 
 
