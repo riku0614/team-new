@@ -107,9 +107,10 @@ void CObjHero::Action()
 
 		}
 
+
 		//キーの入力方向
 		
-		if (Input::GetVKey('A') == true&&Input::GetVKey('D')!=true)
+		if (Input::GetVKey('A') == true && Input::GetVKey('D') != true)
 		{
 			m_vx -= m_speed_power;
 			m_posture = 1.0f;
@@ -150,7 +151,13 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true )
+
+
 		{
 		    Main->SetKeyFlag(true);
 			peperon_flag = true;
@@ -164,7 +171,11 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
 		{
 			Main->SetHealFlag(true);
 			peperon_flag_2 = true;
@@ -177,7 +188,11 @@ void CObjHero::Action()
 		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
 			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
 			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
+			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
 		{
 			Main->SetBarFlag(true);
 			peperon_flag_3 = true;
@@ -201,7 +216,7 @@ void CObjHero::Action()
 			if (m_hero_life <= 2)
 			{
 				use_Item_flag_2 = true;
-				m_hero_life = 30;
+				m_hero_life = 3;
 				UI->Settakeflag_2(false);
 			}
 			else if (m_hero_life == 3)
@@ -314,6 +329,12 @@ void CObjHero::Action()
 	//敵と当たったらフラグを持てる
 	CObjGameUI*ui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
+	//'G'キーを押したら、タイトル画面へ移行
+	if (Input::GetVKey('G') == true)
+	{
+		Scene::SetScene(new CSceneTitle);
+	}
+
 	
 	
 	//主人公機オブジェクトと接触したら敵削除
@@ -321,6 +342,8 @@ void CObjHero::Action()
 		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
 		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
 	{
+		
+
 		//音楽情報の読み込み
 		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
 
@@ -347,6 +370,37 @@ void CObjHero::Action()
 			{
 
 				Scene::SetScene(new CSceneGameOver);
+			}
+
+			//主人公が敵とどの角度で当たっているかどうかの判定
+			HIT_DATA** hit_data;
+
+			hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
+
+			//hit_data[0]->rに当たった相手との角度がある。
+			float r = hit_data[0]->r;
+
+			//右に当たった場合
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx = -20.0f;
+			}
+			//左に当たった場合
+			if (r > 135 && r < 225)
+			{
+				m_vx = +20.0f;
+			}
+
+			//下に当たった場合
+			if (r > 45 && r < 135)
+			{
+				m_vy = +20.0f;
+			}
+
+			//上に当たった場合
+			if (r > 225 && r < 315)
+			{
+				m_vy = -20.0f;
 			}
 
 		}

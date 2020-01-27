@@ -10,6 +10,13 @@ enum OBJ_NAME
 	OBJ_CLICK_TITLE,
 	OBJ_HERO,
 	OBJ_ENEMY,
+	OBJ_ENEMY2,
+	OBJ_ENEMY3,
+	OBJ_ENEMY4,
+	OBJ_ENEMY5,
+	OBJ_ENEMY6,
+	OBJ_ENEMY7,
+	OBJ_ENEMY8,
 	OBJ_FASTENEMY,
 	OBJ_SPWANENEMY,
 	OBJ_MAIN,
@@ -90,7 +97,16 @@ enum ITEM_ID
 #include "ObjHero.h"
 #include "ObjClickTitle.h"
 #include "ObjMain.h"
+
 #include "ObjEnemy.h"
+#include "ObjEnemy_2.h"
+#include "ObjEnemy_3.h"
+#include "ObjEnemy_4.h"
+#include "ObjEnemy_5.h"
+#include "ObjEnemy_6.h"
+#include "ObjEnemy_7.h"
+#include "ObjEnemy_8.h"
+
 #include "ObjGameUI.h"
 #include "ObjGameOver.h"
 #include "ObjGameClear.h"
