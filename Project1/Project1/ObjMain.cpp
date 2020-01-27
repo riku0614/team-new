@@ -61,14 +61,14 @@ void CObjMain::Init()
 	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 
 	//廊下マップデータ
-	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案1.csv", &size);
-	p[1] = Save::ExternalDataOpen(L"マップ３.csv", &size); 
-	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案7.csv", &size);
-	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案3.csv", &size);
-    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案４.csv", &size);
-	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案5.csv", &size);
-    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案6.csv", &size);
-	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案2.csv", &size);
+	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
+	p[1] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size); 
+	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
+	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
+    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
+	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
+    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
+	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 	
 }
@@ -1851,7 +1851,17 @@ void CObjMain::Draw()
 						src.m_bottom = src.m_top + 64.0f;
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
-					}//角壁２・4つ↑
+					}
+					if (m_map[i][j] == 50)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + 64.0f;
+						src.m_bottom = src.m_top + 64.0f;
+
+						Draw::Draw(41, &src, &dst, c, 0.0f);
+					}
+					//角壁２・5つ↑
 				}
 			}
 
