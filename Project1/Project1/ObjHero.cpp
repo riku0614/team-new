@@ -328,36 +328,7 @@ void CObjHero::Action()
 		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
 		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
 	{
-		//主人公が敵とどの角度で当たっているかどうかの判定
-		HIT_DATA** hit_data;
 
-		hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
-
-		//hit_data[0]->rに当たった相手との角度がある。
-		float r = hit_data[0]->r;
-
-		//右に当たった場合
-		if ((r < 45 && r >= 0) || r > 315)
-		{
-			m_vx = -20.0f;
-		}
-		//左に当たった場合
-		if (r > 135 && r < 225)
-		{
-			m_vx = +20.0f;
-		}
-
-		//下に当たった場合
-		if (r > 45 && r < 135)
-		{
-			m_vy = +20.0f;
-		}
-
-		//上に当たった場合
-		if (r >225 && r < 315)
-		{
-			m_vy = -20.0f;
-		}
 
 		//音楽情報の読み込み
 		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);

@@ -32,13 +32,13 @@ void CObjClickTitle::Action()
 	//Enterを押したときの処理
 	if (m_yj == 0.0f && Input::GetVKey(VK_RETURN))
 	{
-		Scene::SetScene(new CSceneMain);//タイトルへ
+		Scene::SetScene(new CScenePRO);//プロローグへ
 	}
 
 	//ゲームを終了する処理
 	if (m_yj == 100.0f && Input::GetVKey(VK_RETURN))
 	{
-		;
+		Scene::SetScene(NULL);//タイトルへ
 	}
 	
 	//'W'keyを押した時の矢印処理

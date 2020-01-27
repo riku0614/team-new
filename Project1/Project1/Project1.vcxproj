@@ -155,6 +155,7 @@
     <ClInclude Include="ObjItem.h" />
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
+    <ClInclude Include="ObjPRO.h" />
     <ClInclude Include="ObjRoomGimmick.h" />
     <ClInclude Include="ObjSpawnEnemy.h" />
     <ClInclude Include="ObjText.h" />
@@ -164,6 +165,7 @@
     <ClInclude Include="SceneGameUI.h" />
     <ClInclude Include="SceneMain.h" />
     <ClInclude Include="SceneMenu.h" />
+    <ClInclude Include="ScenePRO.h" />
     <ClInclude Include="SceneTitle.h" />
     <ClInclude Include="UtilityModule.h" />
   </ItemGroup>
@@ -207,6 +209,7 @@
     <ClCompile Include="ObjItem.cpp" />
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
+    <ClCompile Include="ObjPRO.cpp" />
     <ClCompile Include="ObjRoomGimmick.cpp" />
     <ClCompile Include="ObjSpawnEnemy.cpp" />
     <ClCompile Include="ObjText.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="SceneGameUI.cpp" />
     <ClCompile Include="SceneMain.cpp" />
     <ClCompile Include="SceneMenu.cpp" />
+    <ClCompile Include="ScenePRO.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
