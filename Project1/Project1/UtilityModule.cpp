@@ -425,8 +425,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ１の敵オブジェクト作成
-						CObjEnemy* objg = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY, 11);
+						CObjEnemy* obje = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje, OBJ_ENEMY, 11);
 
 						
 
@@ -446,8 +446,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ２の敵オブジェクト作成
-						CObjEnemy2* objg = new CObjEnemy2(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY2, 11);
+						CObjEnemy2* obje2 = new CObjEnemy2(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje2, OBJ_ENEMY2, 11);
 
 
 					}
@@ -467,8 +467,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ３の敵オブジェクト作成
-						CObjEnemy3* objg = new CObjEnemy3(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY3, 11);
+						CObjEnemy3* obje3 = new CObjEnemy3(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje3, OBJ_ENEMY3, 11);
 					}
 				}
 
@@ -486,8 +486,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ４の敵オブジェクト作成
-						CObjEnemy4* objg = new CObjEnemy4(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY4, 11);
+						CObjEnemy4* obje4 = new CObjEnemy4(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje4, OBJ_ENEMY4, 11);
 					}
 				}
 
@@ -505,8 +505,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ５の敵オブジェクト作成
-						CObjEnemy5* objg = new CObjEnemy5(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY5, 11);
+						CObjEnemy5* obje5 = new CObjEnemy5(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje5, OBJ_ENEMY5, 11);
 					}
 				}
 
@@ -524,8 +524,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ６の敵オブジェクト作成
-						CObjEnemy6* objg = new CObjEnemy6(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY6, 11);
+						CObjEnemy6* obje6 = new CObjEnemy6(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje6, OBJ_ENEMY6, 11);
 					}
 				}
 
@@ -543,8 +543,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ７の敵オブジェクト作成
-						CObjEnemy7* objg = new CObjEnemy7(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY7, 11);
+						CObjEnemy7* obje7 = new CObjEnemy7(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje7, OBJ_ENEMY7, 11);
 					}
 				}
 
@@ -562,8 +562,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ８の敵オブジェクト作成
-						CObjEnemy* objg = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY, 11);
+						CObjEnemy* obje8 = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						Objs::InsertObj(obje8, OBJ_ENEMY, 11);
 
 
 					}

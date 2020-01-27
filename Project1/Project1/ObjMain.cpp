@@ -265,10 +265,12 @@ void CObjMain::Action()
 	//ギミックのヒットボックスをマップごとに変更する処理
 	if (stop_flg == true)
 	{
+		stop_flg2 = false;
+
 		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
 		EnemySpawnChanger(map_chg, m_map, room_in);
 
-		stop_flg2 = false;
+		
 
 
 	}

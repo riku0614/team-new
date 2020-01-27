@@ -58,16 +58,21 @@ void CObjEnemy4::Init()
 //アクション
 void CObjEnemy4::Action()
 {
-
 	//マップ情報の取得
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-	if (main->RoomFlag() == false && main->GetFlug() == true)
+	if (main->GetFlug() == true && main->GetFlug2() == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
-	if (main->GetFlug() == true && main->FirstFlag() == true)
+	else if (main->GetFlug() == true && main->FirstFlag() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -201,11 +206,7 @@ void CObjEnemy4::Action()
 	{
 		Hits::DeleteHitBox(this);
 	}
-	if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+
 }
 
 //ドロー

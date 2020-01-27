@@ -55,7 +55,11 @@ void CObjGimmick::Action()
 		//“–‚½‚è”»’è—pHitBox‚ðì¬
 		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
 	}
-	
+	else if (main->GetFlug() == true && main->GetFlug2() == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	//HitBox‚ÌˆÊ’u‚Ì•ÏX
 
 	if (hit != nullptr)
@@ -89,11 +93,7 @@ void CObjGimmick::Action()
 	{
 		Hits::DeleteHitBox(this);
 	}
-	if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+
 
 
 }
