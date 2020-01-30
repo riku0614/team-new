@@ -227,16 +227,16 @@ void CObjEnemy::Draw()
 
 		//切り取り位置の設定
 		src.m_top = 16.0f;
-		src.m_left = 84.0f + AniData[m_ani_frame] * 512.0f;
-		src.m_right = 480.0 + AniData[m_ani_frame] * 512.0f;
+		src.m_left = 84.0f + AniData[m_ani_frame] *ENEMY_SIZE;
+		src.m_right = 480.0 + AniData[m_ani_frame] * ENEMY_SIZE;
 		src.m_bottom = 496.0f;
 
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_ey + main->GetScrollY();
-		dst.m_left = (84.0) + m_ex + main->GetScrollX();
-		dst.m_right = (84.0f - 84.0f) + m_ex + main->GetScrollX();
-		dst.m_bottom = 84.0f + m_ey + main->GetScrollY();
+		dst.m_left = (ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_right = (ENEMY_DISPLAY - ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_bottom = ENEMY_DISPLAY + m_ey + main->GetScrollY();
 
 		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
 		Draw::Draw(49, &src, &dst, c, 0.0f);
