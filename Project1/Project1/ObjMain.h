@@ -112,6 +112,8 @@ class CObjMain : public CObj
 		bool pepepe_2;
 		bool room_chg_stop;//教室マップデータを変数へ書き写す処理の停止フラグ
 
+		float m_stamina_limid;//スタミナの限界値
+
 		//テキスト表示用関数
 		bool font_key_flg;
 		bool font_key_flg2;
@@ -124,6 +126,10 @@ class CObjMain : public CObj
 		bool font_open_flg2;
 		bool font_nothing_flg;
 		bool keepout_font_flg;
+
+		int m_ani_time;  //アニメーションフレーム動作間隔
+		int m_ani_frame; //描画フレーム
+		float m_ani_max_time;   //アニメーション動作間隔最大値
 
 
 		bool open_flg;//鍵やバールで開ける処理用のフラグ

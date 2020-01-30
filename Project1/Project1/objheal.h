@@ -37,6 +37,8 @@ private:
 
 	bool stop_flg;
 	//bool hit_flg;
-
+	float m_ani_max_time;   //アニメーション動作間隔最大値
+	int m_ani_time;  //アニメーションフレーム動作間隔
+	int m_ani_frame; //描画フレーム
 };
 

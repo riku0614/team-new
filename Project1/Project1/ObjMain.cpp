@@ -42,7 +42,8 @@ void CObjMain::Init()
 	delete_flg = false;
 	first_stop = true;
 
-	
+	m_ani_time = 4;
+	m_ani_max_time = 4;
 
 	pepepe = false;
 	pepepe_2 = false;
@@ -78,7 +79,7 @@ void CObjMain::Action()
 {
 	
 	
-	
+
 
 	//教室マップを６回回したらセーブしたマップへのロードに切り替える
 	if (room_chg >= 7)
@@ -495,7 +496,6 @@ void CObjMain::Action()
 	}
 
 		stop_flg = false;
-
 	
 }
 	
@@ -2029,24 +2029,7 @@ void CObjMain::Draw()
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑2
 						
-					//アイテム（仮）
-					if (r_map[i][j] == 4)
-					{
-
-							//描画切り取り位置
-							src.m_top = 17.0f;
-							src.m_left = 20.0f;
-							src.m_right = src.m_left + 25.0f;
-							src.m_bottom = src.m_top + 30.0f;
-							
-							//表示位置の設定
-							dst.m_top = i * 64.0f + m_scroll_y;
-							dst.m_left = j * 64.0f + m_scroll_x;
-							dst.m_right = dst.m_left + ITEM_SIZE_X;
-							dst.m_bottom = dst.m_top + ITEM_SIZE_Y;
-
-							Draw::Draw(8, &src, &dst, c, 0.0f);
-					}
+		
 					//本棚
 					if (r_map[i][j] == 19)
 					{
