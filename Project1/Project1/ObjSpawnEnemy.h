@@ -62,9 +62,9 @@ private:
 	int k_id;
 	int f_id;
 
-	int m_ani_frame;
-	int m_ani_time;
-	int m_ani_max_time;
+	int m_ani_frame;//描画フレーム
+	int m_ani_time;//アニメーションフレーム動作間隔
+	int m_ani_max_time;//アニメーション動作間隔最大値
 
 	float px, py;//交点
 };

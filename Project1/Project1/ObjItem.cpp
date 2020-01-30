@@ -43,12 +43,10 @@ void CObjItem::Init()
 	//m_scroll_y = -64.0f;
 
 	stop_flg = false;
-
-	m_ani_max_time = 25;
-
-	m_ani_frame = 0;
-
-	m_ani_time = 0;
+	//アイテムのアニメーション関係
+	m_ani_max_time = 25;//アニメーション動作間隔最大値
+	m_ani_frame = 0;//描画フレーム
+	m_ani_time = 0;//アニメーションフレーム動作間隔
 }
 
 //アクション
@@ -86,7 +84,7 @@ void CObjItem::Action()
 //ドロー
 void CObjItem::Draw()
 {
-
+	//アニメーションデータ
 	int AniData[5] =
 	{
 		0,1,2,3,4,
