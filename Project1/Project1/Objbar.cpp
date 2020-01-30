@@ -37,7 +37,7 @@ void CObjbar::Init()
 
 
 	//当たり判定用hitboxを作成
-	Hits::SetHitBox(this, ix, iy, 32, 32, ELEMENT_BLACK, OBJ_BAR, 1);
+	/*its::SetHitBox(this, ix, iy, 32, 32, ELEMENT_BLACK, OBJ_BAR, 1);*/
 
 
 	//m_scroll_x = -2850.0f;
@@ -61,8 +61,9 @@ void CObjbar::Action()
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//HitBoxの位置の変更
+	
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
+	//hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
 
 	//アイテムに当たって、なおかつ'E'を押したときにアイテムが消える処理
 	if (hero->Getflag_3() == true)

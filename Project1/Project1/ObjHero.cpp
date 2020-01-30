@@ -326,9 +326,7 @@ void CObjHero::Action()
 	//hitboxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	//敵と当たったらフラグを持てる
-	CObjGameUI*ui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
+	
 	//'G'キーを押したら、タイトル画面へ移行
 	if (Input::GetVKey('G') == true)
 	{
@@ -337,26 +335,20 @@ void CObjHero::Action()
 
 	
 	
-	//主人公機オブジェクトと接触したら敵削除
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg==false||
-		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
-		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
-	{
-
-
-		}
+	
+		
 
 	   
 
-		if (m_flg == true && m_time > 0)
-		{
-			m_time--;
-		}
-		else if (m_time == 0)
-		{
-			m_flg = false;
+	if (m_flg == true && m_time > 0)
+	{
+		m_time--;
+	}
+	else if (m_time == 0)
+	{
+		m_flg = false;
 
-		}
+	}
 	
 	
 }
