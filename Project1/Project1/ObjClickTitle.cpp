@@ -41,10 +41,10 @@ void CObjClickTitle::Action()
 	if (m_yj == 100.0f && Input::GetVKey(VK_RETURN))
 	{
 		Scene::SetScene(NULL);//タイトルへ
-		//音楽スタート
-		Audio::Start(9);
+		////音楽スタート
+		//Audio::Start(9);
 
-		Scene::SetScene(new CSceneMain);
+		//Scene::SetScene(new CSceneMain);
 	}
 	
 	//'W'keyを押した時の矢印処理

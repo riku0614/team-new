@@ -51,9 +51,9 @@ void CObjEnemy::Init()
 
 	m_ani_frame = 0;
 
-	m_ani_time = 4;
+	m_ani_time = M_ANI_TIME;
 
-	m_ani_max_time = 4;
+	m_ani_max_time = M_ANI_MAX_TIME;
 }
 
 //アクション
@@ -97,8 +97,8 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
-		gx = (hx + (scrollx)+(64.0f * 3)) / 64.0f;
-		gy = (hy + (scrolly)+(64.0f * 3)) / 64.0f;
+		gx = (hx + (scrollx)+(BLOCK_SIZE_X * 3)) / BLOCK_SIZE_X;
+		gy = (hy + (scrolly)+(BLOCK_SIZE_Y * 3)) / BLOCK_SIZE_Y;
 		
 
 		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)
@@ -129,8 +129,8 @@ void CObjEnemy::Action()
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
 
-	m_ex += m_vx*4.0f;
-	m_ey += m_vy*4.0f;
+	m_ex += m_vx* ENEMY_VECTOR_X;
+	m_ey += m_vy* ENEMY_VECTOR_Y;
 
 	//高速移動によるblock判定
 	bool b;
