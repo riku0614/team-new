@@ -61,13 +61,18 @@ void CObjEnemy7::Action()
 
 	//マップ情報の取得
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-
-	if (main->RoomFlag() == false && main->GetFlug() == true)
+	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
+	if (main->MapChangeData()!=6)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
-	if (main->GetFlug() == true && main->FirstFlag() == true)
+	else if (main->GetFlug() == true && main->FirstFlag() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -99,10 +104,10 @@ void CObjEnemy7::Action()
 		m_vy = (hy + -(scrolly)-m_ey);
 
 
-		if (m_time > 300)
+		if (m_time > 300 && hero->GetKeyID() == ITEM_KEY)
 		{
 
-			CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+			
 			m_time = 0;
 
 			m_ex = hx + -(scrollx)+(64.0f * 2);

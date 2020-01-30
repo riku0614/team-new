@@ -1,4 +1,6 @@
 //使用するヘッダーファイル
+#include <stdio.h>
+
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
@@ -343,40 +345,43 @@ void CObjHero::Action()
 		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
 		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
 	{
-		
 
-		//音楽情報の読み込み
-		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
-
-			//音楽スタート
-			Audio::Start(6);
-
-			m_hero_life -= 1;
-
-			m_flg = true;
-			
-
-			m_time = 300;
-			if (m_hero_life == 2)
-			{
-				Conflict_flag = true;
-			}
-
-			if (m_hero_life == 1)
-			{
-				Conflict_flag2 = true;
-			}
-
-			if (m_hero_life == 0)
-			{
-
-				Scene::SetScene(new CSceneGameOver);
-			}
-
+		if (hit->CheckObjNameHit(OBJ_ENEMY))
+		{
+			//ダメージブースト処理！！
 			//主人公が敵とどの角度で当たっているかどうかの判定
-			HIT_DATA** hit_data;
+			HIT_DATA** hit_data=NULL;
 
-			hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
+			switch (Main->MapChangeData())
+			{
+			    case 0:
+				    hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
+				    break;
+				case 1:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY2);
+					break;
+				case 2:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY3);
+					break;
+				case 3:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY4);
+					break;
+				case 4:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY5);
+					break;
+				case 5:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY6);
+					break;
+				case 6:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY7);
+					break;
+				case 7:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY8);
+					break;
+				default:
+					break;
+			}
+
 
 			//hit_data[0]->rに当たった相手との角度がある。
 			float r = hit_data[0]->r;
@@ -384,26 +389,26 @@ void CObjHero::Action()
 			//右に当たった場合
 			if ((r < 45 && r >= 0) || r > 315)
 			{
-				m_vx = -20.0f;
+				m_vx+20.0f;
 			}
 			//左に当たった場合
 			if (r > 135 && r < 225)
 			{
-				m_vx = +20.0f;
+				m_vx-20.0f;
 			}
 
 			//下に当たった場合
 			if (r > 45 && r < 135)
 			{
-				m_vy = +20.0f;
+				m_vy-20.0f;
 			}
 
 			//上に当たった場合
 			if (r > 225 && r < 315)
 			{
-				m_vy = -20.0f;
+				m_vy+20.0f;
 			}
-
+		}
 		}
 
 	   

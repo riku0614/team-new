@@ -49,6 +49,9 @@
     <Filter Include="ソース ファイル\敵（通常）">
       <UniqueIdentifier>{b43a7534-9771-4a12-80b9-3d45b7b71ac9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\プロローグ関係">
+      <UniqueIdentifier>{d62bb4ef-bb71-400c-802f-d05aa5699ce8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -200,6 +203,12 @@
     </ClInclude>
     <ClInclude Include="ObjEnemy_7.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjPRO.h">
+      <Filter>ソース ファイル\プロローグ関係</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePRO.h">
+      <Filter>ソース ファイル\プロローグ関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy_8.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
@@ -358,6 +367,12 @@
     </ClCompile>
     <ClCompile Include="ObjEnemy_7.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjPRO.cpp">
+      <Filter>ソース ファイル\プロローグ関係</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePRO.cpp">
+      <Filter>ソース ファイル\プロローグ関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_8.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>

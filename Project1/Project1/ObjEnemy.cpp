@@ -25,6 +25,7 @@ void CObjEnemy::Init()
 	m_vx = 0.0f;
 	m_vy = 0.0f;
 	
+
 	
 	m_flg = 0;
 
@@ -61,8 +62,14 @@ void CObjEnemy::Action()
 
 	//マップ情報の取得
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
+	if (main->MapChangeData() != 0)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 
-	if (main->RoomFlag() == false && main->GetFlug() == true)
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, m_ex, m_ey, 76, 76, ELEMENT_ENEMY, OBJ_ENEMY, 1);
@@ -90,19 +97,18 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
+		gx = (hx + (scrollx)+(64.0f * 3)) / 64.0f;
+		gy = (hy + (scrolly)+(64.0f * 3)) / 64.0f;
+		
 
-		m_vx = (hx + -(scrollx)-m_ex);
-		m_vy = (hy + -(scrolly)-m_ey);
-
-	
-		if (m_time > 300)
+		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)
 		{
 			
-			CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+		
 			m_time = 0;
 			
-			m_ex = hx + -(scrollx)+(64.0f * 2);
-			m_ey = hy + -(scrolly)+(64.0f * 2);
+			m_ex = gx;
+			m_ey = gy;
 			m_ani_time++;
 		}
 	}
@@ -198,11 +204,8 @@ void CObjEnemy::Action()
 		Hits::DeleteHitBox(this);
 	}
 
-	if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
+	
 }
 
 //ドロー

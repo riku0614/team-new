@@ -39,7 +39,7 @@ void CObjGimmick3::Init()
 	pj = 0;
 
 
-
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 1);
 
 }
 
@@ -50,22 +50,16 @@ void CObjGimmick3::Action()
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
 
-	if (main->GetFlug() == true)
+	
+	if (main->GetFlug() == true && main->GetFlug2() == true)
 	{
-
+		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
-
-		stop_flg == true;
-
 	}
-
-
-
-	if (stop_flg == true && main->MapChangeData() == 2)
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
+		//当たり判定用HitBoxを作成
 		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 1);
-
-		stop_flg = false;
 	}
 
 	//HitBoxの位置の変更
@@ -73,7 +67,7 @@ void CObjGimmick3::Action()
 	if (hit != nullptr)
 	{
 
-		hit->SetPos(gx + main->GetScrollX(), gy + main->GetScrollY());
+ 		hit->SetPos(gx + main->GetScrollX(), gy + main->GetScrollY());
 
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{
@@ -95,6 +89,10 @@ void CObjGimmick3::Action()
 			}
 		}
 
+	}
+	if (main->GetFlug() == true && main->RoomFlag() == true)
+	{
+		Hits::DeleteHitBox(this);
 	}
 
 }
@@ -123,7 +121,7 @@ void CObjGimmick3::Draw()
 	{
 		//上
 
-		if (m_map[pi][pj] == 7 && m_map[pi - 1][pj] == 9)
+		if (m_map[pi - 1][pj] == 9)
 		{
 			//表示位置の設定
 			dst.m_top = (pi - 1) * 64.0f + hy;
@@ -135,7 +133,7 @@ void CObjGimmick3::Draw()
 
 		}
 		//下
-		else if (m_map[pi][pj] == 7 && m_map[pi + 1][pj] == 12)
+		else if (m_map[pi + 1][pj] == 12)
 		{
 			//表示位置の設定
 			dst.m_top = (pi + 1) * 64.0f + hy;
@@ -146,7 +144,7 @@ void CObjGimmick3::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//左
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj - 1] == 11)
+		else if (m_map[pi][pj - 1] == 11)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;
@@ -157,7 +155,7 @@ void CObjGimmick3::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//右
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj + 1] == 10)
+		else if (m_map[pi][pj + 1] == 10)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;

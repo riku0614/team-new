@@ -8,6 +8,7 @@
 #include "Objbar.h"
 #include "GameL/HitBoxManager.h"
 #include "UtilityModule.h"
+#include "GameL/Audio.h"
 
 
 //使用するネームスペース

@@ -8,6 +8,7 @@ enum OBJ_NAME
 	//OBJ_ÅõÅõÇ∆ï\ãL
 	OBJ_TITLE,
 	OBJ_CLICK_TITLE,
+	OBJ_PRO,
 	OBJ_HERO,
 	OBJ_ENEMY,
 	OBJ_ENEMY2,
@@ -97,6 +98,7 @@ enum ITEM_ID
 #include "ObjHero.h"
 #include "ObjClickTitle.h"
 #include "ObjMain.h"
+#include "ObjPRO.h"
 
 #include "ObjEnemy.h"
 #include "ObjEnemy_2.h"
@@ -139,6 +141,7 @@ enum ITEM_ID
 #include "SceneGameOver.h"
 #include "SceneGameUI.h"
 #include "SceneMenu.h"
+#include "ScenePRO.h"
 
 //-----------------------------------------------
 

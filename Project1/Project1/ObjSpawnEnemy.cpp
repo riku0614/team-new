@@ -160,6 +160,40 @@ void CObjSpwanEnemy::Action()
 	//hitboxの位置の変更
 	hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
 
+	if (hit->CheckObjNameHit(OBJ_HERO))
+	{
+		//ダメージブースト処理！！
+		//主人公が敵とどの角度で当たっているかどうかの判定
+		HIT_DATA** hit_data;
+
+		hit_data = hit->SearchObjNameHit(OBJ_HERO);
+
+		//hit_data[0]->rに当たった相手との角度がある。
+		float r = hit_data[0]->r;
+
+		//右に当たった場合
+		if ((r < 45 && r >= 0) || r > 315)
+		{
+			hero->SetVX(+20.0f);
+		}
+		//左に当たった場合
+		if (r > 135 && r < 225)
+		{
+			hero->SetVX(-20.0f);
+		}
+
+		//下に当たった場合
+		if (r > 45 && r < 135)
+		{
+			hero->SetVY(-20.0f);
+		}
+
+		//上に当たった場合
+		if (r > 225 && r < 315)
+		{
+			hero->SetVY(+20.0f);
+		}
+	}
 
 
 }

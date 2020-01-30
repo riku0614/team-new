@@ -1,8 +1,8 @@
 #include "GameHead.h"
 #include "UtilityModule.h"
-#include "GameL/UserData.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "GameL/UserData.h"   
+#include <ctime>      
+#include <cstdlib>     
 
 //---UnitVec関数
 /*引数１ float* vx  ; ベクトルのX成分のポインタ
@@ -13,7 +13,7 @@
 bool UnitVec(float* vx, float* vy)
 {
 	//ベクトルの長さを決める（三平方の定理）
-	float r = 0.0f;
+    float r = 0.0f;
 	r = (*vx)*(*vx) + (*vy)*(*vy);
 	r = sqrt(r);//rをルートを求める
 
@@ -95,22 +95,29 @@ void MapChanger(int m ,int m_map[MAP_X][MAP_Y], unique_ptr<wchar_t>* p)
 切り替え用の教室マップをメイン教室マップ変数にぶち込む関数
 */
 
-void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p,int r)
+void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p)
 {
+
+
 
 	int size;
 
-
-	int map[ROOM_X][ROOM_Y];
+    int map[ROOM_X][ROOM_Y];
 
 	int count = 1;
+
+	static int random = 0;
+
+	srand((unsigned int)time(NULL));
+
+	random = rand() % 6 + 1;
 
 	for (int i = 0; i < ROOM_X; i++)
 	{
 		for (int j = 0; j < ROOM_Y; j++)
 		{
 			int w = 0;
-			swscanf_s(&p[r].get()[count], L"%d", &w);
+			swscanf_s(&p[random].get()[count], L"%d", &w);
 
 			map[i][j] = w;
 			count += 3;
@@ -128,33 +135,33 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p,int r)
 */
 float SpawnChangerX(int m)
 {
-	if (m == 1)
+	if (m == 1)           //7階
 	{
 		return 64.0f;
 	}
-	else if (m == 2)
+	else if (m == 2)      //6
 	{
 		return 64.0f * 60.0f;
 	}
-	else if (m == 3)
+	else if (m == 3)      //5
 	{
 		return 64.0f * 60.0f;
 	}
-	else if (m == 4)
+	else if (m == 4)      //4 
+	{
+		return 64.0f*3.0f;
+	}
+	else if (m == 5)	  //3
 	{
 		return 64.0f*34.0f;
 	}
-	else if (m == 5)
+	else if (m == 6)      //2
 	{
-		return 64.0f*30.0f;
+		return 64.0f*63.0f;
 	}
-	else if (m == 6)
+	else if (m == 7)      //1階
 	{
-		return 64.0f*40.0f;
-	}
-	else if (m == 7)
-	{
-		return 64.0f*33.0f;
+		return 64.0f*37.0f;
 	}
 
 }
@@ -166,33 +173,33 @@ float SpawnChangerX(int m)
 */
 float SpawnChangerY(int m)
 {
-	if (m == 1)
+	if (m == 1)           //7階
 	{
 		return 64.0f * 2;
 	}
-	else if (m == 2)
+	else if (m == 2)     //6
 	{
 		return 64.0f * 67.0f;
 	}
-	else if (m == 3)
+	else if (m == 3)     //5
 	{
 		return 64.0f * 70.0f;
 	}
-	else if (m == 4)
+	else if (m == 4)     //4
 	{
-		return 64.0f * 25.0f;
+		return 64.0f * 70.0f;
 	}
-	else if (m == 5)
+	else if (m == 5)     //3
 	{
 		return 64.0f;
 	}
-	else if (m == 6)
+	else if (m == 6)     //2
 	{
-		return 64.0f;
+		return 64.0f * 70.0f;
 	}
-	else if (m == 7)
+	else if (m == 7)      //1階
 	{
-		return 64.0f;
+		return 64.0f * 1;
 	}
 
 }
@@ -221,7 +228,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 						m_map[i][j] = 1;
 
 						//gimmickオブジェクト作成
-						CObjGimmick* objg = new CObjGimmick(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick* objg = new CObjGimmick(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg, OBJ_GIMMICK, 11);
 
 						CObjGimmick* gmk = (CObjGimmick*)Objs::GetObj(OBJ_GIMMICK);
@@ -245,7 +252,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 						m_map[i][j] = 1;
 
 						//gimmickオブジェクト作成
-						CObjGimmick2* objg2 = new CObjGimmick2((j - 1 * 30)*64.0f + -(main->GetScrollX()), i*64.0f + main->GetScrollY());
+						CObjGimmick2* objg2 = new CObjGimmick2(j *64.0f, i * 64.0f);
 						Objs::InsertObj(objg2, OBJ_GIMMICK2, 11);
 
 						CObjGimmick2* gmk2 = (CObjGimmick2*)Objs::GetObj(OBJ_GIMMICK2);
@@ -266,16 +273,17 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 				{
 					if (m_map[i][j] == 7)
 					{
+						m_map[i][j] = 1;
 
 						//gimmickオブジェクト作成
-						CObjGimmick3* objg3 = new CObjGimmick3(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick3* objg3 = new CObjGimmick3(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg3, OBJ_GIMMICK3, 11);
 
 						CObjGimmick3* gmk3 = (CObjGimmick3*)Objs::GetObj(OBJ_GIMMICK3);
 						gmk3->SetX(i);
 						gmk3->SetY(j);
 
-						m_map[i][j] = 1;
+						
 					}
 				}
 
@@ -291,7 +299,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 
 						//gimmickオブジェクト作成
-						CObjGimmick4* objg4 = new CObjGimmick4(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick4* objg4 = new CObjGimmick4(j*64.0f , i*64.0f);
 						Objs::InsertObj(objg4, OBJ_GIMMICK4, 11);
 
 						CObjGimmick4* gmk4 = (CObjGimmick4*)Objs::GetObj(OBJ_GIMMICK4);
@@ -314,7 +322,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 
 						//gimmickオブジェクト作成
-						CObjGimmick5* objg5 = new CObjGimmick5(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick5* objg5 = new CObjGimmick5(j*64.0f , i*64.0f);
 						Objs::InsertObj(objg5, OBJ_GIMMICK5, 11);
 
 						CObjGimmick5* gmk5 = (CObjGimmick5*)Objs::GetObj(OBJ_GIMMICK5);
@@ -337,12 +345,12 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 
 						//gimmickオブジェクト作成
-						CObjGimmick2* objg2 = new CObjGimmick2(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg2, OBJ_GIMMICK2, 11);
+						CObjGimmick6* objg6 = new CObjGimmick6(j*64.0f, i*64.0f);
+						Objs::InsertObj(objg6, OBJ_GIMMICK6, 11);
 
-						CObjGimmick2* gmk2 = (CObjGimmick2*)Objs::GetObj(OBJ_GIMMICK2);
-						gmk2->SetX(i);
-						gmk2->SetY(j);
+						CObjGimmick6* gmk6 = (CObjGimmick6*)Objs::GetObj(OBJ_GIMMICK6);
+						gmk6->SetX(i);
+						gmk6->SetY(j);
 
 						m_map[i][j] = 1;
 					}
@@ -360,7 +368,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 
 						//gimmickオブジェクト作成
-						CObjGimmick7* objg7 = new CObjGimmick7(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick7* objg7 = new CObjGimmick7(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg7, OBJ_GIMMICK7, 11);
 
 						CObjGimmick7* gmk7 = (CObjGimmick7*)Objs::GetObj(OBJ_GIMMICK7);
@@ -383,7 +391,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 
 						//gimmickオブジェクト作成
-						CObjGimmick8* objg8 = new CObjGimmick8(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
+						CObjGimmick8* objg8 = new CObjGimmick8(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg8, OBJ_GIMMICK8, 11);
 
 						CObjGimmick8* gmk8 = (CObjGimmick8*)Objs::GetObj(OBJ_GIMMICK8);
@@ -425,8 +433,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ１の敵オブジェクト作成
-						CObjEnemy* objg = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY, 11);
+						CObjEnemy* obje = new CObjEnemy(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje, OBJ_ENEMY, 11);
 
 						
 
@@ -446,8 +454,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ２の敵オブジェクト作成
-						CObjEnemy2* objg = new CObjEnemy2(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY2, 11);
+						CObjEnemy2* obje2 = new CObjEnemy2(j*64.0f , i*64.0f);
+						Objs::InsertObj(obje2, OBJ_ENEMY2, 11);
 
 
 					}
@@ -467,8 +475,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ３の敵オブジェクト作成
-						CObjEnemy3* objg = new CObjEnemy3(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY3, 11);
+						CObjEnemy3* obje3 = new CObjEnemy3(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje3, OBJ_ENEMY3, 11);
 					}
 				}
 
@@ -486,8 +494,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ４の敵オブジェクト作成
-						CObjEnemy4* objg = new CObjEnemy4(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY4, 11);
+						CObjEnemy4* obje4 = new CObjEnemy4(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje4, OBJ_ENEMY4, 11);
 					}
 				}
 
@@ -505,8 +513,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ５の敵オブジェクト作成
-						CObjEnemy5* objg = new CObjEnemy5(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY5, 11);
+						CObjEnemy5* obje5 = new CObjEnemy5(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje5, OBJ_ENEMY5, 11);
 					}
 				}
 
@@ -524,8 +532,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ６の敵オブジェクト作成
-						CObjEnemy6* objg = new CObjEnemy6(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY6, 11);
+						CObjEnemy6* obje6 = new CObjEnemy6(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje6, OBJ_ENEMY6, 11);
 					}
 				}
 
@@ -543,8 +551,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ７の敵オブジェクト作成
-						CObjEnemy7* objg = new CObjEnemy7(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY7, 11);
+						CObjEnemy7* obje7 = new CObjEnemy7(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje7, OBJ_ENEMY7, 11);
 					}
 				}
 
@@ -562,8 +570,8 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						m_map[i][j] = 1;
 
 						//ステージ８の敵オブジェクト作成
-						CObjEnemy* objg = new CObjEnemy(j*64.0f + main->GetScrollX(), i*64.0f + main->GetScrollY());
-						Objs::InsertObj(objg, OBJ_ENEMY, 11);
+						CObjEnemy* obje8 = new CObjEnemy(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje8, OBJ_ENEMY, 11);
 
 
 					}
@@ -574,3 +582,5 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 	}
 
 }
+
+
