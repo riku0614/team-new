@@ -12,6 +12,9 @@ using namespace GameL;
 #define MAP_MIN   (0)
 #define MAP_ERROR (-1)
 #define MAP_DRAW_SIZE (64.0f)
+#define ENEMY_SIZE (512.0f)
+#define ENEMY_DISPLAY (84.0f)
+
 
 #define BUFFER_MAX         (8)
 #define BUFFER_DELETE_DATA (999)
