@@ -2251,7 +2251,7 @@ void CObjMain::Draw()
 	else if (font_open_flg == true && m_time <= 90)
 	{
 
-		Font::StrDraw(L"バールを使った...", 340.0f, 530.0f, 25, c);
+		Font::StrDraw(L"錆びたバールのようなものを使った,", 200.0f, 530.0f, 25, c);
 
 		m_time++;
 	}
@@ -2367,6 +2367,3 @@ void CObjMain::Draw()
 		m_time = 0;
 	}
 }
-	
-
-
