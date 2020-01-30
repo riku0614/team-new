@@ -1,4 +1,6 @@
 //使用するヘッダーファイル
+#include <stdio.h>
+
 #include "GameL/DrawTexture.h"
 #include "GameL/WinInputs.h"
 #include "GameL/SceneManager.h"
@@ -335,8 +337,76 @@ void CObjHero::Action()
 
 	
 	
-	
-		
+	//主人公機オブジェクトと接触したら敵削除
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg==false||
+		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
+		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
+	{
+
+		if (hit->CheckObjNameHit(OBJ_ENEMY))
+		{
+			//ダメージブースト処理！！
+			//主人公が敵とどの角度で当たっているかどうかの判定
+			HIT_DATA** hit_data=NULL;
+
+			switch (Main->MapChangeData())
+			{
+			    case 0:
+				    hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
+				    break;
+				case 1:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY2);
+					break;
+				case 2:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY3);
+					break;
+				case 3:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY4);
+					break;
+				case 4:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY5);
+					break;
+				case 5:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY6);
+					break;
+				case 6:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY7);
+					break;
+				case 7:
+					hit_data = hit->SearchObjNameHit(OBJ_ENEMY8);
+					break;
+				default:
+					break;
+			}
+
+
+			//hit_data[0]->rに当たった相手との角度がある。
+			float r = hit_data[0]->r;
+
+			//右に当たった場合
+			if ((r < 45 && r >= 0) || r > 315)
+			{
+				m_vx+20.0f;
+			}
+			//左に当たった場合
+			if (r > 135 && r < 225)
+			{
+				m_vx-20.0f;
+			}
+
+			//下に当たった場合
+			if (r > 45 && r < 135)
+			{
+				m_vy-20.0f;
+			}
+
+			//上に当たった場合
+			if (r > 225 && r < 315)
+			{
+				m_vy+20.0f;
+			}
+		}
+		}
 
 	   
 

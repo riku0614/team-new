@@ -199,9 +199,12 @@ void CObjEnemy::Action()
 		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
 	}
 
-	
+	if (main->RoomFlag()==true)
+	{
+		Hits::DeleteHitBox(this);
+	}
 
-	if (hit->CheckObjNameHit(OBJ_HERO) && hit != nullptr)
+	if (hit->CheckObjNameHit(OBJ_HERO))
 	{
 		//ダメージブースト処理！！
 		//主人公が敵とどの角度で当たっているかどうかの判定
