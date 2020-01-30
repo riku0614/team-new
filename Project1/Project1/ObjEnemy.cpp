@@ -97,8 +97,8 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
-		gx = (hx + (scrollx)+(BLOCK_SIZE_X * 3)) / BLOCK_SIZE_X;
-		gy = (hy + (scrolly)+(BLOCK_SIZE_Y * 3)) / BLOCK_SIZE_Y;
+		gx = (hx + -(scrollx)+(BLOCK_SIZE_X * 3)) / BLOCK_SIZE_X;
+		gy = (hy + -(scrolly)+(BLOCK_SIZE_Y * 3)) / BLOCK_SIZE_Y;
 		
 
 		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)

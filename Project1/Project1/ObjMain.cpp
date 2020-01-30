@@ -33,6 +33,8 @@ void CObjMain::Init()
 	m_scroll_x = -64.0f*7;
 	m_scroll_y = -64.0f*7;
 
+	room_chg_stop = false;
+
 	map_chg = 0;
 	room_chg = 0;
 	stop_flg = true;
@@ -210,9 +212,8 @@ void CObjMain::Action()
 			spawn_pointX[map_chg] = SpawnChangerX(map_chg);
 			spawn_pointY[map_chg] = SpawnChangerY(map_chg);
 			
-			hero->SetX(0.0f);
-			hero->SetY(0.0f);
-			m_scroll_x = -spawn_pointX[map_chg] ;
+			
+			m_scroll_x = -spawn_pointX[map_chg];
 			m_scroll_y = -spawn_pointY[map_chg];
 
 		}
@@ -816,6 +817,7 @@ void CObjMain::BlockHit(
 									map_chg++;
 									stop_flg2 = true;
 									first_stop = true;
+									room_chg_stop = false;
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -883,7 +885,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									
+									room_chg_stop = false;
 
 									
 									map_chg++;
@@ -911,7 +913,7 @@ void CObjMain::BlockHit(
 									first_stop = true;
 									map_chg ++;
 
-									
+									room_chg_stop = false;
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -963,7 +965,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-
+									room_chg_stop = false;
 									
 									
 									*k_id = 99;
@@ -1415,7 +1417,7 @@ void CObjMain::ItemHit(
 					float scroll_x = scroll_on_x ? m_scroll_x : 0;
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 63.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
+					if ((*x + (-scroll_x) + 64.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
 					{
 						//上下左右判定
 
@@ -1624,33 +1626,33 @@ void CObjMain::ItemHit(
 					 if (len < 88.0f)
 					 {  
 					 	 //角度で左右を判定
-						 if ((r < 45 && r>=0) || r > 315)
+						 if ((r < 45 && r >= 0) || r > 315)
 						 {
-							//右
-							*right = true;//主人公から見て、左の部分が衝突している
-							*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
-							ix = bx / 64;
-							iy = by / 64;
+							 //右
+							 *right = true;//主人公から見て、左の部分が衝突している
+							 *x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
+							 ix = bx / 64;
+							 iy = by / 64;
 
-								if (delete_flg == true)
-								{
-									//音楽情報の読み込み
-									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+							 if (delete_flg == true)
+							 {
+								 //音楽情報の読み込み
+								 Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
 
-									//音楽スタート
-									Audio::Start(10);
+								 //音楽スタート
+								 Audio::Start(10);
 
-									r_map[iy][ix] = 1;
+								 r_map[iy][ix] = 1;
 
 
 
-									delete_flg = false;
-								}
-								
+								 delete_flg = false;
+							 }
+						 }
 
-							}
-							if (r > 45 && r < 135)
-							{
+							
+						if (r > 45 && r < 135)
+						{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
 								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
@@ -1671,7 +1673,7 @@ void CObjMain::ItemHit(
 								}
 
 								*vy = 0.0f;
-							}
+						}
 							if (r > 135 && r < 225)
 							{
 								//左
@@ -1690,10 +1692,11 @@ void CObjMain::ItemHit(
 
 									r_map[iy][ix] = 1;
 
-								delete_flg = false;
+									delete_flg = false;
+								}
 							}
 							
-						}
+						
 						if (r > 225 && r < 315)
 						{
 							//下
