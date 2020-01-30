@@ -218,10 +218,10 @@ void CObjMain::Action()
 			memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
 		}
 		//廊下マップからマップへの切り替え処理
-		else if (room_in == false && stop_flg == true)
+		if (room_chg >= 1 && room_in == true && stop_flg == true)
 		{
 			//音楽情報の読み込み
-			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
+   			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
 
 			//音楽スタート
 			Audio::Start(5);

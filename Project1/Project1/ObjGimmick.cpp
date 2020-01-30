@@ -50,6 +50,7 @@ void CObjGimmick::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
+
 	if (main->GetFlug() == true && main->GetFlug2() == true)
 	{
 		this->SetStatus(false);
@@ -136,9 +137,6 @@ void CObjGimmick::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 
-
-			                                                           
-			m_map[pi][pj] = 1;
 			Hits::DeleteHitBox(this);
 
 			
@@ -152,9 +150,6 @@ void CObjGimmick::Draw()
 		dst.m_right = dst.m_left + 64.0f;
 		dst.m_bottom = dst.m_top + 64.0f;
 
-
-
-		m_map[pi][pj] = 1;
 		Hits::DeleteHitBox(this);
 
 
@@ -169,8 +164,6 @@ void CObjGimmick::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 
-
-			m_map[pi][pj] = 1;
 			Hits::DeleteHitBox(this);
 
 		
@@ -184,7 +177,6 @@ void CObjGimmick::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 
-			m_map[pi][pj] = 1;
 			Hits::DeleteHitBox(this);
 
 			
@@ -198,7 +190,6 @@ void CObjGimmick::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 
-			m_map[pi][pj] = 1;
 			Hits::DeleteHitBox(this);
 		}
 		//‰E
@@ -221,7 +212,6 @@ void CObjGimmick::Draw()
 			dst.m_right = dst.m_left + 64.0f;
 			dst.m_bottom = dst.m_top + 64.0f;
 
-			m_map[pi][pj] = 1;
 			Hits::DeleteHitBox(this);
 		}
 
