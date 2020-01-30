@@ -20,6 +20,7 @@ using namespace GameL;
 #define ITEM_SIZE_X (32.0f)
 #define ITEM_SIZE_Y (32.0f)
 #define ROOM_NUMBER (7)
+#define DRAW_SIZE (64.0f)
 
 //オブジェクト：メイン
 class CObjMain : public CObj
@@ -128,6 +129,7 @@ class CObjMain : public CObj
 
 		bool open_flg;//鍵やバールで開ける処理用のフラグ
 		bool nothing_flg;//本棚などからアイテムを1度しか入手できない処理用フラグ
+		bool switch_flg;
 
 		int g_count1;
 		int g_count2;

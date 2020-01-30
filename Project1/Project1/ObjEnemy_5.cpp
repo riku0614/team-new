@@ -61,7 +61,8 @@ void CObjEnemy5::Action()
 
 	//ƒ}ƒbƒvî•ñ‚ÌŽæ“¾
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-	if (main->GetFlug() == true && main->GetFlug2() == true)
+	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
+	if (main->MapChangeData() != 4)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
@@ -104,10 +105,10 @@ void CObjEnemy5::Action()
 		m_vy = (hy + -(scrolly)-m_ey);
 
 
-		if (m_time > 300)
+		if (m_time > 300 && hero->GetKeyID() == ITEM_KEY)
 		{
 
-			CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
+			
 			m_time = 0;
 
 			m_ex = hx + -(scrollx)+(64.0f * 2);
