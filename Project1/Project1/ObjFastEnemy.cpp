@@ -39,11 +39,11 @@ void CObjFastEnemy::Init()
 	m_hit_right = false;
 
 
-	m_ani_frame = 0;
+	m_ani_frame = 0;//描画フレーム
 
-	m_ani_time = 4;
+	m_ani_time = 4;//アニメーションフレーム動作間隔
 
-	m_ani_max_time = 4;
+	m_ani_max_time = 4;//アニメーション動作間隔最大値
 	//当たり判定用HitBoxを作成
 	Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_FASTENEMY, 1);
 
@@ -199,6 +199,7 @@ void CObjFastEnemy::Draw()
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	if (main->RoomFlag() == false)
 	{
+		//アニメーションデータ
 		int AniData[4] =
 		{
 			0,1,1,0,
