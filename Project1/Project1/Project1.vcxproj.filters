@@ -25,9 +25,6 @@
     <Filter Include="ソース ファイル\UI関係">
       <UniqueIdentifier>{d7465f0e-8004-4741-88c3-04bc03143df5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\敵">
-      <UniqueIdentifier>{b43a7534-9771-4a12-80b9-3d45b7b71ac9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\タイトル">
       <UniqueIdentifier>{7412df36-5108-4b2b-a75d-a2ed2475e935}</UniqueIdentifier>
     </Filter>
@@ -45,6 +42,12 @@
     </Filter>
     <Filter Include="ソース ファイル\関数系">
       <UniqueIdentifier>{f4b868cd-2bff-4904-b0d7-ada0d9618b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\敵（特殊）">
+      <UniqueIdentifier>{e0f29d43-6475-48c8-9c0c-149b75a7a06d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\敵（通常）">
+      <UniqueIdentifier>{b43a7534-9771-4a12-80b9-3d45b7b71ac9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -136,13 +139,7 @@
       <Filter>ソース ファイル\UI関係</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy.h">
-      <Filter>ソース ファイル\敵</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjFastEnemy.h">
-      <Filter>ソース ファイル\敵</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSpawnEnemy.h">
-      <Filter>ソース ファイル\敵</Filter>
+      <Filter>ソース ファイル\敵（通常）</Filter>
     </ClInclude>
     <ClInclude Include="ObjClickTitle.h">
       <Filter>ソース ファイル\タイトル</Filter>
@@ -177,11 +174,35 @@
     <ClInclude Include="ObjHero.h">
       <Filter>ソース ファイル\主人公</Filter>
     </ClInclude>
-    <ClInclude Include="ObjRoom.h">
-      <Filter>ソース ファイル\教室</Filter>
-    </ClInclude>
     <ClInclude Include="UtilityModule.h">
       <Filter>ソース ファイル\関数系</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFastEnemy.h">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSpawnEnemy.h">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_2.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_3.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_4.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_5.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_6.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_7.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_8.h">
+      <Filter>ソース ファイル\敵（通常）</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -276,13 +297,7 @@
       <Filter>ソース ファイル\UI関係</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy.cpp">
-      <Filter>ソース ファイル\敵</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjFastEnemy.cpp">
-      <Filter>ソース ファイル\敵</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSpawnEnemy.cpp">
-      <Filter>ソース ファイル\敵</Filter>
+      <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
     <ClCompile Include="ObjClickTitle.cpp">
       <Filter>ソース ファイル\タイトル</Filter>
@@ -317,11 +332,35 @@
     <ClCompile Include="ObjHero.cpp">
       <Filter>ソース ファイル\主人公</Filter>
     </ClCompile>
-    <ClCompile Include="ObjRoom.cpp">
-      <Filter>ソース ファイル\教室</Filter>
-    </ClCompile>
     <ClCompile Include="UtilityModule.cpp">
       <Filter>ソース ファイル\関数系</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFastEnemy.cpp">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSpawnEnemy.cpp">
+      <Filter>ソース ファイル\敵（特殊）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_2.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_3.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_4.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_5.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_6.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_7.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEnemy_8.cpp">
+      <Filter>ソース ファイル\敵（通常）</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

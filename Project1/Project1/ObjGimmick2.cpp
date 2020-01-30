@@ -49,8 +49,17 @@ void CObjGimmick2::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
-
 	
+	if (main->RoomFlag() == false && main->GetFlug() == true)
+	{
+		//“–‚½‚è”»’è—pHitBox‚ðì¬
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
+	}
+	else if (main->GetFlug() == true && main->GetFlug2() == true)
+	{
+		this->SetStatus(false);
+		Hits::DeleteHitBox(this);
+	}
 	if (hit != nullptr)
 	{
 		
@@ -77,7 +86,7 @@ void CObjGimmick2::Action()
 		}
 	
 	}
-	if (main->GetFlug() == true)
+	if (main->GetFlug() == true && main->RoomFlag() == true)
 	{
 		Hits::DeleteHitBox(this);
 	}

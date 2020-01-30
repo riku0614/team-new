@@ -5,7 +5,7 @@
 #include "GameL/HitBoxManager.h"
 
 #include "GameHead.h"
-#include "ObjEnemy.h"
+#include "ObjEnemy_5.h"
 #include "SceneMain.h"
 #include "UtilityModule.h"
 
@@ -13,19 +13,19 @@
 //使用するネームスペース
 using namespace GameL;
 
-CObjEnemy::CObjEnemy(float x,float y)
+CObjEnemy5::CObjEnemy5(float x, float y)
 {
 	m_ex = x;
 	m_ey = y;
 }
 //イニシャライズ
-void CObjEnemy::Init()
+void CObjEnemy5::Init()
 {
 
 	m_vx = 0.0f;
 	m_vy = 0.0f;
-	
-	
+
+
 	m_flg = 0;
 
 	m_id = CHAR_ENEMY;
@@ -35,8 +35,8 @@ void CObjEnemy::Init()
 
 	boost_flag = false;
 
-	
-	
+
+
 	//blockとの衝突確認用
 
 	m_hit_up = false;
@@ -44,9 +44,9 @@ void CObjEnemy::Init()
 	m_hit_left = false;
 	m_hit_right = false;
 
-	
+
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_ex, m_ey, 76,76, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 
 	m_ani_frame = 0;
 
@@ -56,7 +56,7 @@ void CObjEnemy::Init()
 }
 
 //アクション
-void CObjEnemy::Action()
+void CObjEnemy5::Action()
 {
 
 	//マップ情報の取得
@@ -66,13 +66,17 @@ void CObjEnemy::Action()
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
-
+	
 	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, m_ex, m_ey, 76, 76, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
-	
+	else if (main->GetFlug() == true && main->FirstFlag() == true)
+	{
+		//当たり判定用HitBoxを作成
+		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	}
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	float hx = hero->GetX();
@@ -84,10 +88,10 @@ void CObjEnemy::Action()
 
 	//画面内に入ると主人公を追従する
 	if (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
-		    m_ey<(WINDOW_MAX_Y + -(scrolly)) && m_ey>(WINDOW_MIN_Y + -(scrolly)))
+		m_ey<(WINDOW_MAX_Y + -(scrolly)) && m_ey>(WINDOW_MIN_Y + -(scrolly)))
 	{
-		m_vx = (hx + -(scrollx) - m_ex) ;
-		m_vy = (hy + -(scrolly) - m_ey) ;
+		m_vx = (hx + -(scrollx)-m_ex);
+		m_vy = (hy + -(scrolly)-m_ey);
 
 		m_ani_time++;
 	}
@@ -99,13 +103,13 @@ void CObjEnemy::Action()
 		m_vx = (hx + -(scrollx)-m_ex);
 		m_vy = (hy + -(scrolly)-m_ey);
 
-	
+
 		if (m_time > 300)
 		{
-			
+
 			CObjEnemy* enemy = (CObjEnemy*)Objs::GetObj(OBJ_ENEMY);
 			m_time = 0;
-			
+
 			m_ex = hx + -(scrollx)+(64.0f * 2);
 			m_ey = hy + -(scrolly)+(64.0f * 2);
 			m_ani_time++;
@@ -128,13 +132,13 @@ void CObjEnemy::Action()
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
 
-	m_ex += m_vx*4.0f;
-	m_ey += m_vy*4.0f;
+	m_ex += m_vx * 4.0f;
+	m_ey += m_vy * 4.0f;
 
 	//高速移動によるblock判定
 	bool b;
 	float pxx, pyy, r;
-	
+
 	CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	if (pbb->GetScrollX() > 0)
 		pbb->SetScrollX(0);
@@ -142,7 +146,7 @@ void CObjEnemy::Action()
 		pbb->SetScrollY(0);
 	//移動方向にrayを飛ばす
 	float vx;
-	
+
 	if (m_vx > 0)
 		vx = 500 - pbb->GetScrollX();
 	else
@@ -185,11 +189,11 @@ void CObjEnemy::Action()
 	CObjMain* pb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	pb->BlockHit(&m_ex, &m_ey, false, false,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
-		&d, &m_id,&k_id);
+		&d, &m_id, &k_id);
 
 
 	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-	
+
 	//自身のhitboxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit != nullptr)
@@ -198,16 +202,15 @@ void CObjEnemy::Action()
 		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
 	}
 
-	if (main->RoomFlag()==true)
+	if (main->RoomFlag() == true)
 	{
 		Hits::DeleteHitBox(this);
 	}
-
 	
 }
 
 //ドロー
-void CObjEnemy::Draw()
+void CObjEnemy5::Draw()
 {
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	if (main->RoomFlag() == false)
@@ -224,22 +227,23 @@ void CObjEnemy::Draw()
 		RECT_F dst; //描画先表示位置
 
 		//切り取り位置の設定
-		src.m_top = 16.0f;
-		src.m_left = 84.0f + AniData[m_ani_frame] * 512.0f;
-		src.m_right = 480.0 + AniData[m_ani_frame] * 512.0f;
-		src.m_bottom = 496.0f;
+		src.m_top = 0.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 512.0f;
+		src.m_right = 512.0 + AniData[m_ani_frame] * 512.0f;
+		src.m_bottom = 512.0f;
 
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_ey + main->GetScrollY();
-		dst.m_left = (84.0) + m_ex + main->GetScrollX();
-		dst.m_right = (84.0f - 84.0f) + m_ex + main->GetScrollX();
-		dst.m_bottom = 84.0f + m_ey + main->GetScrollY();
+		dst.m_left = (128.0) + m_ex + main->GetScrollX();
+		dst.m_right = (128 - 128.0f) + m_ex + main->GetScrollX();
+		dst.m_bottom = 128.0f + m_ey + main->GetScrollY();
 
 		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
 		Draw::Draw(49, &src, &dst, c, 0.0f);
 	}
 }
+
 
 
 
