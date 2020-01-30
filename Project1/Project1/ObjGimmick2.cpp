@@ -39,7 +39,7 @@ void CObjGimmick2::Init()
 	pj = 0;
 
 
-	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_GREEN, OBJ_GIMMICK2, 1);
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK2, 1);
 
 }
 
@@ -49,17 +49,19 @@ void CObjGimmick2::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
-	
-	if (main->RoomFlag() == false && main->GetFlug() == true)
+
+	if (main->GetFlug() == true && main->GetFlug2() == true)
+	{
+	this->SetStatus(false);
+	Hits::DeleteHitBox(this);
+	}
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK2, 1);
 	}
-	else if (main->GetFlug() == true && main->GetFlug2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
+
 	if (hit != nullptr)
 	{
 		
@@ -116,7 +118,7 @@ void CObjGimmick2::Draw()
 	{
 		//上
 
-		if (m_map[pi][pj] == 7 && m_map[pi - 1][pj] == 9)
+		if (m_map[pi - 1][pj] == 9)
 		{
 			//表示位置の設定
 			dst.m_top = (pi - 1) * 64.0f + hy;
@@ -128,7 +130,7 @@ void CObjGimmick2::Draw()
 
 		}
 		//下
-		else if (m_map[pi][pj] == 7 && m_map[pi + 1][pj] == 12)
+		else if (m_map[pi + 1][pj] == 12)
 		{
 			//表示位置の設定
 			dst.m_top = (pi + 1) * 64.0f + hy;
@@ -139,7 +141,7 @@ void CObjGimmick2::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//左
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj - 1] == 11)
+		else if (m_map[pi][pj - 1] == 11)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;
@@ -150,7 +152,7 @@ void CObjGimmick2::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//右
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj + 1] == 10)
+		else if (m_map[pi][pj + 1] == 10)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;

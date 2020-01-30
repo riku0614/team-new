@@ -47,6 +47,8 @@ public:
 	float scrollY() { return escrolly; }
 	float scrollX() { return escrollx; }
 	
+	
+
 private:
 	float m_ex;  //オブジェクトの位置X
 	float m_ey;  //オブジェクトの位置Y
@@ -60,6 +62,9 @@ private:
 	int m_time;
 	int zx;
 	int zy;
+
+	int gx;
+	int gy;
 
 	float escrolly;
 	float escrollx;

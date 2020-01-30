@@ -39,6 +39,7 @@ void CObjGimmick::Init()
 	pj = 0;
 
 	
+
 	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
 
 }
@@ -49,17 +50,17 @@ void CObjGimmick::Action()
 	CHitBox* hit = Hits::GetHitBox(this);
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
-	
-	if (main->RoomFlag() == false && main->GetFlug() == true)
-	{
-		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
-	}
-	else if (main->GetFlug() == true && main->GetFlug2() == true)
+	if (main->GetFlug() == true && main->GetFlug2() == true)
 	{
 		this->SetStatus(false);
 		Hits::DeleteHitBox(this);
 	}
+	else if (main->RoomFlag() == false && main->GetFlug() == true)
+	{
+		//当たり判定用HitBoxを作成
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
+	}
+	
 	//HitBoxの位置の変更
 
 	if (hit != nullptr)

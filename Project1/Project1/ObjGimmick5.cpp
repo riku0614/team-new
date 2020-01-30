@@ -116,12 +116,11 @@ void CObjGimmick5::Draw()
 	float hx = main->GetScrollX();
 	float hy = main->GetScrollY();
 
-
 	if (gimmick_flg == true)
 	{
 		//上
 
-		if (m_map[pi][pj] == 7 && m_map[pi - 1][pj] == 9)
+		if (m_map[pi - 1][pj] == 9)
 		{
 			//表示位置の設定
 			dst.m_top = (pi - 1) * 64.0f + hy;
@@ -133,7 +132,7 @@ void CObjGimmick5::Draw()
 
 		}
 		//下
-		else if (m_map[pi][pj] == 7 && m_map[pi + 1][pj] == 12)
+		else if (m_map[pi + 1][pj] == 12)
 		{
 			//表示位置の設定
 			dst.m_top = (pi + 1) * 64.0f + hy;
@@ -144,7 +143,7 @@ void CObjGimmick5::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//左
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj - 1] == 11)
+		else if (m_map[pi][pj - 1] == 11)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;
@@ -155,7 +154,7 @@ void CObjGimmick5::Draw()
 			Hits::DeleteHitBox(this);
 		}
 		//右
-		else if (m_map[pi][pj] == 7 && m_map[pi][pj + 1] == 10)
+		else if (m_map[pi][pj + 1] == 10)
 		{
 			//表示位置の設定
 			dst.m_top = pi * 64.0f + hy;

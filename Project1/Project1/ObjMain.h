@@ -128,6 +128,7 @@ class CObjMain : public CObj
 
 		bool open_flg;//鍵やバールで開ける処理用のフラグ
 		bool nothing_flg;//本棚などからアイテムを1度しか入手できない処理用フラグ
+		bool switch_flg;
 
 		int g_count1;
 		int g_count2;
