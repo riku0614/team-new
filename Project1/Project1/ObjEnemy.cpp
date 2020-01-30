@@ -97,18 +97,16 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
-		gx = (hx + (scrollx)+(64.0f * 3)) / 64.0f;
-		gy = (hy + (scrolly)+(64.0f * 3)) / 64.0f;
+		gx = (hx + -(scrollx)+(64.0f * 2)) / 64.0f;
+		gy = (hy + -(scrolly)+(64.0f * 2)) / 64.0f;
 		
 
 		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)
 		{
-			
-		
 			m_time = 0;
 			
-			m_ex = gx;
-			m_ey = gy;
+			m_ex = gx*64.0f;
+			m_ey = gy*64.0f;
 			m_ani_time++;
 		}
 	}
@@ -189,14 +187,14 @@ void CObjEnemy::Action()
 		&d, &m_id,&k_id);
 
 
-	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	
 	
 	//自身のhitboxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit != nullptr)
 	{
 		//hitboxの位置の変更
-		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
+		hit->SetPos(m_ex + pb->GetScrollX(), m_ey + pb->GetScrollY());
 	}
 
 	if (main->RoomFlag()==true)
@@ -227,16 +225,16 @@ void CObjEnemy::Draw()
 
 		//切り取り位置の設定
 		src.m_top = 16.0f;
-		src.m_left = 84.0f + AniData[m_ani_frame] * 512.0f;
-		src.m_right = 480.0 + AniData[m_ani_frame] * 512.0f;
+		src.m_left = 84.0f + AniData[m_ani_frame] *ENEMY_SIZE;
+		src.m_right = 480.0 + AniData[m_ani_frame] * ENEMY_SIZE;
 		src.m_bottom = 496.0f;
 
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_ey + main->GetScrollY();
-		dst.m_left = (84.0) + m_ex + main->GetScrollX();
-		dst.m_right = (84.0f - 84.0f) + m_ex + main->GetScrollX();
-		dst.m_bottom = 84.0f + m_ey + main->GetScrollY();
+		dst.m_left = (ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_right = (ENEMY_DISPLAY - ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_bottom = ENEMY_DISPLAY + m_ey + main->GetScrollY();
 
 		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
 		Draw::Draw(49, &src, &dst, c, 0.0f);
