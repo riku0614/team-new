@@ -97,18 +97,16 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
-		gx = (hx + (scrollx)+(64.0f * 3)) / 64.0f;
-		gy = (hy + (scrolly)+(64.0f * 3)) / 64.0f;
+		gx = (hx + -(scrollx)+(64.0f * 2)) / 64.0f;
+		gy = (hy + -(scrolly)+(64.0f * 2)) / 64.0f;
 		
 
 		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)
 		{
-			
-		
 			m_time = 0;
 			
-			m_ex = gx;
-			m_ey = gy;
+			m_ex = gx*64.0f;
+			m_ey = gy*64.0f;
 			m_ani_time++;
 		}
 	}
@@ -189,14 +187,14 @@ void CObjEnemy::Action()
 		&d, &m_id,&k_id);
 
 
-	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	
 	
 	//Ž©g‚Ìhitbox‚ðŽ‚Á‚Ä‚­‚é
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit != nullptr)
 	{
 		//hitbox‚ÌˆÊ’u‚Ì•ÏX
-		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
+		hit->SetPos(m_ex + pb->GetScrollX(), m_ey + pb->GetScrollY());
 	}
 
 	if (main->RoomFlag()==true)
