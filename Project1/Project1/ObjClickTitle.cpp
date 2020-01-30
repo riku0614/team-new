@@ -30,6 +30,12 @@ void CObjClickTitle::Action()
 	//Enterを押したときの処理
 	if (m_yj == 0.0f && Input::GetVKey(VK_RETURN))
 	{
+		//音楽情報の読み込み
+		Audio::LoadAudio(9, L"9タイトル決定音.wav", SOUND_TYPE::EFFECT);
+
+		//音楽スタート
+		Audio::Start(9);
+
 		Scene::SetScene(new CSceneMain);
 	}
 	
@@ -138,8 +144,8 @@ void CObjClickTitle::Draw()
 	//ゲームを始める場所
 
 	float cc[4] = { 1.0f,0.5f,0.5f,0.7f };
-	Font::StrDraw(L"最初から", 320, 350, 30, cc);
-	Font::StrDraw(L"続きから", 320, 400, 30, cc);
+	Font::StrDraw(L"最初カラ", 320, 350, 30, cc);
+	Font::StrDraw(L"続キカラ", 320, 400, 30, cc);
 	Font::StrDraw(L"ゲーム終了", 300, 450, 30, cc);
 
 }

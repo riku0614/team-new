@@ -1079,8 +1079,15 @@ void CObjMain::BlockHit(
 								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								
+								//本を開く処理本を開く処理
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1145,8 +1152,17 @@ void CObjMain::BlockHit(
 							if (r_map[i][j] == 2)
 								*bt = m_map[i][j];
 							*vy = 0.0f;
+
+							//本を開く処理
 							if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 							{
+
+								//音楽情報の読み込み
+								Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+								//音楽スタート
+								Audio::Start(12);
+
 								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 								font_story_flg = true;
 								hero->SetHeroStop(true);
@@ -1185,6 +1201,7 @@ void CObjMain::BlockHit(
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									if (hero->Getflag_3() == true && Input::GetVKey('E'))
 									{
+
 										CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 										hero->SetFlug_3(false);
 										gui->SetID(99);
@@ -1209,8 +1226,15 @@ void CObjMain::BlockHit(
 								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 
+								//本を開く処理
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1249,6 +1273,12 @@ void CObjMain::BlockHit(
 										
 										if (hero->Getflag_3() == true && Input::GetVKey('E'))
 										{
+											//音楽情報の読み込み
+											Audio::LoadAudio(11, L"11ドア破壊音.wav", SOUND_TYPE::EFFECT);
+
+											//音楽スタート
+											Audio::Start(11);
+
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
 											gui->SetID(99);
@@ -1286,6 +1316,11 @@ void CObjMain::BlockHit(
 								//本棚から鍵を取る処理
 								if (r_map[i][j] == 19 && Input::GetVKey(VK_RETURN) == true&&nothing_flg==false)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
 
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									*k_id = ITEM_KEY;
@@ -1300,8 +1335,15 @@ void CObjMain::BlockHit(
 								{
 									font_nothing_flg = true;
 								}
+								//本を開く処理
 								else if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1462,6 +1504,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 									
 
@@ -1481,6 +1530,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1500,6 +1556,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1518,6 +1581,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1617,6 +1687,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 
@@ -1636,6 +1712,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 									delete_flg = false;
@@ -1653,6 +1735,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 								delete_flg = false;
@@ -1669,6 +1757,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 									delete_flg = false;
