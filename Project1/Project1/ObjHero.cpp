@@ -235,12 +235,13 @@ void CObjHero::Action()
 		UI->Settakeflag_3(false);
 	}
 
-	//アニメーションのリセット
-	if (m_ani_time > m_ani_max_time)
-	{
-		m_ani_frame += 1;
-		m_ani_time = 0;
-	}
+
+		//アニメーションのリセット
+		if (m_ani_time > m_ani_max_time)
+		{
+			m_ani_frame += 1;
+			m_ani_time = 0;
+		}
 
 	//アニメーションフレームのリセット
 	if (m_ani_frame == 4)
@@ -467,7 +468,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 0.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + +AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 64.0f;
 		
@@ -477,7 +478,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 128.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 192.0f;
 
@@ -488,7 +489,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 0.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 64.0f;
 		

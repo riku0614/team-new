@@ -46,13 +46,13 @@ void CObjEnemy4::Init()
 
 
 	//当たり判定用HitBoxを作成
-	Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+	Hits::SetHitBox(this, m_ex, m_ey, BLOCK_SIZE_X, BLOCK_SIZE_Y, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 
 	m_ani_frame = 0;
 
-	m_ani_time = 4;
+	m_ani_time = M_ANI_TIME;
 
-	m_ani_max_time = 4;
+	m_ani_max_time = M_ANI_MAX_TIME;
 }
 
 //アクション
@@ -70,12 +70,12 @@ void CObjEnemy4::Action()
 	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+		Hits::SetHitBox(this, m_ex, m_ey, BLOCK_SIZE_X, BLOCK_SIZE_Y, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
 	else if (main->GetFlug() == true && main->FirstFlag() == true)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, m_ex, m_ey, 64, 64, ELEMENT_ENEMY, OBJ_ENEMY, 1);
+		Hits::SetHitBox(this, m_ex, m_ey, BLOCK_SIZE_X, BLOCK_SIZE_Y, ELEMENT_ENEMY, OBJ_ENEMY, 1);
 	}
 
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -110,8 +110,8 @@ void CObjEnemy4::Action()
 		
 			m_time = 0;
 
-			m_ex = hx + -(scrollx)+(64.0f * 2);
-			m_ey = hy + -(scrolly)+(64.0f * 2);
+			m_ex = hx + -(scrollx)+(BLOCK_SIZE_X * 2);
+			m_ey = hy + -(scrolly)+(BLOCK_SIZE_Y * 2);
 			m_ani_time++;
 		}
 	}
@@ -132,8 +132,8 @@ void CObjEnemy4::Action()
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
 
-	m_ex += m_vx * 4.0f;
-	m_ey += m_vy * 4.0f;
+	m_ex += m_vx * ENEMY_VECTOR_X;
+	m_ey += m_vy * ENEMY_VECTOR_Y;
 
 	//高速移動によるblock判定
 	bool b;

@@ -124,7 +124,10 @@ void CSceneMain::InitScene()
 	Draw::LoadImageW(L"教卓右上.png", 51, TEX_SIZE_1024);
 	Draw::LoadImageW(L"教卓左上.png", 52, TEX_SIZE_1024);
 	Draw::LoadImageW(L"教卓左下.png", 53, TEX_SIZE_1024);
-	
+
+	Draw::LoadImageW(L"バールアイテムエフェクトまとめ.png", 54, TEX_SIZE_1024);
+	Draw::LoadImageW(L"回復アイテムエフェクトまとめ.png", 55, TEX_SIZE_1024);
+	Draw::LoadImageW(L"鍵アイテムエフェクトまとめ.png", 56, TEX_SIZE_1024);
 
 	//出力させる文字のグラフィック作成
 	Font::SetStrTex(L"鍵を入手した...");
