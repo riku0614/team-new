@@ -135,33 +135,33 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p)
 */
 float SpawnChangerX(int m)
 {
-	if (m == 1)
+	if (m == 1)           //7ŠK
 	{
 		return 64.0f;
 	}
-	else if (m == 2)
+	else if (m == 2)      //6
 	{
 		return 64.0f * 60.0f;
 	}
-	else if (m == 3)
+	else if (m == 3)      //5
 	{
 		return 64.0f * 60.0f;
 	}
-	else if (m == 4)
+	else if (m == 4)      //4 
+	{
+		return 64.0f*3.0f;
+	}
+	else if (m == 5)	  //3
 	{
 		return 64.0f*34.0f;
 	}
-	else if (m == 5)
+	else if (m == 6)      //2
 	{
-		return 64.0f*30.0f;
+		return 64.0f*63.0f;
 	}
-	else if (m == 6)
+	else if (m == 7)      //1ŠK
 	{
-		return 64.0f*40.0f;
-	}
-	else if (m == 7)
-	{
-		return 64.0f*33.0f;
+		return 64.0f*37.0f;
 	}
 
 }
@@ -173,33 +173,33 @@ float SpawnChangerX(int m)
 */
 float SpawnChangerY(int m)
 {
-	if (m == 1)
+	if (m == 1)           //7ŠK
 	{
 		return 64.0f * 2;
 	}
-	else if (m == 2)
+	else if (m == 2)     //6
 	{
 		return 64.0f * 67.0f;
 	}
-	else if (m == 3)
+	else if (m == 3)     //5
 	{
 		return 64.0f * 70.0f;
 	}
-	else if (m == 4)
+	else if (m == 4)     //4
 	{
-		return 64.0f * 25.0f;
+		return 64.0f * 70.0f;
 	}
-	else if (m == 5)
+	else if (m == 5)     //3
 	{
 		return 64.0f;
 	}
-	else if (m == 6)
+	else if (m == 6)     //2
 	{
-		return 64.0f;
+		return 64.0f * 70.0f;
 	}
-	else if (m == 7)
+	else if (m == 7)      //1ŠK
 	{
-		return 64.0f;
+		return 64.0f * 1;
 	}
 
 }

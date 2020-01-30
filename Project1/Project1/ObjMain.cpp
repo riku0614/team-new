@@ -61,14 +61,14 @@ void CObjMain::Init()
 	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 
 	//廊下マップデータ
-	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案1.csv", &size);
-	p[1] = Save::ExternalDataOpen(L"マップ３.csv", &size); 
-	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案7.csv", &size);
-	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案3.csv", &size);
-    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案４.csv", &size);
-	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案5.csv", &size);
-    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案6.csv", &size);
-	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案2.csv", &size);
+	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
+	p[1] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size); 
+	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
+	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
+    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
+	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
+    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
+	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 	
 }
@@ -1051,8 +1051,15 @@ void CObjMain::BlockHit(
 								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								
+								//本を開く処理本を開く処理
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1117,9 +1124,17 @@ void CObjMain::BlockHit(
 							if (r_map[i][j] == 2)
 								*bt = m_map[i][j];
 							*vy = 0.0f;
-						
+
+							//本を開く処理
 							if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 							{
+
+								//音楽情報の読み込み
+								Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+								//音楽スタート
+								Audio::Start(12);
+
 								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 								font_story_flg = true;
 								hero->SetHeroStop(true);
@@ -1152,7 +1167,25 @@ void CObjMain::BlockHit(
 										}
 									}
 								}
-								
+								//初期の部屋でバールを使わないと開かない処理
+								else if (room_in == true && room_chg == 0)
+								{
+									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+									if (hero->Getflag_3() == true && Input::GetVKey('E'))
+									{
+
+										CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+										hero->SetFlug_3(false);
+										gui->SetID(99);
+
+										hero->SetBarID(99);
+
+										room_in = false;
+										stop_flg = true;
+
+									}
+
+								}
 							}
 							
 
@@ -1165,8 +1198,15 @@ void CObjMain::BlockHit(
 								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 
+								//本を開く処理
 								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1205,6 +1245,12 @@ void CObjMain::BlockHit(
 										
 										if (hero->Getflag_3() == true && Input::GetVKey('E'))
 										{
+											//音楽情報の読み込み
+											Audio::LoadAudio(11, L"11ドア破壊音.wav", SOUND_TYPE::EFFECT);
+
+											//音楽スタート
+											Audio::Start(11);
+
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
 											gui->SetID(99);
@@ -1242,6 +1288,11 @@ void CObjMain::BlockHit(
 								//本棚から鍵を取る処理
 								if (r_map[i][j] == 19 && Input::GetVKey(VK_RETURN) == true&&nothing_flg==false)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
 
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									*k_id = ITEM_KEY;
@@ -1256,8 +1307,15 @@ void CObjMain::BlockHit(
 								{
 									font_nothing_flg = true;
 								}
+								//本を開く処理
 								else if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(12);
+
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									font_story_flg = true;
 									hero->SetHeroStop(true);
@@ -1391,6 +1449,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 									
 
@@ -1410,6 +1475,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1429,6 +1501,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1451,6 +1530,13 @@ void CObjMain::ItemHit(
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
+
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									m_map[iy][ix] = 1;
 
 									
@@ -1546,6 +1632,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 
@@ -1565,6 +1657,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 									delete_flg = false;
@@ -1582,6 +1680,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 								delete_flg = false;
@@ -1598,6 +1702,12 @@ void CObjMain::ItemHit(
 
 								if (delete_flg == true)
 								{
+									//音楽情報の読み込み
+									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+
+									//音楽スタート
+									Audio::Start(10);
+
 									r_map[iy][ix] = 1;
 
 									delete_flg = false;
@@ -1667,10 +1777,10 @@ void CObjMain::Draw()
 
 
 					//表示位置の設定
-					dst.m_top = i * 64.0f + m_scroll_y;
-					dst.m_left = j * 64.0f + m_scroll_x;
-					dst.m_right = dst.m_left + 64.0;
-					dst.m_bottom = dst.m_top + 64.0;
+					dst.m_top = i * DRAW_SIZE + m_scroll_y;
+					dst.m_left = j * DRAW_SIZE + m_scroll_x;
+					dst.m_right = dst.m_left + DRAW_SIZE;
+					dst.m_bottom = dst.m_top + DRAW_SIZE;
 
 
 					//床テクスチャ
@@ -1678,8 +1788,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
@@ -1689,8 +1799,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
@@ -1699,8 +1809,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(7, &src, &dst, c, 0.0f);
 					}
@@ -1709,8 +1819,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
@@ -1718,8 +1828,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}	
@@ -1727,8 +1837,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
@@ -1736,8 +1846,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(20, &src, &dst, c, 0.0f);
 					}//壁テクスチャ４つ↑
@@ -1785,7 +1895,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
@@ -1794,7 +1904,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
@@ -1803,7 +1913,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
@@ -1812,7 +1922,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑
@@ -1822,8 +1932,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(38, &src, &dst, c, 0.0f);
 					}
@@ -1831,8 +1941,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
@@ -1840,8 +1950,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
@@ -1849,11 +1959,21 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
-					}//角壁２・4つ↑
+					}
+					if (m_map[i][j] == 50)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
+
+						Draw::Draw(41, &src, &dst, c, 0.0f);
+					}
+					//角壁２・5つ↑
 				}
 			}
 
@@ -1870,8 +1990,8 @@ void CObjMain::Draw()
 
 
 					//表示位置の設定
-					dst.m_top = i * 64.0f + m_scroll_y;
-					dst.m_left = j * 64.0f + m_scroll_x;
+					dst.m_top = i * DRAW_SIZE + m_scroll_y;
+					dst.m_left = j * DRAW_SIZE + m_scroll_x;
 					dst.m_right = dst.m_left + 64.0;
 					dst.m_bottom = dst.m_top + 64.0;
 
@@ -1882,8 +2002,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
@@ -1912,8 +2032,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(43, &src, &dst, c, 0.0f);
 					}
@@ -1922,8 +2042,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
@@ -1931,8 +2051,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
@@ -1940,8 +2060,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}
@@ -1949,8 +2069,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(20, &src, &dst, c, 0.0f);
 					}//壁テクスチャ４つ↑
@@ -1999,7 +2119,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
@@ -2008,7 +2128,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
@@ -2017,7 +2137,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
@@ -2026,7 +2146,7 @@ void CObjMain::Draw()
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
 						src.m_right = src.m_left + 63.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑2
@@ -2054,8 +2174,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 						
 						Draw::Draw(29, &src, &dst, c, 0.0f);
 					}
@@ -2063,8 +2183,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
@@ -2073,8 +2193,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
@@ -2083,8 +2203,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(50, &src, &dst, c, 0.0f);
 					}
@@ -2093,8 +2213,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(51, &src, &dst, c, 0.0f);
 					}
@@ -2103,8 +2223,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(52, &src, &dst, c, 0.0f);
 					}
@@ -2113,8 +2233,8 @@ void CObjMain::Draw()
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 64.0f;
-						src.m_bottom = src.m_top + 64.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(53, &src, &dst, c, 0.0f);
 					}
