@@ -1,4 +1,6 @@
 //使用するヘッダーファイル
+#include <stdio.h>
+
 #include "GameL/DrawTexture.h"
 #include "GameL/DrawFont.h"
 #include "GameL/WinInputs.h"
@@ -33,6 +35,8 @@ void CObjMain::Init()
 	m_scroll_x = -64.0f*7;
 	m_scroll_y = -64.0f*7;
 
+	room_chg_stop = false;
+
 	map_chg = 0;
 	room_chg = 0;
 	stop_flg = true;
@@ -56,12 +60,12 @@ void CObjMain::Init()
 	m_time = 0;
 
 	//教室マップデータ
-	r[1] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
+	r[1] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 	r[2] = Save::ExternalDataOpen(L"教室２右サクラ.csv", &size);
 	r[3] = Save::ExternalDataOpen(L"教室３右サクラ.csv", &size);
 	r[4] = Save::ExternalDataOpen(L"教室４右サクラ.csv", &size);
 	r[5] = Save::ExternalDataOpen(L"教室５右サクラ.csv", &size);
-	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
+	r[6] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
 
 	//廊下マップデータ
 	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
@@ -72,13 +76,14 @@ void CObjMain::Init()
 	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
     p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
 	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	
+	p[8] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 }
 
 //アクション
 void CObjMain::Action()
 {
+	
 	
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -89,7 +94,7 @@ void CObjMain::Action()
 			first_stop = true;
 			
 			map_chg++;
-			if (map_chg == 7)
+			if (map_chg == 8)
 			{
 				Scene::SetScene(new CSceneGameClear);
 			}
@@ -210,9 +215,8 @@ void CObjMain::Action()
 			spawn_pointX[map_chg] = SpawnChangerX(map_chg);
 			spawn_pointY[map_chg] = SpawnChangerY(map_chg);
 			
-			hero->SetX(0.0f);
-			hero->SetY(0.0f);
-			m_scroll_x = -spawn_pointX[map_chg] ;
+			
+			m_scroll_x = -spawn_pointX[map_chg];
 			m_scroll_y = -spawn_pointY[map_chg];
 
 		}
@@ -221,10 +225,10 @@ void CObjMain::Action()
 			memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
 		}
 		//廊下マップからマップへの切り替え処理
-		else if (room_in == false && stop_flg == true)
+		if (room_chg >= 1 && room_in == true && stop_flg == true)
 		{
 			//音楽情報の読み込み
-			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
+   			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
 
 			//音楽スタート
 			Audio::Start(5);
@@ -816,11 +820,12 @@ void CObjMain::BlockHit(
 									map_chg++;
 									stop_flg2 = true;
 									first_stop = true;
+									room_chg_stop = false;
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -869,7 +874,7 @@ void CObjMain::BlockHit(
 								
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -883,7 +888,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									
+									room_chg_stop = false;
 
 									
 									map_chg++;
@@ -896,6 +901,7 @@ void CObjMain::BlockHit(
 									}
 
 								}
+								
 							
 							}
 							if (r > 135 && r < 225)
@@ -911,7 +917,7 @@ void CObjMain::BlockHit(
 									first_stop = true;
 									map_chg ++;
 
-									
+									room_chg_stop = false;
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -963,7 +969,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-
+									room_chg_stop = false;
 									
 									
 									*k_id = 99;
@@ -974,7 +980,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -988,7 +994,7 @@ void CObjMain::BlockHit(
 									if (room_in == false)
 									{
 										keepout_font_flg = true;
-										
+
 									}
 
 								}
@@ -1189,9 +1195,24 @@ void CObjMain::BlockHit(
 
 								}
 							}
-							
+							if (r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey(VK_RETURN) ||
+								r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey(VK_RETURN))
+							{
+								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+								hero->SetBarID(ITEM_BAR);
 
-							
+								hero->SetFlug_3(true);
+
+								font_bar_flg = true;
+
+								nothing_flg = true;
+
+							}
+							else if (r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey(VK_RETURN) ||
+								     r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey(VK_RETURN))
+							{
+								font_nothing_flg = true;
+							}
 						}
 							if (r > 135 && r < 225 )
 							{
@@ -1353,7 +1374,7 @@ void CObjMain::BlockHit(
 									}
 									
 								}
-								
+							
 								
 							}
 						
@@ -1415,7 +1436,7 @@ void CObjMain::ItemHit(
 					float scroll_x = scroll_on_x ? m_scroll_x : 0;
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 63.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
+					if ((*x + (-scroll_x) + 64.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
 					{
 						//上下左右判定
 
@@ -1624,33 +1645,33 @@ void CObjMain::ItemHit(
 					 if (len < 88.0f)
 					 {  
 					 	 //角度で左右を判定
-						 if ((r < 45 && r>=0) || r > 315)
+						 if ((r < 45 && r >= 0) || r > 315)
 						 {
-							//右
-							*right = true;//主人公から見て、左の部分が衝突している
-							*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
-							ix = bx / 64;
-							iy = by / 64;
+							 //右
+							 *right = true;//主人公から見て、左の部分が衝突している
+							 *x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
+							 ix = bx / 64;
+							 iy = by / 64;
 
-								if (delete_flg == true)
-								{
-									//音楽情報の読み込み
-									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
+							 if (delete_flg == true)
+							 {
+								 //音楽情報の読み込み
+								 Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
 
-									//音楽スタート
-									Audio::Start(10);
+								 //音楽スタート
+								 Audio::Start(10);
 
-									r_map[iy][ix] = 1;
+								 r_map[iy][ix] = 1;
 
 
 
-									delete_flg = false;
-								}
-								
+								 delete_flg = false;
+							 }
+						 }
 
-							}
-							if (r > 45 && r < 135)
-							{
+							
+						if (r > 45 && r < 135)
+						{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
 								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
@@ -1671,7 +1692,7 @@ void CObjMain::ItemHit(
 								}
 
 								*vy = 0.0f;
-							}
+						}
 							if (r > 135 && r < 225)
 							{
 								//左
@@ -1690,10 +1711,11 @@ void CObjMain::ItemHit(
 
 									r_map[iy][ix] = 1;
 
-								delete_flg = false;
+									delete_flg = false;
+								}
 							}
 							
-						}
+						
 						if (r > 225 && r < 315)
 						{
 							//下
@@ -2249,7 +2271,7 @@ void CObjMain::Draw()
 	else if (font_open_flg == true && m_time <= 90)
 	{
 
-		Font::StrDraw(L"バールを使った...", 340.0f, 530.0f, 25, c);
+		Font::StrDraw(L"錆びたバールのようなものを使った,", 200.0f, 530.0f, 25, c);
 
 		m_time++;
 	}
@@ -2365,6 +2387,3 @@ void CObjMain::Draw()
 		m_time = 0;
 	}
 }
-	
-
-
