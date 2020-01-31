@@ -40,10 +40,15 @@ void CObjbar::Init()
 	/*its::SetHitBox(this, ix, iy, 32, 32, ELEMENT_BLACK, OBJ_BAR, 1);*/
 
 
+
 	//m_scroll_x = -2850.0f;
 	//m_scroll_y = -64.0f;
 
 	stop_flg = false;
+	//アイテムのアニメーション関係
+	m_ani_max_time = 25;//アニメーション動作間隔最大値
+	m_ani_frame = 0;//描画フレーム
+	m_ani_time = 0;//アニメーションフレーム動作間隔
 
 
 }
@@ -64,12 +69,21 @@ void CObjbar::Action()
 	
 	CHitBox* hit = Hits::GetHitBox(this);
 	//hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
+	
+	
+	m_ani_time++;
 
-	//アイテムに当たって、なおかつ'E'を押したときにアイテムが消える処理
-	if (hero->Getflag_3() == true)
+	//アニメーションのリセット
+	if (m_ani_time > m_ani_max_time)
 	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
+		m_ani_frame += 1;
+		m_ani_time = 0;
+	}
+
+	//アニメーションフレームのリセット
+	if (m_ani_frame == 5)
+	{
+		m_ani_frame = 0;
 	}
 
 
@@ -78,16 +92,22 @@ void CObjbar::Action()
 //ドロー
 void CObjbar::Draw()
 {
+	//アニメーションデータ
+	int AniData[5] =
+	{
+		4,3,2,1,0,
+	};
+
 	float c[4] = { 1.0f,1.0f,1.0f,1.0f };
 
 	RECT_F src; //描画元切り取り位置
 	RECT_F dst; //描画先表示位置
 
 	//描画切り取り位置
-	src.m_top = 17.0f;
-	src.m_left = 20.0f;
-	src.m_right = src.m_left + 25.0f;
-	src.m_bottom = src.m_top + 30.0f;
+	src.m_top = 0.0f;
+	src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
+	src.m_right = 64.0f + AniData[m_ani_frame] * 64.0f;
+	src.m_bottom = 64.0f;
 
 	//メインの位置を取得
 	CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
@@ -102,30 +122,24 @@ void CObjbar::Draw()
 			{
 				if (r_map[i][j] == BAR )
 				{
-					if (main->GetStoryFlag() == true)
-					{
-						;
-					}
-					else
-					{
-						//表示位置の設定
-						dst.m_top = i * 64.0f + hy;
-						dst.m_left = j * 64.0f + hx;
-						dst.m_right = dst.m_left + 32.0f;
-						dst.m_bottom = dst.m_top + 32.0f;
-					}
-					Draw::Draw(8, &src, &dst, c, 0.0f);
+					//表示位置の設定
+					dst.m_top = i * 64.0f + hy;
+					dst.m_left = j * 64.0f + hx;
+					dst.m_right = dst.m_left + 32.0f;
+					dst.m_bottom = dst.m_top + 32.0f;
+					
+					Draw::Draw(54, &src, &dst, c, 0.0f);
 				}
 			}
 		}
 	}
-	else
+	if(main->RoomFlag() == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == BAR&&main->GetStoryFlag()==false)
+				if (m_map[i][j] == BAR)
 				{
 					//表示位置の設定
 					dst.m_top = i * 64.0f + hy;
@@ -133,7 +147,7 @@ void CObjbar::Draw()
 					dst.m_right = dst.m_left + 32.0f;
 					dst.m_bottom = dst.m_top + 32.0f;
 
-					Draw::Draw(8, &src, &dst, c, 0.0f);
+					Draw::Draw(54, &src, &dst, c, 0.0f);
 				}
 			}
 		}

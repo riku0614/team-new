@@ -51,9 +51,9 @@ void CObjEnemy::Init()
 
 	m_ani_frame = 0;
 
-	m_ani_time = 4;
+	m_ani_time = M_ANI_TIME;
 
-	m_ani_max_time = 4;
+	m_ani_max_time = M_ANI_MAX_TIME;
 }
 
 //アクション
@@ -97,18 +97,16 @@ void CObjEnemy::Action()
 	else
 	{
 		m_time++;
-		gx = (hx + (scrollx)+(64.0f * 3)) / 64.0f;
-		gy = (hy + (scrolly)+(64.0f * 3)) / 64.0f;
+		gx = (hx + -(scrollx)+(BLOCK_SIZE_X * 3)) / BLOCK_SIZE_X;
+		gy = (hy + -(scrolly)+(BLOCK_SIZE_Y * 3)) / BLOCK_SIZE_Y;
 		
 
 		if (m_time > 300&& m_map[gy][gx]==1&&hero->GetKeyID()==ITEM_KEY)
 		{
-			
-		
 			m_time = 0;
 			
-			m_ex = gx;
-			m_ey = gy;
+			m_ex = gx*64.0f;
+			m_ey = gy*64.0f;
 			m_ani_time++;
 		}
 	}
@@ -129,8 +127,8 @@ void CObjEnemy::Action()
 	//移動ベクトルの正規化
 	UnitVec(&m_vy, &m_vx);
 
-	m_ex += m_vx*4.0f;
-	m_ey += m_vy*4.0f;
+	m_ex += m_vx* ENEMY_VECTOR_X;
+	m_ey += m_vy* ENEMY_VECTOR_Y;
 
 	//高速移動によるblock判定
 	bool b;
@@ -189,14 +187,14 @@ void CObjEnemy::Action()
 		&d, &m_id,&k_id);
 
 
-	CObjMain* scroll = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	
 	
 	//自身のhitboxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 	if (hit != nullptr)
 	{
 		//hitboxの位置の変更
-		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
+		hit->SetPos(m_ex + pb->GetScrollX(), m_ey + pb->GetScrollY());
 	}
 
 	if (main->RoomFlag()==true)
@@ -265,16 +263,16 @@ void CObjEnemy::Draw()
 
 		//切り取り位置の設定
 		src.m_top = 16.0f;
-		src.m_left = 84.0f + AniData[m_ani_frame] * 512.0f;
-		src.m_right = 480.0 + AniData[m_ani_frame] * 512.0f;
+		src.m_left = 84.0f + AniData[m_ani_frame] *ENEMY_SIZE;
+		src.m_right = 480.0 + AniData[m_ani_frame] * ENEMY_SIZE;
 		src.m_bottom = 496.0f;
 
 
 		//表示位置の設定
 		dst.m_top = 0.0f + m_ey + main->GetScrollY();
-		dst.m_left = (84.0) + m_ex + main->GetScrollX();
-		dst.m_right = (84.0f - 84.0f) + m_ex + main->GetScrollX();
-		dst.m_bottom = 84.0f + m_ey + main->GetScrollY();
+		dst.m_left = (ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_right = (ENEMY_DISPLAY - ENEMY_DISPLAY) + m_ex + main->GetScrollX();
+		dst.m_bottom = ENEMY_DISPLAY + m_ey + main->GetScrollY();
 
 		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
 		Draw::Draw(49, &src, &dst, c, 0.0f);

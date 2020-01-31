@@ -111,20 +111,20 @@ void CObjHero::Action()
 
 
 		//キーの入力方向
-		
+
 		if (Input::GetVKey('A') == true && Input::GetVKey('D') != true)
 		{
 			m_vx -= m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey('W') == true&&Input::GetVKey('S') != true)
+		else if (Input::GetVKey('W') == true && Input::GetVKey('S') != true)
 		{
 			m_vy -= m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey('S') == true&&Input::GetVKey('W') != true)
+		else if (Input::GetVKey('S') == true && Input::GetVKey('W') != true)
 		{
 			m_vy += m_speed_power;
 			m_posture = 1.0f;
@@ -137,7 +137,7 @@ void CObjHero::Action()
 			m_ani_time += 1;
 		}
 	}
-	else if (m_hero_stop==true&&Input::GetVKey(VK_RETURN) == true)
+	else if (m_hero_stop == true && Input::GetVKey(VK_RETURN) == true)
 	{
 
 		Main->SetStoryFlag(false);
@@ -145,95 +145,87 @@ void CObjHero::Action()
 		m_hero_stop = false;
 	}
 
-		//主人公のアイテムと当たったフラグを持ってくる
-		CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
+	//主人公のアイテムと当たったフラグを持ってくる
+	CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
 
-		//1番目のアイテムをとる処理
-		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true )
+	//1番目のアイテムをとる処理
+	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
 
 
+	{
+		Main->SetKeyFlag(true);
+		peperon_flag = true;
+		k_id = ITEM_KEY;
+		Main->SetDelete(true);
+
+		
+	}
+
+	//2番目のアイテムをとる処理
+	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
+	{
+		Main->SetHealFlag(true);
+		peperon_flag_2 = true;
+		h_id = ITEM_HEAL;
+		Main->SetDelete(true);
+
+		
+	}
+
+	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
+	{
+		Main->SetBarFlag(true);
+		peperon_flag_3 = true;
+		b_id = ITEM_BAR;
+		Main->SetDelete(true);
+
+		
+	}
+
+
+
+
+	//回復アイテムを使う処理
+	else if (Input::GetVKey('2') == true && UI->GetItemflag_2() == true&&h_id==ITEM_HEAL)
+	{
+
+		if (m_hero_life <= 2)
 		{
-		    Main->SetKeyFlag(true);
-			peperon_flag = true;
-			k_id = ITEM_KEY;
-			Main->SetDelete(true);
-			
-			//Main->GetMapItem() = false;
+			use_Item_flag_2 = true;
+			m_hero_life = 3;
+			UI->Settakeflag_2(false);
+			h_id = 99;
+		}
+		else if (m_hero_life == 3)
+		{
+			;
 		}
 
-		//2番目のアイテムをとる処理
-		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
-		{
-			Main->SetHealFlag(true);
-			peperon_flag_2 = true;
-			h_id = ITEM_HEAL;
-			Main->SetDelete(true);
-			
-			//Main->GetMapItem_2() = false;
-		}
+	}
 
-		if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-			Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
-		{
-			Main->SetBarFlag(true);
-			peperon_flag_3 = true;
-			b_id = ITEM_BAR;
-			Main->SetDelete(true);
-			
-			//Main->GetMapItem_2() = false;
-		}
-
-
-		//1番目のアイテムを使う処理
-		if (Input::GetVKey('1') == true && UI->GetItemflag() == true)
-		{
-			use_Item_flag = true;
-			UI->Settakeflag(false);
-		}
-
-		//2番目のアイテムを使う処理
-		else if (Input::GetVKey('2') == true && UI->GetItemflag_2() == true)
-		{
-			if (m_hero_life <= 2)
-			{
-				use_Item_flag_2 = true;
-				m_hero_life = 3;
-				UI->Settakeflag_2(false);
-			}
-			else if (m_hero_life == 3)
-			{
-				;
-			}
-
-		}
-
-		//3番目のアイテムを使う処理
-		else if (Input::GetVKey('3') == true && UI->GetItemflag_3() == true)
-		{
-			use_Item_flag_3 = true;
-			UI->Settakeflag_3(false);
-		}
+	
 
 		//アニメーションのリセット
 		if (m_ani_time > m_ani_max_time)
@@ -242,77 +234,77 @@ void CObjHero::Action()
 			m_ani_time = 0;
 		}
 
-		//アニメーションフレームのリセット
-		if (m_ani_frame == 4)
-		{
-			m_ani_frame = 0;
-		}
+	//アニメーションフレームのリセット
+	if (m_ani_frame == 4)
+	{
+		m_ani_frame = 0;
+	}
 
-		//摩擦
-		m_vx += -(m_vx*0.098f);
-		m_vy += -(m_vy*0.098f);
+	//摩擦
+	m_vx += -(m_vx*0.098f);
+	m_vy += -(m_vy*0.098f);
 
-		//高速移動によるblock判定
-		bool b;
-		float pxx, pyy, r;
-		CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	//高速移動によるblock判定
+	bool b;
+	float pxx, pyy, r;
+	CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-		if (pbb->GetScrollX() > 0)
-			pbb->SetScrollX(0);
+	if (pbb->GetScrollX() > 0)
+		pbb->SetScrollX(0);
 
-		//移動方向にrayを飛ばす
-		float vx;
-		float vy;
+	//移動方向にrayを飛ばす
+	float vx;
+	float vy;
 
-		if (m_vx > 0)
-			vx = 500 - pbb->GetScrollX();
+	if (m_vx > 0)
+		vx = 500 - pbb->GetScrollX();
+	else
+		vx = 0 - pbb->GetScrollX();
+
+
+	//ray判定
+	b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, 0.0f, &pxx, &pyy, &r);
+
+	if (b == true)
+	{
+		//交点取得
+		px = pxx + pbb->GetScrollX();
+		py = pyy - pbb->GetScrollY();
+
+		float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
+		float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
+
+
+		//主人公の幅分オフセット
+		if (vx > 0)
+			px += -64;
 		else
-			vx = 0 - pbb->GetScrollX();
+			px += 2;
 
 
-		//ray判定
-		b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, 0.0f, &pxx, &pyy, &r);
-
-		if (b == true)
+		//AとBが逆を向いている（主人公が移動先の壁を越えている）
+		if (aa*bb < 0)
 		{
-			//交点取得
-			px = pxx + pbb->GetScrollX();
-			py = pyy - pbb->GetScrollY();
-
-			float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
-			float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
-
-
-			//主人公の幅分オフセット
-			if (vx > 0)
-				px += -64;
-			else
-				px += 2;
-
-
-			//AとBが逆を向いている（主人公が移動先の壁を越えている）
-			if (aa*bb < 0)
-			{
-				//移動ベクトルを（交点→主人公の位置）ベクトルにする
-				m_vx = px - m_px;
-			}
-
+			//移動ベクトルを（交点→主人公の位置）ベクトルにする
+			m_vx = px - m_px;
 		}
-		else
-		{
-			px = 0.0f;
-			py = 0.0f;
-		}
+
+	}
+	else
+	{
+		px = 0.0f;
+		py = 0.0f;
+	}
 
 	Main->BlockHit(&m_px, &m_py, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type, &m_id, &k_id
 	);
 
-		//自身のhitboxを持ってくる
-		CHitBox* hit = Hits::GetHitBox(this);
+	//自身のhitboxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
 
-		//アイテムの当たり判定実行
+	//アイテムの当たり判定実行
 	Main->ItemHit(&m_px, &m_py, true, true,
 		&mi_hit_up, &mi_hit_down, &mi_hit_left, &mi_hit_right, &m_vx, &m_vy,
 		&m_block_type
@@ -335,80 +327,74 @@ void CObjHero::Action()
 		Scene::SetScene(new CSceneTitle);
 	}
 
-	
-	
+
 	//主人公機オブジェクトと接触したら敵削除
-	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg==false||
-		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false|| 
+	if (hit->CheckObjNameHit(OBJ_ENEMY) != nullptr&&m_flg == false ||
+		hit->CheckObjNameHit(OBJ_FASTENEMY) != nullptr&&m_flg == false ||
 		hit->CheckObjNameHit(OBJ_SPWANENEMY) != nullptr&&m_flg == false)
 	{
+		//主人公が敵とどの角度で当たっているかどうかの判定
+		HIT_DATA** hit_data;
 
-		if (hit->CheckObjNameHit(OBJ_ENEMY))
+		hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
+
+		//hit_data[0]->rに当たった相手との角度がある。
+		float r = hit_data[0]->r;
+
+		//右に当たった場合
+		if ((r < 45 && r >= 0) || r > 315)
 		{
-			//ダメージブースト処理！！
-			//主人公が敵とどの角度で当たっているかどうかの判定
-			HIT_DATA** hit_data=NULL;
-
-			switch (Main->MapChangeData())
-			{
-			    case 0:
-				    hit_data = hit->SearchObjNameHit(OBJ_ENEMY);
-				    break;
-				case 1:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY2);
-					break;
-				case 2:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY3);
-					break;
-				case 3:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY4);
-					break;
-				case 4:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY5);
-					break;
-				case 5:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY6);
-					break;
-				case 6:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY7);
-					break;
-				case 7:
-					hit_data = hit->SearchObjNameHit(OBJ_ENEMY8);
-					break;
-				default:
-					break;
-			}
-
-
-			//hit_data[0]->rに当たった相手との角度がある。
-			float r = hit_data[0]->r;
-
-			//右に当たった場合
-			if ((r < 45 && r >= 0) || r > 315)
-			{
-				m_vx+20.0f;
-			}
-			//左に当たった場合
-			if (r > 135 && r < 225)
-			{
-				m_vx-20.0f;
-			}
-
-			//下に当たった場合
-			if (r > 45 && r < 135)
-			{
-				m_vy-20.0f;
-			}
-
-			//上に当たった場合
-			if (r > 225 && r < 315)
-			{
-				m_vy+20.0f;
-			}
+			m_vx = -20.0f;
 		}
+		//左に当たった場合
+		if (r > 135 && r < 225)
+		{
+			m_vx = +20.0f;
 		}
 
-	   
+		//下に当たった場合
+		if (r > 45 && r < 135)
+		{
+			m_vy = +20.0f;
+		}
+
+		//上に当たった場合
+		if (r > 225 && r < 315)
+		{
+			m_vy = -20.0f;
+		}
+
+		//音楽情報の読み込み
+		Audio::LoadAudio(6, L"6ダメージ音.wav", SOUND_TYPE::EFFECT);
+
+		//音楽スタート
+		Audio::Start(6);
+
+		m_hero_life -= 1;
+
+		m_flg = true;
+
+
+		m_time = 300;
+		if (m_hero_life == 2)
+		{
+			Conflict_flag = true;
+		}
+
+		if (m_hero_life == 1)
+		{
+			Conflict_flag2 = true;
+		}
+
+		if (m_hero_life == 0)
+		{
+
+			Scene::SetScene(new CSceneGameOver);
+		}
+
+	}
+
+
 
 	if (m_flg == true && m_time > 0)
 	{
@@ -419,6 +405,7 @@ void CObjHero::Action()
 		m_flg = false;
 
 	}
+	
 	
 	
 }
@@ -470,7 +457,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 0.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + +AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 64.0f;
 		
@@ -480,7 +467,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 128.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 192.0f;
 
@@ -491,7 +478,7 @@ void CObjHero::Draw()
 	{
 		//切り取り位置設定
 		src.m_top = 0.0f;
-		src.m_left = 0.0f + +AniData[m_ani_frame] * 64.0f;
+		src.m_left = 0.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_right = 64.0f + AniData[m_ani_frame] * 64.0f;
 		src.m_bottom = 64.0f;
 		

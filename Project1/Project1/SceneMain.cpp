@@ -70,61 +70,64 @@ void CSceneMain::InitScene()
 	}
 
 
-	Draw::LoadImageW(L"床.png", 1, TEX_SIZE_512);
-	Draw::LoadImageW(L"スタミナゲージ.png", 2, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁.png", 3, TEX_SIZE_512);
-	Draw::LoadImageW(L"窓.png", 4, TEX_SIZE_512);
-	Draw::LoadImageW(L"敵(仮2).png", 5, TEX_SIZE_512);
-	Draw::LoadImageW(L"アイテム欄(仮).png", 6, TEX_SIZE_512);
-	Draw::LoadImageW(L"kaidan2.png", 7, TEX_SIZE_512);
-	Draw::LoadImageW(L"アイテム(仮).png", 8, TEX_SIZE_512);
-	Draw::LoadImageW(L"鍵.png", 9, TEX_SIZE_512);
-	Draw::LoadImageW(L"扉.png", 10, TEX_SIZE_512);
+	Draw::LoadImage(L"床.png", 1, TEX_SIZE_512);
+	Draw::LoadImage(L"スタミナゲージ.png", 2, TEX_SIZE_512);
+	Draw::LoadImage(L"壁.png", 3, TEX_SIZE_512);
+	Draw::LoadImage(L"窓.png", 4, TEX_SIZE_512);
+	Draw::LoadImage(L"敵(仮2).png", 5, TEX_SIZE_512);
+	Draw::LoadImage(L"アイテム欄(仮).png", 6, TEX_SIZE_512);
+	Draw::LoadImage(L"kaidan2.png", 7, TEX_SIZE_512);
+	Draw::LoadImage(L"アイテム(仮).png", 8, TEX_SIZE_512);
+	Draw::LoadImage(L"鍵.png", 9, TEX_SIZE_512);
+	Draw::LoadImage(L"扉.png", 10, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"主人公まとめ.png", 11, TEX_SIZE_512);
+	Draw::LoadImage(L"主人公まとめ.png", 11, TEX_SIZE_512);
 
-	Draw::LoadImageW(L"手形1.png", 15, TEX_SIZE_512);
-	Draw::LoadImageW(L"呪い.png", 16, TEX_SIZE_512);
-	Draw::LoadImageW(L"画面.png", 17, TEX_SIZE_1024);
-	Draw::LoadImageW(L"壁（横）.png", 18, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁（横）２.png", 19, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁２.png", 20, TEX_SIZE_512);                     //20
-	Draw::LoadImageW(L"薬.png", 21, TEX_SIZE_512);
-	Draw::LoadImageW(L"ダメージエフェクト1.png", 22, TEX_SIZE_1024);
-	Draw::LoadImageW(L"ダメージエフェクト2.png", 23, TEX_SIZE_1024);
-	Draw::LoadImageW(L"床穴.png", 24, TEX_SIZE_512);
-	Draw::LoadImageW(L"扉1.png", 25, TEX_SIZE_512);
-	Draw::LoadImageW(L"扉（下）1.png", 26, TEX_SIZE_512);
-	Draw::LoadImageW(L"扉（右）1.png", 27, TEX_SIZE_512);
-	Draw::LoadImageW(L"扉（左）1.png", 28, TEX_SIZE_512);
-	Draw::LoadImageW(L"本棚.png", 29, TEX_SIZE_512);
-	Draw::LoadImageW(L"机まとめ.png", 30, TEX_SIZE_1024);                             //30
-	Draw::LoadImageW(L"椅子まとめ.png", 31, TEX_SIZE_1024);
-	Draw::LoadImageW(L"敵黄色(仮).png", 32, TEX_SIZE_512);
-	Draw::LoadImageW(L"ドット絵　本.png", 33, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁左上.png", 34, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁右上.png", 35, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁右下.png", 36, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁左下.png", 37, TEX_SIZE_512);
-	Draw::LoadImageW(L"敵赤色(仮).png", 38, TEX_SIZE_512);
-	Draw::LoadImageW(L"床青.png", 39, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁角２右下.png", 38, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁角２左下.png", 39, TEX_SIZE_512);
-	Draw::LoadImageW(L"壁角２左上.png", 40, TEX_SIZE_512);                       //40
-	Draw::LoadImageW(L"壁角２右上.png", 41, TEX_SIZE_512);
-	Draw::LoadImageW(L"敵赤色(仮).png", 42, TEX_SIZE_512);
-	Draw::LoadImageW(L"床青.png", 43, TEX_SIZE_512);
-	Draw::LoadImageW(L"バールのようなもの.png", 44, TEX_SIZE_1024);
-	Draw::LoadImageW(L"教卓.png", 45, TEX_SIZE_512);
-	Draw::LoadImageW(L"black.png", 46, TEX_SIZE_1024);
-	Draw::LoadImageW(L"ダメージエフェクト1.png", 47, TEX_SIZE_1024);
-	Draw::LoadImageW(L"ダメージエフェクト2.png", 48, TEX_SIZE_1024);
-	Draw::LoadImageW(L"敵結合.png", 49, TEX_SIZE_1024);
-	Draw::LoadImageW(L"教卓右下.png", 50, TEX_SIZE_1024);
-	Draw::LoadImageW(L"教卓右上.png", 51, TEX_SIZE_1024);
-	Draw::LoadImageW(L"教卓左上.png", 52, TEX_SIZE_1024);
-	Draw::LoadImageW(L"教卓左下.png", 53, TEX_SIZE_1024);
-	
+	Draw::LoadImage(L"手形1.png", 15, TEX_SIZE_512);
+	Draw::LoadImage(L"呪い.png", 16, TEX_SIZE_512);
+	Draw::LoadImage(L"画面.png", 17, TEX_SIZE_1024);
+	Draw::LoadImage(L"壁（横）.png", 18, TEX_SIZE_512);
+	Draw::LoadImage(L"壁（横）２.png", 19, TEX_SIZE_512);
+	Draw::LoadImage(L"壁２.png", 20, TEX_SIZE_512);                     //20
+	Draw::LoadImage(L"薬.png", 21, TEX_SIZE_512);
+	Draw::LoadImage(L"ダメージエフェクト1.png", 22, TEX_SIZE_1024);
+	Draw::LoadImage(L"ダメージエフェクト2.png", 23, TEX_SIZE_1024);
+	Draw::LoadImage(L"床穴.png", 24, TEX_SIZE_512);
+	Draw::LoadImage(L"扉1.png", 25, TEX_SIZE_512);
+	Draw::LoadImage(L"扉（下）1.png", 26, TEX_SIZE_512);
+	Draw::LoadImage(L"扉（右）1.png", 27, TEX_SIZE_512);
+	Draw::LoadImage(L"扉（左）1.png", 28, TEX_SIZE_512);
+	Draw::LoadImage(L"本棚.png", 29, TEX_SIZE_512);
+	Draw::LoadImage(L"机まとめ.png", 30, TEX_SIZE_1024);                             //30
+	Draw::LoadImage(L"椅子まとめ.png", 31, TEX_SIZE_1024);
+	Draw::LoadImage(L"敵黄色(仮).png", 32, TEX_SIZE_512);
+	Draw::LoadImage(L"ドット絵　本.png", 33, TEX_SIZE_512);
+	Draw::LoadImage(L"壁左上.png", 34, TEX_SIZE_512);
+	Draw::LoadImage(L"壁右上.png", 35, TEX_SIZE_512);
+	Draw::LoadImage(L"壁右下.png", 36, TEX_SIZE_512);
+	Draw::LoadImage(L"壁左下.png", 37, TEX_SIZE_512);
+	Draw::LoadImage(L"敵赤色(仮).png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"床青.png", 39, TEX_SIZE_512);
+	Draw::LoadImage(L"壁角２右下.png", 38, TEX_SIZE_512);
+	Draw::LoadImage(L"壁角２左下.png", 39, TEX_SIZE_512);
+	Draw::LoadImage(L"壁角２左上.png", 40, TEX_SIZE_512);                       //40
+	Draw::LoadImage(L"壁角２右上.png", 41, TEX_SIZE_512);
+	Draw::LoadImage(L"敵赤色(仮).png", 42, TEX_SIZE_512);
+	Draw::LoadImage(L"床青.png", 43, TEX_SIZE_512);
+	Draw::LoadImage(L"バールのようなもの.png", 44, TEX_SIZE_1024);
+	Draw::LoadImage(L"教卓.png", 45, TEX_SIZE_512);
+	Draw::LoadImage(L"black.png", 46, TEX_SIZE_1024);
+	Draw::LoadImage(L"ダメージエフェクト1.png", 47, TEX_SIZE_1024);
+	Draw::LoadImage(L"ダメージエフェクト2.png", 48, TEX_SIZE_1024);
+	Draw::LoadImage(L"敵結合.png", 49, TEX_SIZE_1024);
+	Draw::LoadImage(L"教卓右下.png", 50, TEX_SIZE_1024);
+	Draw::LoadImage(L"教卓右上.png", 51, TEX_SIZE_1024);
+	Draw::LoadImage(L"教卓左上.png", 52, TEX_SIZE_1024);
+	Draw::LoadImage(L"教卓左下.png", 53, TEX_SIZE_1024);
+
+	Draw::LoadImage(L"バールアイテムエフェクトまとめ.png", 54, TEX_SIZE_1024);
+	Draw::LoadImage(L"回復アイテムエフェクトまとめ.png", 55, TEX_SIZE_1024);
+	Draw::LoadImage(L"鍵アイテムエフェクトまとめ.png", 56, TEX_SIZE_1024);
 
 	//出力させる文字のグラフィック作成
 	Font::SetStrTex(L"鍵を入手した...");
