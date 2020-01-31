@@ -219,13 +219,14 @@ void CObjMain::Action()
 			m_scroll_x = -spawn_pointX[map_chg];
 			m_scroll_y = -spawn_pointY[map_chg];
 
+			first_stop = false;
 		}
 		else if(stop_flg==true&&room_in==false)
 		{
 			memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
 		}
 		//廊下マップからマップへの切り替え処理
-		if (room_chg >= 1 && room_in == true && stop_flg == true)
+		else if (room_chg >= 1 && room_in == true && stop_flg == true)
 		{
 			//音楽情報の読み込み
    			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
@@ -1097,16 +1098,15 @@ void CObjMain::BlockHit(
 										main->SetScrollX(save_scroll_x[map_chg][0]);
 										main->SetScrollY(save_scroll_y[map_chg][0]);
 
-										if (room_chg >= 1)
+										
+										for (int i = 0; i < ROOM_X; i++)
 										{
-											for (int i = 0; i < ROOM_X; i++)
+											for (int j = 0; j < ROOM_Y; j++)
 											{
-												for (int j = 0; j < ROOM_Y; j++)
-												{
-													save_room_map[i][j][room_chg] = r_map[i][j];
-												}
+												save_room_map[i][j][room_chg] = r_map[i][j];
 											}
 										}
+										
 									}
 									//初期の部屋でバールを使わないと開かない処理
 									else if (room_in == true && room_chg == 0)
@@ -1141,6 +1141,7 @@ void CObjMain::BlockHit(
 								*bt = m_map[i][j];
 							*vy = 0.0f;
 
+							
 							//本を開く処理
 							if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
 							{
@@ -1203,24 +1204,7 @@ void CObjMain::BlockHit(
 
 								}
 							}
-							if (r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey(VK_RETURN) ||
-								r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey(VK_RETURN))
-							{
-								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-								hero->SetBarID(ITEM_BAR);
-
-								hero->SetFlug_3(true);
-
-								font_bar_flg = true;
-
-								nothing_flg = true;
-
-							}
-							else if (r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey(VK_RETURN) ||
-								     r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey(VK_RETURN))
-							{
-								font_nothing_flg = true;
-							}
+							
 						}
 							if (r > 135 && r < 225 )
 							{
