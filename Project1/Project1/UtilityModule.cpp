@@ -149,7 +149,7 @@ float SpawnChangerX(int m)
 	}
 	else if (m == 4)      //4 
 	{
-		return BLOCK_SIZE_X *4.0f;
+		return BLOCK_SIZE_X *2.0f;
 	}
 	else if (m == 5)	  //3
 	{

@@ -1,4 +1,6 @@
 //使用するヘッダーファイル
+#include <stdio.h>
+
 #include "GameL/DrawTexture.h"
 #include "GameL/DrawFont.h"
 #include "GameL/WinInputs.h"
@@ -74,13 +76,14 @@ void CObjMain::Init()
 	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
     p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
 	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	
+	p[8] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 }
 
 //アクション
 void CObjMain::Action()
 {
+	
 	
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
