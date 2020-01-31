@@ -61,10 +61,8 @@ void CObjItem::Action()
 
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
-	/*hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());*/
-	//アイテムに当たって、なおかつ'E'を押したときにアイテムが消える処理
+	
+	
 	m_ani_time++;
 
 	//アニメーションのリセット

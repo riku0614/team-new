@@ -166,7 +166,7 @@ void CObjHero::Action()
 		k_id = ITEM_KEY;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem() = false;
+		
 	}
 
 	//2番目のアイテムをとる処理
@@ -184,7 +184,7 @@ void CObjHero::Action()
 		h_id = ITEM_HEAL;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem_2() = false;
+		
 	}
 
 	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
@@ -201,7 +201,7 @@ void CObjHero::Action()
 		b_id = ITEM_BAR;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem_2() = false;
+		
 	}
 
 
@@ -320,9 +320,7 @@ void CObjHero::Action()
 	//hitboxの位置の変更
 	hit->SetPos(m_px, m_py);
 
-	//敵と当たったらフラグを持てる
-	CObjGameUI*ui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
-
+	
 	//'G'キーを押したら、タイトル画面へ移行
 	if (Input::GetVKey('G') == true)
 	{

@@ -157,8 +157,11 @@ void CObjSpwanEnemy::Action()
 	//自身のhitboxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
 
-	//hitboxの位置の変更
-	hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
+	if (hit != nullptr)
+	{
+		//hitboxの位置の変更
+		hit->SetPos(m_ex + scroll->GetScrollX(), m_ey + scroll->GetScrollY());
+	}
 
 	if (hit->CheckObjNameHit(OBJ_HERO))
 	{

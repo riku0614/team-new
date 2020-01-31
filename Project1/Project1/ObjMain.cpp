@@ -423,7 +423,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] == 5)
+				if (r_map[i][j] == 21)
 				{
 
 					//アイテムオブジェクト作成
@@ -1116,8 +1116,11 @@ void CObjMain::BlockHit(
 										{
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
+											hero->SetUseItem(true);
+
 											gui->SetID(99);
-											
+											gui->Settakeflag_3(false);
+
 											hero->SetBarID(99);
 
 											room_in = false;
@@ -1193,6 +1196,8 @@ void CObjMain::BlockHit(
 
 										CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 										hero->SetFlug_3(false);
+										hero->SetUseItem(true);
+
 										gui->SetID(99);
 
 										hero->SetBarID(99);
@@ -1268,6 +1273,7 @@ void CObjMain::BlockHit(
 
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
+											hero->SetUseItem(true);
 											gui->SetID(99);
 
 											hero->SetBarID(99);
@@ -1752,7 +1758,7 @@ void CObjMain::ItemHit(
 						}
 
 
-						}
+					 }
 
 
 					}
