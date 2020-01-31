@@ -91,7 +91,7 @@ void CObjMain::Action()
 			first_stop = true;
 			
 			map_chg++;
-			if (map_chg == 7)
+			if (map_chg == 8)
 			{
 				Scene::SetScene(new CSceneGameClear);
 			}
@@ -822,7 +822,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -871,7 +871,7 @@ void CObjMain::BlockHit(
 								
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -976,7 +976,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}

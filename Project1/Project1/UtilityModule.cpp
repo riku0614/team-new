@@ -137,31 +137,31 @@ float SpawnChangerX(int m)
 {
 	if (m == 1)           //7ŠK
 	{
-		return 64.0f;
+		return BLOCK_SIZE_X;
 	}
 	else if (m == 2)      //6
 	{
-		return 64.0f * 60.0f;
+		return BLOCK_SIZE_X * 55.0f;
 	}
 	else if (m == 3)      //5
 	{
-		return 64.0f * 60.0f;
+		return BLOCK_SIZE_X * 66.0f;
 	}
 	else if (m == 4)      //4 
 	{
-		return 64.0f*3.0f;
+		return BLOCK_SIZE_X *4.0f;
 	}
 	else if (m == 5)	  //3
 	{
-		return 64.0f*34.0f;
+		return BLOCK_SIZE_X *34.0f;
 	}
 	else if (m == 6)      //2
 	{
-		return 64.0f*63.0f;
+		return BLOCK_SIZE_X*60.0f;
 	}
 	else if (m == 7)      //1ŠK
 	{
-		return 64.0f*37.0f;
+		return BLOCK_SIZE_X *35.0f;
 	}
 
 }
@@ -175,31 +175,31 @@ float SpawnChangerY(int m)
 {
 	if (m == 1)           //7ŠK
 	{
-		return 64.0f * 2;
+		return BLOCK_SIZE_Y;
 	}
 	else if (m == 2)     //6
 	{
-		return 64.0f * 67.0f;
+		return BLOCK_SIZE_Y * 67.0f;
 	}
 	else if (m == 3)     //5
 	{
-		return 64.0f * 70.0f;
+		return BLOCK_SIZE_Y * 67.0f;
 	}
 	else if (m == 4)     //4
 	{
-		return 64.0f * 70.0f;
+		return BLOCK_SIZE_Y * 67.0f;
 	}
 	else if (m == 5)     //3
 	{
-		return 64.0f;
+		return BLOCK_SIZE_Y;
 	}
 	else if (m == 6)     //2
 	{
-		return 64.0f * 70.0f;
+		return BLOCK_SIZE_Y *68.0f;
 	}
 	else if (m == 7)      //1ŠK
 	{
-		return 64.0f * 1;
+		return 0.0f;
 	}
 
 }
