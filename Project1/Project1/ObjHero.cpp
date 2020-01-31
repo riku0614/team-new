@@ -166,7 +166,7 @@ void CObjHero::Action()
 		k_id = ITEM_KEY;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem() = false;
+		
 	}
 
 	//2”Ô–Ú‚ÌƒAƒCƒeƒ€‚ð‚Æ‚éˆ—
@@ -184,7 +184,7 @@ void CObjHero::Action()
 		h_id = ITEM_HEAL;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem_2() = false;
+		
 	}
 
 	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
@@ -201,7 +201,7 @@ void CObjHero::Action()
 		b_id = ITEM_BAR;
 		Main->SetDelete(true);
 
-		//Main->GetMapItem_2() = false;
+		
 	}
 
 

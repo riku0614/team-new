@@ -60,15 +60,8 @@ void CObjheal::Action()
 
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);/*
-	hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());*/
-	//アイテムに当たって、なおかつ'E'を押したときにアイテムが消える処理
-	if (hero->Getflag_2() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
+
 	m_ani_time++;
 
 	//アニメーションのリセット
@@ -130,7 +123,7 @@ void CObjheal::Draw()
 			}
 		}
 	}
-	else
+	if(main->RoomFlag() == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
