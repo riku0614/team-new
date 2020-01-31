@@ -64,10 +64,10 @@ void CObjbar::Action()
 	memcpy(r_map, main->r_map, sizeof(int)*(ROOM_X * ROOM_Y));
 
 	//主人公のアイテムと当たったフラグを持ってくる
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//HitBoxの位置の変更
 	
-	CHitBox* hit = Hits::GetHitBox(this);
+	//CHitBox* hit = Hits::GetHitBox(this);
 	//hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
 	
 	
