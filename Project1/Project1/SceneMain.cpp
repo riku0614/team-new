@@ -131,7 +131,7 @@ void CSceneMain::InitScene()
 	Draw::LoadImage(L"鍵アイテムエフェクトまとめ.png", 56, TEX_SIZE_1024);
 	Draw::LoadImage(L"敵結合赤.png", 57, TEX_SIZE_1024);
 
-	Draw::LoadImage(L"穴.png", 57, TEX_SIZE_512);
+	Draw::LoadImage(L"穴.png", 58, TEX_SIZE_512);
 	//出力させる文字のグラフィック作成
 	Font::SetStrTex(L"鍵を入手した...");
 

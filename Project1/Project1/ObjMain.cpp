@@ -2004,7 +2004,7 @@ void CObjMain::Draw()
 						src.m_right = src.m_left + DRAW_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
-						Draw::Draw(57, &src, &dst, c, 0.0f);
+						Draw::Draw(58, &src, &dst, c, 0.0f);
 					}
 				}
 			}
