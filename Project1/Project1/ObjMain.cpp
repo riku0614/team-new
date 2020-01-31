@@ -770,7 +770,7 @@ void CObjMain::BlockHit(
 
 				if (m_map[i][j] <= 99 && m_map[i][j] >=3&&m_map[i][j]!=4 && m_map[i][j] != 5 && 
 					m_map[i][j] != 7 && m_map[i][j] != 21 && m_map[i][j] != 25 && m_map[i][j] != 26 
-					&& m_map[i][j] != 35 )
+					)
 				{
 					//óvëfî‘çÜÇç¿ïWÇ…ïœçX
 					float bx = j * 64.0f;
@@ -1980,6 +1980,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
 					}
+				
 					if (m_map[i][j] == 50)
 					{
 						src.m_top = 0.0f;
@@ -1990,6 +1991,15 @@ void CObjMain::Draw()
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
 					//äpï«ÇQÅE5Ç¬Å™
+					if (m_map[i][j] == 36)
+					{
+						src.m_top = 0.0f;
+						src.m_left = 0.0f;
+						src.m_right = src.m_left + DRAW_SIZE;
+						src.m_bottom = src.m_top + DRAW_SIZE;
+
+						Draw::Draw(57, &src, &dst, c, 0.0f);
+					}
 				}
 			}
 
