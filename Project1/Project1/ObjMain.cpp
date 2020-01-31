@@ -77,7 +77,7 @@ void CObjMain::Init()
     p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
 	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	p[8] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	
+
 }
 
 //アクション
@@ -815,9 +815,13 @@ void CObjMain::BlockHit(
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
-
-									stop_flg = true;
 									map_chg++;
+									if (map_chg == 8)
+									{
+										Scene::SetScene(new CSceneGameClear);
+									}
+									stop_flg = true;
+									
 									stop_flg2 = true;
 									first_stop = true;
 									room_chg_stop = false;
@@ -825,10 +829,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
-									if (map_chg > 7)
-									{
-										Scene::SetScene(new CSceneGameClear);
-									}
+									
 
 
 								
@@ -874,7 +875,9 @@ void CObjMain::BlockHit(
 								
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
-									if (map_chg > 7)
+									map_chg++;
+
+									if (map_chg == 8)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -891,7 +894,7 @@ void CObjMain::BlockHit(
 									room_chg_stop = false;
 
 									
-									map_chg++;
+									
 								}
 								else if (m_map[i][j] == 16  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
 								{
@@ -912,21 +915,24 @@ void CObjMain::BlockHit(
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
+									map_chg++;
+
+									if (map_chg == 8)
+									{
+										Scene::SetScene(new CSceneGameClear);
+									}
+
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									map_chg ++;
+									
 
 									room_chg_stop = false;
 									*k_id = 99;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg > 7)
-									{
-										Scene::SetScene(new CSceneGameClear);
-									}
-
+									
 									
 
 									
@@ -966,6 +972,14 @@ void CObjMain::BlockHit(
 								}
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
+
+									map_chg++;
+
+									if (map_chg == 8)
+									{
+										Scene::SetScene(new CSceneGameClear);
+									}
+
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
@@ -974,16 +988,10 @@ void CObjMain::BlockHit(
 									
 									*k_id = 99;
 
-									map_chg++;
-									
-									
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg > 7)
-									{
-										Scene::SetScene(new CSceneGameClear);
-									}
+									
 
 									
 									
