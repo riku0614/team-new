@@ -904,6 +904,7 @@ void CObjMain::BlockHit(
 									}
 
 								}
+								
 							
 							}
 							if (r > 135 && r < 225)
@@ -1001,7 +1002,7 @@ void CObjMain::BlockHit(
 									if (room_in == false)
 									{
 										keepout_font_flg = true;
-										
+
 									}
 
 								}
@@ -1202,9 +1203,24 @@ void CObjMain::BlockHit(
 
 								}
 							}
-							
+							if (r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && Input::GetVKey(VK_RETURN) ||
+								r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && Input::GetVKey(VK_RETURN))
+							{
+								CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+								hero->SetBarID(ITEM_BAR);
 
-							
+								hero->SetFlug_3(true);
+
+								font_bar_flg = true;
+
+								nothing_flg = true;
+
+							}
+							else if (r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 37 && nothing_flg == true && Input::GetVKey(VK_RETURN) ||
+								     r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey('E') || r_map[MAP_X][MAP_Y] == 38 && nothing_flg == true && Input::GetVKey(VK_RETURN))
+							{
+								font_nothing_flg = true;
+							}
 						}
 							if (r > 135 && r < 225 )
 							{
@@ -1366,7 +1382,7 @@ void CObjMain::BlockHit(
 									}
 									
 								}
-								
+							
 								
 							}
 						

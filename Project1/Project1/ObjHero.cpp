@@ -205,21 +205,18 @@ void CObjHero::Action()
 	}
 
 
-	//1番目のアイテムを使う処理
-	if (Input::GetVKey('1') == true && UI->GetItemflag() == true)
-	{
-		use_Item_flag = true;
-		UI->Settakeflag(false);
-	}
 
-	//2番目のアイテムを使う処理
-	else if (Input::GetVKey('2') == true && UI->GetItemflag_2() == true)
+
+	//回復アイテムを使う処理
+	else if (Input::GetVKey('2') == true && UI->GetItemflag_2() == true&&h_id==ITEM_HEAL)
 	{
+
 		if (m_hero_life <= 2)
 		{
 			use_Item_flag_2 = true;
 			m_hero_life = 3;
 			UI->Settakeflag_2(false);
+			h_id = 99;
 		}
 		else if (m_hero_life == 3)
 		{
@@ -228,13 +225,7 @@ void CObjHero::Action()
 
 	}
 
-	//3番目のアイテムを使う処理
-	else if (Input::GetVKey('3') == true && UI->GetItemflag_3() == true)
-	{
-		use_Item_flag_3 = true;
-		UI->Settakeflag_3(false);
-	}
-
+	
 
 		//アニメーションのリセット
 		if (m_ani_time > m_ani_max_time)
