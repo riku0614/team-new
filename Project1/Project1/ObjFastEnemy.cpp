@@ -224,7 +224,7 @@ void CObjFastEnemy::Draw()
 		dst.m_bottom = 128.0f + m_ey + main->GetScrollY();
 
 		//3番目に登録したグラフィックをsrc.dst.cの情報を元に描画
-		Draw::Draw(49, &src, &dst, c, 0.0f);
+		Draw::Draw(57, &src, &dst, c, 0.0f);
 	}
 
 }
