@@ -2000,7 +2000,8 @@ void CObjMain::Draw()
 
 					//床テクスチャ
 					if (r_map[i][j] >= 1&&r_map[i][j]<= 8|| r_map[i][j] == 5||r_map[i][j]==7|| r_map[i][j] == 8|| r_map[i][j] == 13||r_map[i][j]==31 
-						|| r_map[i][j] == 26 ||r_map[i][j] == 36 || r_map[i][j] == 37 || r_map[i][j] == 38 || r_map[i][j] == 39)
+						|| r_map[i][j] == 26 ||r_map[i][j] == 36 || r_map[i][j] == 37 || r_map[i][j] == 38 || r_map[i][j] == 39|| r_map[i][j] == 21
+						)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
