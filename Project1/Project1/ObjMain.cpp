@@ -56,12 +56,12 @@ void CObjMain::Init()
 	m_time = 0;
 
 	//教室マップデータ
-	r[1] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
+	r[1] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 	r[2] = Save::ExternalDataOpen(L"教室２右サクラ.csv", &size);
 	r[3] = Save::ExternalDataOpen(L"教室３右サクラ.csv", &size);
 	r[4] = Save::ExternalDataOpen(L"教室４右サクラ.csv", &size);
 	r[5] = Save::ExternalDataOpen(L"教室５右サクラ.csv", &size);
-	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
+	r[6] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
 
 	//廊下マップデータ
 	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
