@@ -37,7 +37,8 @@ void CObjbar::Init()
 
 
 	//当たり判定用hitboxを作成
-	Hits::SetHitBox(this, ix, iy, 32, 32, ELEMENT_BLACK, OBJ_BAR, 1);
+	/*its::SetHitBox(this, ix, iy, 32, 32, ELEMENT_BLACK, OBJ_BAR, 1);*/
+
 
 
 	//m_scroll_x = -2850.0f;
@@ -63,17 +64,13 @@ void CObjbar::Action()
 	memcpy(r_map, main->r_map, sizeof(int)*(ROOM_X * ROOM_Y));
 
 	//主人公のアイテムと当たったフラグを持ってくる
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	//CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 	//HitBoxの位置の変更
-	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
-
-	//アイテムに当たって、なおかつ'E'を押したときにアイテムが消える処理
-	if (hero->Getflag_3() == true)
-	{
-		this->SetStatus(false);
-		Hits::DeleteHitBox(this);
-	}
+	
+	//CHitBox* hit = Hits::GetHitBox(this);
+	//hit->SetPos(ix + main->GetScrollX(), iy + main->GetScrollY());
+	
+	
 	m_ani_time++;
 
 	//アニメーションのリセット
@@ -125,30 +122,24 @@ void CObjbar::Draw()
 			{
 				if (r_map[i][j] == BAR )
 				{
-					if (main->GetStoryFlag() == true)
-					{
-						;
-					}
-					else
-					{
-						//表示位置の設定
-						dst.m_top = i * 64.0f + hy;
-						dst.m_left = j * 64.0f + hx;
-						dst.m_right = dst.m_left + 32.0f;
-						dst.m_bottom = dst.m_top + 32.0f;
-					}
+					//表示位置の設定
+					dst.m_top = i * 64.0f + hy;
+					dst.m_left = j * 64.0f + hx;
+					dst.m_right = dst.m_left + 32.0f;
+					dst.m_bottom = dst.m_top + 32.0f;
+					
 					Draw::Draw(54, &src, &dst, c, 0.0f);
 				}
 			}
 		}
 	}
-	else
+	if(main->RoomFlag() == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == BAR&&main->GetStoryFlag()==false)
+				if (m_map[i][j] == BAR)
 				{
 					//表示位置の設定
 					dst.m_top = i * 64.0f + hy;
