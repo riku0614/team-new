@@ -35,7 +35,7 @@ void CSceneGameOver::InitScene()
 	//CObjMain* p = new CObjMain();
 	//Objs::InsertObj(p, OBJ_MAIN, 1);
 
-	Draw::LoadImageW(L"無題.png", 0, TEX_SIZE_512);
+	Draw::LoadImage(L"無題.png", 0, TEX_SIZE_512);
 
 	//タイトルオブジェクト作成
 	CObjGameOver* objg = new CObjGameOver();		//ゲームオーバーオブジェクト作成

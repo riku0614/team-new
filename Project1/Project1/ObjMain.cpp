@@ -1,4 +1,6 @@
 //使用するヘッダーファイル
+#include <stdio.h>
+
 #include "GameL/DrawTexture.h"
 #include "GameL/DrawFont.h"
 #include "GameL/WinInputs.h"
@@ -58,12 +60,12 @@ void CObjMain::Init()
 	m_time = 0;
 
 	//教室マップデータ
-	r[1] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
+	r[1] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
 	r[2] = Save::ExternalDataOpen(L"教室２右サクラ.csv", &size);
 	r[3] = Save::ExternalDataOpen(L"教室３右サクラ.csv", &size);
 	r[4] = Save::ExternalDataOpen(L"教室４右サクラ.csv", &size);
 	r[5] = Save::ExternalDataOpen(L"教室５右サクラ.csv", &size);
-	r[6] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
+	r[6] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
 
 	//廊下マップデータ
 	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
@@ -74,13 +76,14 @@ void CObjMain::Init()
 	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
     p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
 	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	
+	p[8] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 	
 }
 
 //アクション
 void CObjMain::Action()
 {
+	
 	
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -91,7 +94,7 @@ void CObjMain::Action()
 			first_stop = true;
 			
 			map_chg++;
-			if (map_chg == 7)
+			if (map_chg == 8)
 			{
 				Scene::SetScene(new CSceneGameClear);
 			}
@@ -822,7 +825,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -871,7 +874,7 @@ void CObjMain::BlockHit(
 								
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
@@ -977,7 +980,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									if (map_chg == 7)
+									if (map_chg > 7)
 									{
 										Scene::SetScene(new CSceneGameClear);
 									}
