@@ -127,6 +127,7 @@ class CObjMain : public CObj
 		bool font_open_flg2;
 		bool font_nothing_flg;
 		bool keepout_font_flg;
+		bool searchpoint_font_flg;
 
 		int m_ani_time;  //アニメーションフレーム動作間隔
 		int m_ani_frame; //描画フレーム
