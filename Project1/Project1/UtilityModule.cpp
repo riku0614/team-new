@@ -60,7 +60,7 @@ float GetAtan2Angle(float w, float h)
 引数１　int m     :map切り替え用変数
 引数２　int m_map :切り替えるマップデータをぶち込むメインマップ変数
 戻り値　無し
-切り替え用のマップをメインマップ変数にぶち込む関数
+切り替え用の廊下マップをメイン廊下マップ変数にぶち込む関数
 */
 void MapChanger(int m ,int m_map[MAP_X][MAP_Y], unique_ptr<wchar_t>* p)
 {
@@ -93,6 +93,7 @@ void MapChanger(int m ,int m_map[MAP_X][MAP_Y], unique_ptr<wchar_t>* p)
 引数２　int m_map :切り替えるマップデータをぶち込むメインマップ変数
 戻り値　無し
 切り替え用の教室マップをメイン教室マップ変数にぶち込む関数
+切り替え用の教室マップはランダムに選ばれる
 */
 
 void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p)
@@ -131,7 +132,7 @@ void RoomMapChanger(int r_map[ROOM_X][ROOM_Y], unique_ptr<wchar_t>* p)
 /*
 引数１　int m     :map切り替え用変数
 戻り値　float
-ステージごとの主人公の初期位置を返す変数
+ステージごとの主人公の初期位置（X軸）を返す変数
 */
 float SpawnChangerX(int m)
 {
@@ -169,7 +170,7 @@ float SpawnChangerX(int m)
 /*
 引数１　int m     :map切り替え用変数
 戻り値　float
-ステージごとの主人公の初期位置を返す変数
+ステージごとの主人公の初期位置（Y軸）を返す変数
 */
 float SpawnChangerY(int m)
 {
@@ -208,7 +209,7 @@ float SpawnChangerY(int m)
 引数　１　　　int m　               :マップ切り替え管理用変数
 引数　２　　　int map[MAP_X][MAP_Y  :マップ情報
 戻り値　無し
-マップ切り替え時にギミックのヒットボックスを変更する関数
+ギミックのヒットボックスをマップごとに変更する関数
 */
 
 void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_map[ROOM_X][ROOM_Y])
@@ -251,7 +252,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 						m_map[i][j] = 1;
 
-						//gimmickオブジェクト作成
+						//gimmick２オブジェクト作成
 						CObjGimmick2* objg2 = new CObjGimmick2(j *64.0f, i * 64.0f);
 						Objs::InsertObj(objg2, OBJ_GIMMICK2, 11);
 
@@ -275,7 +276,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					{
 						m_map[i][j] = 1;
 
-						//gimmickオブジェクト作成
+						//gimmick３オブジェクト作成
 						CObjGimmick3* objg3 = new CObjGimmick3(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg3, OBJ_GIMMICK3, 11);
 
@@ -298,7 +299,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					if (m_map[i][j] == 7)
 					{
 
-						//gimmickオブジェクト作成
+						//gimmick４オブジェクト作成
 						CObjGimmick4* objg4 = new CObjGimmick4(j*64.0f , i*64.0f);
 						Objs::InsertObj(objg4, OBJ_GIMMICK4, 11);
 
@@ -321,7 +322,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					if (m_map[i][j] == 7)
 					{
 
-						//gimmickオブジェクト作成
+						//gimmick５オブジェクト作成
 						CObjGimmick5* objg5 = new CObjGimmick5(j*64.0f , i*64.0f);
 						Objs::InsertObj(objg5, OBJ_GIMMICK5, 11);
 
@@ -344,7 +345,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					if (m_map[i][j] == 7)
 					{
 
-						//gimmickオブジェクト作成
+						//gimmick６オブジェクト作成
 						CObjGimmick6* objg6 = new CObjGimmick6(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg6, OBJ_GIMMICK6, 11);
 
@@ -367,7 +368,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					if (m_map[i][j] == 7)
 					{
 
-						//gimmickオブジェクト作成
+						//gimmick７オブジェクト作成
 						CObjGimmick7* objg7 = new CObjGimmick7(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg7, OBJ_GIMMICK7, 11);
 
@@ -390,7 +391,7 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 					if (m_map[i][j] == 7)
 					{
 
-						//gimmickオブジェクト作成
+						//gimmick８オブジェクト作成
 						CObjGimmick8* objg8 = new CObjGimmick8(j*64.0f, i*64.0f);
 						Objs::InsertObj(objg8, OBJ_GIMMICK8, 11);
 

@@ -85,15 +85,17 @@ void CObjMain::Action()
 {
 	
 	searchpoint_font_flg = false;
-	
+	//ステージ強制移動コマンド
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
+		//廊下マップ→次の廊下マップ
 		if (switch_flg == true&&room_in==false)
 		{
 			stop_flg = true;
 			stop_flg2 = true;
 			first_stop = true;
 			
+			nothing_flg = false;
 			map_chg++;
 			if (map_chg == 8)
 			{
@@ -101,6 +103,7 @@ void CObjMain::Action()
 			}
 			switch_flg = false;
 		}
+		//教室マップ→廊下マップ
 		else if (switch_flg == true && room_in == true)
 		{
 			room_in = false;
@@ -110,6 +113,7 @@ void CObjMain::Action()
 		}
 	
 	}
+	//入力重複阻止フラグ
 	else
 	{
 		switch_flg = true;
@@ -731,8 +735,21 @@ bool CObjMain::HeroBlockCrossPoint(
   引数９　　float* vx            :左右判定時の反発による移動方向・力の値を変えて返す
   引数１０　　float* vy            :上下判定時による自由落下運動の移動方向・力の値を変えて返す
   引数１１　int* bt            　:下部分判定時、特殊なブロックのタイプを返す
-  判定を行うobjectとブロック64*64限定で、当たり判定と上下左右判定を行う
-  その結果は引数４～１０に返す*/
+  引数１２　int *c_id            :判定時に当たっているキャラクターのID
+  引数１２　int *k_id            :判定時に当たっているキャラクターのアイテム（鍵）のID
+  基本処理　判定を行うobjectとブロック64*64限定で、当たり判定と上下左右判定を行う
+  その結果は引数４～１０に返す。（廊下マップ用と教室マップ用の二種類）
+  
+  応用処理　教室の扉（上下左右）に接触しかつEキーを押した際に廊下マップから教室マップ教室マップから廊下マップに切り替える
+  また特殊な扉（アイテムを使わないと開かない扉）に接触しかつ主人公がアイテム（錆びたバールのようなもの）を持っているかどうか判別し、
+  持っていれば開いた演出が出て通常の扉と同様に出ることができる。
+
+  階段（上下左右）接触しかつ主人公がカギを待っているか判別し持っていれば次の階層へ進むことができる。
+  持っていなければ、処理をスルーする。
+
+  アイテムや本、本棚の衝突判定を取り、調べる及び取得できるフラグを立てる
+
+  */
 
 void CObjMain::BlockHit(
 	float *x, float *y, bool scroll_on_x, bool scroll_on_y,
@@ -815,6 +832,7 @@ void CObjMain::BlockHit(
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
+								//階段
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
@@ -831,7 +849,7 @@ void CObjMain::BlockHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
-									
+									nothing_flg = false;
 
 
 								
@@ -839,6 +857,7 @@ void CObjMain::BlockHit(
 								
 									
 								}
+								//扉
 								else if (m_map[i][j] == 17  && *c_id == CHAR_HERO && Input::GetVKey('E') == true)
 								{
 									if (room_in == false)
@@ -875,7 +894,7 @@ void CObjMain::BlockHit(
 									*bt = m_map[i][j];
 								*vy = 0.0f;//-VX*反発係数
 								
-								
+								//階段
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
@@ -895,10 +914,11 @@ void CObjMain::BlockHit(
 									stop_flg2 = true;
 									first_stop = true;
 									room_chg_stop = false;
-
+									nothing_flg = false;
 									
 									
 								}
+							    //扉
 								else if (m_map[i][j] == 16  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
 								{
 									if (room_in == false)
@@ -918,6 +938,7 @@ void CObjMain::BlockHit(
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
+								//階段
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
 									map_chg++;
@@ -930,7 +951,7 @@ void CObjMain::BlockHit(
 									stop_flg = true;
 									stop_flg2 = true;
 									first_stop = true;
-									
+									nothing_flg = false;
 
 									room_chg_stop = false;
 									*k_id = 99;
@@ -944,6 +965,7 @@ void CObjMain::BlockHit(
 
 									
 								}
+								//扉
 								else if (m_map[i][j] == 18&& *c_id == CHAR_HERO && Input::GetVKey('E') == true)
 								{
 									if (room_in == false)
@@ -970,11 +992,12 @@ void CObjMain::BlockHit(
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
 								*y =(by-0.1f) + 64.0f + (scroll_y);//ブロックの位置-主人公の
-								
+								//反発係数
 								if (*vy < 0)
 								{
 									*vy = 0.0f;
 								}
+								//階段
 								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 
@@ -989,7 +1012,8 @@ void CObjMain::BlockHit(
 									stop_flg2 = true;
 									first_stop = true;
 									room_chg_stop = false;
-									
+									nothing_flg = false;
+
 									searchpoint_font_flg = true;
 									
 									*k_id = 99;
@@ -1002,7 +1026,7 @@ void CObjMain::BlockHit(
 									
 									
 								}
-							
+							    //扉
 								else if (m_map[i][j] == 15 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == false)
@@ -1090,16 +1114,17 @@ void CObjMain::BlockHit(
 									font_story_flg = true;
 									hero->SetHeroStop(true);
 								}
-								//通常の時
+								//通常の扉
 								else if (r_map[i][j] == 17 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
+
 									if (room_in == true && room_chg >= 1)
 									{
 										room_in = false;
 										stop_flg = true;
 
 										searchpoint_font_flg = true;
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
+										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
@@ -1118,7 +1143,7 @@ void CObjMain::BlockHit(
 										}
 										
 									}
-									//初期の部屋でバールを使わないと開かない処理
+									//バールを使わないと開かない扉
 									else if (room_in == true && room_chg == 0)
 									{
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -1151,7 +1176,7 @@ void CObjMain::BlockHit(
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
 							*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
-							*vy = 0.0f;
+							*vy = 0.0f;	//反発係数
 
 							
 							//本を開く処理
@@ -1169,7 +1194,7 @@ void CObjMain::BlockHit(
 								font_story_flg = true;
 								hero->SetHeroStop(true);
 							}
-							//通常の時
+							//通常の扉
 							else if (r_map[i][j] == 16 && *c_id == CHAR_HERO && Input::GetVKey('E'))
 							{
 								if (room_in == true && room_chg >= 1)
@@ -1179,7 +1204,7 @@ void CObjMain::BlockHit(
 									room_in = false;
 									stop_flg = true;
 
-									//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
+									//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 									CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
@@ -1233,7 +1258,7 @@ void CObjMain::BlockHit(
 										room_in = false;
 										stop_flg = true;
 
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
+										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
@@ -1351,7 +1376,7 @@ void CObjMain::BlockHit(
 										room_in = false;
 										stop_flg = true;
 
-										//主人公が階段に当たった瞬間に位置とスクロール情報を保存する。
+										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										CObjMain* main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
@@ -1376,6 +1401,7 @@ void CObjMain::BlockHit(
 							
 								
 							}
+							//扉やアイテムなどの調べることができるものに当たった際に主人公の頭上にフォントを表示する
 							if (r_map[i][j] == 31 || r_map[i][j] == 15 || r_map[i][j] == 16 || r_map[i][j] == 17 || r_map[i][j] == 18 || r_map[i][j] == 19)
 							{
 								searchpoint_font_flg = true;
@@ -1399,8 +1425,8 @@ void CObjMain::BlockHit(
   引数９　　float* vx            :左右判定時の反発による移動方向・力の値を変えて返す
   引数１０　　float* vy            :上下判定時による自由落下運動の移動方向・力の値を変えて返す
   引数１１　int* bt            　:下部分判定時、特殊なブロックのタイプを返す
-  判定を行うobjectとブロック64*64限定で、当たり判定と上下左右判定を行う
-  その結果は引数４～１０に返す*/
+  判定を行うobjectとアイテム64*32限定で、当たり判定と上下左右判定を行う
+  その結果は引数４～１０に返す（廊下マップと教室マップ）*/
 
 void CObjMain::ItemHit(
 	float *x, float *y, bool scroll_on_x, bool scroll_on_y,
@@ -2272,7 +2298,7 @@ void CObjMain::Draw()
 		}
 
 	}
-
+	//サーチポイントフォント
 	if (searchpoint_font_flg == true)
 	{
 		Font::StrDraw(L"E", hero->GetX()+25.0f, hero->GetY()-20.0f, 23, c);
@@ -2280,7 +2306,7 @@ void CObjMain::Draw()
 	}
 
 
-
+	//バールのようなもの持ってない状態で特殊なドアを調べると出るフォント
 	if (font_close_flg == true && m_time <= 100)
 	{
 
@@ -2296,7 +2322,7 @@ void CObjMain::Draw()
 
 		hero->SetHeroStop(false);
 	}
-
+	//バールのようなもの持っている状態で特殊なドアを調べると出るフォント
 	else if (font_open_flg == true && m_time <= 90)
 	{
 
@@ -2312,6 +2338,7 @@ void CObjMain::Draw()
 
 		hero->SetHeroStop(false);
 	}
+	//一度本棚で鍵を取得した際のちに本棚を調べると出るフォント
 	else if (font_nothing_flg == true && m_time <= 150)
 	{
 
