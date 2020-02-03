@@ -27,7 +27,7 @@ void CObjHero::Init()
 	m_hero_life = 3;//主人公の体力用変数
 
 
-
+	dash_stop = false;
 
 	use_Item_flag = false;
 	
@@ -85,9 +85,19 @@ void CObjHero::Action()
 	if (m_hero_stop == false)
 	{
 
+		if (m_stamina_limid == 0)
+		{
+			dash_stop = true;
+		}
+
+		if (m_stamina_limid >= 65)
+		{
+			dash_stop = false;
+		}
+
 		//Zキー入力で速度アップ
-		if (m_stamina_limid >= 10 && Input::GetVKey(VK_LSHIFT) == true ||
-			m_stamina_limid >= 10 && Input::GetVKey(VK_RSHIFT) == true)
+		if (m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_LSHIFT) == true ||
+			m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_RSHIFT) == true)
 		{
 
 			//ダッシュ時の速度
@@ -106,10 +116,10 @@ void CObjHero::Action()
 			{
 				m_stamina_limid += 0.5f;
 			}
-
 		}
 
-
+	
+		
 		//キーの入力方向
 
 		if (Input::GetVKey('A') == true && Input::GetVKey('D') != true)

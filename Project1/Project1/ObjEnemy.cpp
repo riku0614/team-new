@@ -85,7 +85,7 @@ void CObjEnemy::Action()
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
 
 	//‰æ–Ê“à‚É“ü‚é‚ÆŽålŒö‚ð’Ç]‚·‚é
-	if (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
+	if     (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
 		    m_ey<(WINDOW_MAX_Y + -(scrolly)) && m_ey>(WINDOW_MIN_Y + -(scrolly)))
 	{
 		m_vx = (hx + -(scrollx) - m_ex) ;
