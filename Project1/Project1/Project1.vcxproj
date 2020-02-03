@@ -139,6 +139,7 @@
     <ClInclude Include="ObjEnemy_6.h" />
     <ClInclude Include="ObjEnemy_7.h" />
     <ClInclude Include="ObjEnemy_8.h" />
+    <ClInclude Include="ObjEPI.h" />
     <ClInclude Include="ObjFastEnemy.h" />
     <ClInclude Include="ObjGameClear.h" />
     <ClInclude Include="ObjGameOver.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="ObjSpawnEnemy.h" />
     <ClInclude Include="ObjText.h" />
     <ClInclude Include="ObjTitle.h" />
+    <ClInclude Include="SceneEPI.h" />
     <ClInclude Include="SceneGameClear.h" />
     <ClInclude Include="SceneGameOver.h" />
     <ClInclude Include="SceneGameUI.h" />
@@ -194,6 +196,7 @@
     <ClCompile Include="ObjEnemy_6.cpp" />
     <ClCompile Include="ObjEnemy_7.cpp" />
     <ClCompile Include="ObjEnemy_8.cpp" />
+    <ClCompile Include="ObjEPI.cpp" />
     <ClCompile Include="ObjFastEnemy.cpp" />
     <ClCompile Include="ObjGameClear.cpp" />
     <ClCompile Include="ObjGameOver.cpp" />
@@ -216,6 +219,7 @@
     <ClCompile Include="ObjSpawnEnemy.cpp" />
     <ClCompile Include="ObjText.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
+    <ClCompile Include="SceneEPI.cpp" />
     <ClCompile Include="SceneGameClear.cpp" />
     <ClCompile Include="SceneGameOver.cpp" />
     <ClCompile Include="SceneGameUI.cpp" />
