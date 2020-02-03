@@ -79,6 +79,7 @@ private:
 	float m_posture; //姿勢
 	float m_stamina_limid;//スタミナの限界値
 
+	bool dash_stop;
 	int m_hero_life;//主人公の体力
 	int m_ani_time;  //アニメーションフレーム動作間隔
 	int m_ani_frame; //描画フレーム
