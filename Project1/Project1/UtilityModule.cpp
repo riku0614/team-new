@@ -158,7 +158,7 @@ float SpawnChangerX(int m)
 	}
 	else if (m == 6)      //2
 	{
-		return BLOCK_SIZE_X*60.0f;
+		return BLOCK_SIZE_X*58.0f;
 	}
 	else if (m == 7)      //1ŠK
 	{
@@ -196,7 +196,7 @@ float SpawnChangerY(int m)
 	}
 	else if (m == 6)     //2
 	{
-		return BLOCK_SIZE_Y *68.0f;
+		return BLOCK_SIZE_Y *66.0f;
 	}
 	else if (m == 7)      //1ŠK
 	{
