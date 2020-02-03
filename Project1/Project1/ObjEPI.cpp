@@ -5,7 +5,7 @@
 #include "GameL/SceneManager.h"
 
 #include "GameHead.h"
-#include "ObjPRO.h"
+#include "ObjEPI.h"
 #include "SceneMain.h"
 #include "GameL/Audio.h"
 
@@ -14,28 +14,28 @@
 using namespace GameL;
 
 //イニシャライズ
-void CObjPRO::Init()
+void CObjEPI::Init()
 {
 	PR = 0;
 	m_time = 0;
 }
 
 //アクション
-void CObjPRO::Action()
+void CObjEPI::Action()
 {
-	if (m_time < 691)
+	if (m_time < 761)
 	{
 		m_time++;
 	}
 
 	if (Input::GetVKey(VK_RETURN) == true)
 	{
-		m_time = 690;
+		m_time = 760;
 	}
 
-	if (m_time == 690)
+	if (m_time == 760)
 	{
-		Scene::SetScene(new CSceneMain);
+		Scene::SetScene(new CSceneGameClear);
 	}
 
 	/*if (PR < 2 && Input::GetVKey('P') == true)
@@ -50,11 +50,9 @@ void CObjPRO::Action()
 
 //ドロー
 //Font::StrDraw(L"出力したい文字列", x位置, y位置, 文字の大きさ, color配列);
-void CObjPRO::Draw()
+void CObjEPI::Draw()
 {
-	//Font::StrDraw(L"～カイエ～", 317, 270, 25, c);
-	//プロローグ表示
-	for (int i = 0; i < 50; i++)
+	for (int i = 0; i < 14; i++)
 	{
 		if (m_time <= 20)
 		{
@@ -75,31 +73,10 @@ void CObjPRO::Draw()
 			dst.m_left = 0.0f;
 			dst.m_bottom = 600.0f;
 
-			Draw::Draw(25, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 20 && m_time <= 40)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
 			Draw::Draw(0, &src, &dst, f, 0.0f);
 		}
-		if (m_time > 40 && m_time <= 60)
+
+		if (m_time > 20 && m_time <= 140)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -121,7 +98,29 @@ void CObjPRO::Draw()
 			Draw::Draw(1, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 60 && m_time <= 80)
+		if (m_time > 140 && m_time <= 160)
+		{
+			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+			RECT_F src;
+			RECT_F dst;
+
+			//切り取り位置の設定
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 640.0f;
+			src.m_bottom = 480.0f;
+
+			//表示位置設定
+			dst.m_top = 0.0f;
+			dst.m_right = 800.0f;
+			dst.m_left = 0.0f;
+			dst.m_bottom = 600.0f;
+
+			Draw::Draw(0, &src, &dst, f, 0.0f);
+		}
+
+		if (m_time > 160 && m_time <= 280)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -143,7 +142,29 @@ void CObjPRO::Draw()
 			Draw::Draw(2, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 80 && m_time <= 130)
+		if (m_time > 280 && m_time <= 300)
+		{
+			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+			RECT_F src;
+			RECT_F dst;
+
+			//切り取り位置の設定
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 640.0f;
+			src.m_bottom = 480.0f;
+
+			//表示位置設定
+			dst.m_top = 0.0f;
+			dst.m_right = 800.0f;
+			dst.m_left = 0.0f;
+			dst.m_bottom = 600.0f;
+
+			Draw::Draw(0, &src, &dst, f, 0.0f);
+		}
+
+		if (m_time > 300 && m_time <= 420)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -165,7 +186,29 @@ void CObjPRO::Draw()
 			Draw::Draw(3, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 130 && m_time <= 150)
+		if (m_time > 420 && m_time <= 440)
+		{
+			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
+
+			RECT_F src;
+			RECT_F dst;
+
+			//切り取り位置の設定
+			src.m_top = 0.0f;
+			src.m_left = 0.0f;
+			src.m_right = 640.0f;
+			src.m_bottom = 480.0f;
+
+			//表示位置設定
+			dst.m_top = 0.0f;
+			dst.m_right = 800.0f;
+			dst.m_left = 0.0f;
+			dst.m_bottom = 600.0f;
+
+			Draw::Draw(0, &src, &dst, f, 0.0f);
+		}
+
+		if (m_time > 440 && m_time <= 560)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -187,7 +230,7 @@ void CObjPRO::Draw()
 			Draw::Draw(4, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 150 && m_time <= 170)
+		if (m_time > 560 && m_time <= 580)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -209,7 +252,7 @@ void CObjPRO::Draw()
 			Draw::Draw(5, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 170 && m_time <= 190)
+		if (m_time > 580 && m_time <= 600)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -231,7 +274,7 @@ void CObjPRO::Draw()
 			Draw::Draw(6, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 190 && m_time <= 210)
+		if (m_time > 600 && m_time <= 620)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -253,7 +296,7 @@ void CObjPRO::Draw()
 			Draw::Draw(7, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 210 && m_time <= 230)
+		if (m_time > 620 && m_time <= 640)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -275,29 +318,7 @@ void CObjPRO::Draw()
 			Draw::Draw(8, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 230 && m_time <= 250)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(25, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 250 && m_time <= 270)
+		if (m_time > 640 && m_time <= 660)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -319,7 +340,7 @@ void CObjPRO::Draw()
 			Draw::Draw(9, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 270 && m_time <= 290)
+		if (m_time > 660 && m_time <= 680)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -341,7 +362,7 @@ void CObjPRO::Draw()
 			Draw::Draw(10, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 290 && m_time <= 310)
+		if (m_time > 680 && m_time <= 700)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -363,7 +384,7 @@ void CObjPRO::Draw()
 			Draw::Draw(11, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 310 && m_time <= 360)
+		if (m_time > 700 && m_time <= 720)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -385,7 +406,7 @@ void CObjPRO::Draw()
 			Draw::Draw(12, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 360 && m_time <= 380)
+		if (m_time > 720 && m_time <= 740)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -407,7 +428,7 @@ void CObjPRO::Draw()
 			Draw::Draw(13, &src, &dst, f, 0.0f);
 		}
 
-		if (m_time > 380 && m_time <= 400)
+		if (m_time > 740 && m_time <= 760)
 		{
 			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
 
@@ -426,271 +447,7 @@ void CObjPRO::Draw()
 			dst.m_left = 0.0f;
 			dst.m_bottom = 600.0f;
 
-			Draw::Draw(14, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 400 && m_time <= 420)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(15, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 420 && m_time <= 440)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(16, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 440 && m_time <= 460)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(25, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 460 && m_time <= 480)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(17, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 480 && m_time <= 500)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(18, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 500 && m_time <= 520)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(19, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 520 && m_time <= 540)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(20, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 540 && m_time <= 590)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(21, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 590 && m_time <= 610)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(22, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 610 && m_time <= 630)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(23, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 630 && m_time <= 650)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(24, &src, &dst, f, 0.0f);
-		}
-
-		if (m_time > 650 && m_time <= 670)
-		{
-			float f[4] = { 1.0f,1.0f,1.0f,1.0f };
-
-			RECT_F src;
-			RECT_F dst;
-
-			//切り取り位置の設定
-			src.m_top = 0.0f;
-			src.m_left = 0.0f;
-			src.m_right = 640.0f;
-			src.m_bottom = 480.0f;
-
-			//表示位置設定
-			dst.m_top = 0.0f;
-			dst.m_right = 800.0f;
-			dst.m_left = 0.0f;
-			dst.m_bottom = 600.0f;
-
-			Draw::Draw(25, &src, &dst, f, 0.0f);
+			Draw::Draw(0, &src, &dst, f, 0.0f);
 		}
 	}
 
@@ -698,6 +455,6 @@ void CObjPRO::Draw()
 
 	//文字の表示
 	Font::StrDraw(L"(ENTER_KEY)でスキップ", 560, 560, 20, c);
-	
+
 
 }

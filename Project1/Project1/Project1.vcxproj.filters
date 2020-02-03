@@ -52,6 +52,9 @@
     <Filter Include="ソース ファイル\プロローグ関係">
       <UniqueIdentifier>{d62bb4ef-bb71-400c-802f-d05aa5699ce8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\エピローグ">
+      <UniqueIdentifier>{cd9a04a0-0583-4f6d-b9bc-e831dc3b44c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameHead.h">
@@ -212,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="ObjEnemy_8.h">
       <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEPI.h">
+      <Filter>ソース ファイル\エピローグ</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEPI.h">
+      <Filter>ソース ファイル\エピローグ</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -376,6 +385,12 @@
     </ClCompile>
     <ClCompile Include="ObjEnemy_8.cpp">
       <Filter>ソース ファイル\敵（通常）</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjEPI.cpp">
+      <Filter>ソース ファイル\エピローグ</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneEPI.cpp">
+      <Filter>ソース ファイル\エピローグ</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

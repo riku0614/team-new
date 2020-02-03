@@ -33,9 +33,15 @@ void CScenePRO::InitScene()
 {
 
 	//出力させる文字のグラフィック作成
-	//Font::SetStrTex(L"怪穢");
+	Font::SetStrTex(L"(ENTER_KEY)でスキップ");
 	//Font::SetStrTex(L"～カイエ～");
 	//Font::SetStrTex(L"最初から");
+
+	//音楽情報の読み込み
+	Audio::LoadAudio(0, L"プロローグ音楽.wav", SOUND_TYPE::BACK_MUSIC);
+
+	//音楽スタート
+	Audio::Start(0);
 
 	//クリックタイトルオブジェクト作成
 	CObjPRO* objpr = new CObjPRO();				//プロローグオブジェクト作成
@@ -54,6 +60,20 @@ void CScenePRO::InitScene()
 	Draw::LoadImageW(L"PR/プロローグ19(フェード入り).png", 9, TEX_SIZE_1024);
 	Draw::LoadImageW(L"PR/プロローグ21(フェード入り).png", 10, TEX_SIZE_1024);
 	Draw::LoadImageW(L"PR/プロローグ23(フェード入り).png", 11, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ25(フェード入り).png", 12, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ27(フェード入り).png", 13, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ29(フェード入り).png", 14, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ31(フェード入り).png", 15, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ33(フェード入り).png", 16, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ35(フェード入り).png", 17, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ37(フェード入り).png", 18, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ39(フェード入り).png", 19, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ41(フェード入り).png", 20, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ43(フェード入り).png", 21, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ45(フェード入り).png", 22, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ47(フェード入り).png", 23, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/プロローグ49(フェード入り).png", 24, TEX_SIZE_1024);
+	Draw::LoadImageW(L"PR/PR_BLACK.png", 25, TEX_SIZE_1024);
 }
 
 //ゲームメイン実行中メソッド

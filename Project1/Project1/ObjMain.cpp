@@ -99,7 +99,7 @@ void CObjMain::Action()
 			map_chg++;
 			if (map_chg == 8)
 			{
-				Scene::SetScene(new CSceneGameClear);
+				Scene::SetScene(new CSceneEPI);
 			}
 			switch_flg = false;
 		}
@@ -838,7 +838,7 @@ void CObjMain::BlockHit(
 									map_chg++;
 									if (map_chg == 8)
 									{
-										Scene::SetScene(new CSceneGameClear);
+										Scene::SetScene(new CSceneEPI);
 									}
 									stop_flg = true;
 									
@@ -901,7 +901,7 @@ void CObjMain::BlockHit(
 
 									if (map_chg == 8)
 									{
-										Scene::SetScene(new CSceneGameClear);
+										Scene::SetScene(new CSceneEPI);
 									}
 
 									
@@ -945,7 +945,7 @@ void CObjMain::BlockHit(
 
 									if (map_chg == 8)
 									{
-										Scene::SetScene(new CSceneGameClear);
+										Scene::SetScene(new CSceneEPI);
 									}
 
 									stop_flg = true;
@@ -1005,7 +1005,7 @@ void CObjMain::BlockHit(
 
 									if (map_chg == 8)
 									{
-										Scene::SetScene(new CSceneGameClear);
+										Scene::SetScene(new CSceneEPI);
 									}
 
 									stop_flg = true;
