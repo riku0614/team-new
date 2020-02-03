@@ -354,13 +354,13 @@ void CObjMain::Action()
 		}
 	}
 	//アイテム「鍵」の生成処理：教室用
-	if (stop_flg == true && room_in == false)
+	if (stop_flg == true && room_in == true)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 4)
+				if (r_map[i][j] == 4)
 				{
 
 					
@@ -421,7 +421,7 @@ void CObjMain::Action()
 
 
 	//アイテム「薬」の表示処理：教室用
-	if (room_in == true && stop_flg == false)
+	if (room_in == true && stop_flg == true)
 	{
 
 		for (int i = 0; i < ROOM_X; i++)
