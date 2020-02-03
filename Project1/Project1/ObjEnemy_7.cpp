@@ -99,23 +99,19 @@ void CObjEnemy7::Action()
 	else
 	{
 		m_time++;
+		gx = (hx + -(scrollx)+(BLOCK_SIZE_X * 3)) / BLOCK_SIZE_X;
+		gy = (hy + -(scrolly)+(BLOCK_SIZE_Y * 3)) / BLOCK_SIZE_Y;
 
-		m_vx = (hx + -(scrollx)-m_ex);
-		m_vy = (hy + -(scrolly)-m_ey);
 
-
-		if (m_time > 300 && hero->GetKeyID() == ITEM_KEY)
+		if (m_time > 300 && m_map[gy][gx] == 1 && hero->GetKeyID() == ITEM_KEY)
 		{
-
-			
 			m_time = 0;
 
-			m_ex = hx + -(scrollx)+(BLOCK_SIZE_X * 2);
-			m_ey = hy + -(scrolly)+(BLOCK_SIZE_Y * 2);
+			m_ex = gx * 64.0f;
+			m_ey = gy * 64.0f;
 			m_ani_time++;
 		}
 	}
-
 
 	//アニメーションのリセット
 	if (m_ani_time > m_ani_max_time)

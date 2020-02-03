@@ -568,12 +568,12 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 					if (m_map[i][j] == 5)
 					{
 
-						m_map[i][j] = 1;
+						
 
 						//ステージ８の敵オブジェクト作成
-						CObjEnemy* obje8 = new CObjEnemy(j*64.0f, i*64.0f);
-						Objs::InsertObj(obje8, OBJ_ENEMY, 11);
-
+						CObjEnemy8* obje8 = new CObjEnemy8(j*64.0f, i*64.0f);
+						Objs::InsertObj(obje8, OBJ_ENEMY8, 11);
+						m_map[i][j] = 1;
 
 					}
 				}
