@@ -1328,7 +1328,7 @@ void CObjMain::BlockHit(
 								}
 
 								//本棚から鍵を取る処理
-								if (r_map[i][j] == 19 && Input::GetVKey(VK_RETURN) == true&&nothing_flg==false)
+								if (r_map[i][j] == 19 && Input::GetVKey('E') == true&&nothing_flg==false)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
@@ -1604,11 +1604,19 @@ void CObjMain::ItemHit(
 								searchpoint_font_flg = true;
 								map_Item = true;
 							}
+							else
+							{
+								map_Item = false;
+							}
 							//薬
 							if (m_map[i][j] == 21)
 							{
 								searchpoint_font_flg = true;
 								map_Item_2 = true;
+							}
+							else
+							{
+								map_Item_2 = false;
 							}
 							//バール
 							if (m_map[i][j] == 26)
@@ -1616,7 +1624,10 @@ void CObjMain::ItemHit(
 								searchpoint_font_flg = true;
 								map_Item_3 = true;
 							}
-
+							else
+							{
+								map_Item_3 = false;
+							}
 
 						}
 
@@ -1781,11 +1792,19 @@ void CObjMain::ItemHit(
 							searchpoint_font_flg = true;
 							map_Item = true;
 						}
+						else
+						{
+							map_Item = false;
+						}
 						//薬
 						if (r_map[i][j] == 21)
 						{
 							searchpoint_font_flg = true;
 							map_Item_2 = true;
+						}
+						else
+						{
+							map_Item_2 = false;
 						}
 						//バールのようなもの
 						if (r_map[i][j] == 26)
@@ -1793,7 +1812,10 @@ void CObjMain::ItemHit(
 							searchpoint_font_flg = true;
 							map_Item_3 = true;
 						}
-
+						else
+						{
+							map_Item_3 = false;
+						}
 
 					 }
 
