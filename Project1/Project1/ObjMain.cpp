@@ -421,7 +421,7 @@ void CObjMain::Action()
 
 
 	//アイテム「薬」の表示処理：教室用
-	if (room_in == true && stop_flg == true)
+	if (stop_flg == true && room_in == true)
 	{
 
 		for (int i = 0; i < ROOM_X; i++)
