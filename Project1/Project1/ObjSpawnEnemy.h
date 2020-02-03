@@ -14,8 +14,8 @@ using namespace GameL;
 #define MAP_DRAW_SIZE (64.0f)
 #define ENEMY_SIZE (512.0f)
 #define ENEMY_DISPLAY (84.0f)
-#define ENEMY_VECTOR_X (4.0f)
-#define ENEMY_VECTOR_Y (4.0f)
+#define ENEMY_VECTOR_X (6.0f)
+#define ENEMY_VECTOR_Y (6.0f)
 #define M_ANI_TIME (4)
 #define M_ANI_MAX_TIME (4)
 

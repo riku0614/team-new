@@ -114,7 +114,7 @@ void CObjbar::Draw()
 	float hx = main->GetScrollX();
 	float hy = main->GetScrollY();
 
-	if (main->RoomFlag() == true)
+	if (main->RoomFlag() == true&&main->GetStoryFlag()==false)
 	{
 		for (int i = 0; i < ROOM_X; i++)
 		{
@@ -133,7 +133,7 @@ void CObjbar::Draw()
 			}
 		}
 	}
-	if(main->RoomFlag() == false)
+	if(main->RoomFlag() == false && main->GetStoryFlag() == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{

@@ -60,7 +60,8 @@ private:
 	int m_time;
 	int zx;
 	int zy;
-
+	int gx;
+	int gy;
 	float escrolly;
 	float escrollx;
 

@@ -85,7 +85,7 @@ void CObjEnemy::Action()
 	memcpy(m_map, main->m_map, sizeof(int)*(MAP_X * MAP_Y));
 
 	//画面内に入ると主人公を追従する
-	if (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
+	if     (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
 		    m_ey<(WINDOW_MAX_Y + -(scrolly)) && m_ey>(WINDOW_MIN_Y + -(scrolly)))
 	{
 		m_vx = (hx + -(scrollx) - m_ex) ;
@@ -93,7 +93,7 @@ void CObjEnemy::Action()
 
 		m_ani_time++;
 	}
-	//画面外に数秒いると主人公の近くにワープする
+	//画面外に数秒いるかつ主人公がカギをもっていると主人公の近くにワープする
 	else
 	{
 		m_time++;
