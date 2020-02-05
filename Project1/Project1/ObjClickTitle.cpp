@@ -38,7 +38,7 @@ void CObjClickTitle::Action()
 		Audio::LoadAudio(9, L"9タイトル決定音.wav", SOUND_TYPE::EFFECT);
 
 	//ゲームを終了する処理
-	if (m_yj == 100.0f && Input::GetVKey(VK_RETURN))
+	if (m_yj == CLICK_TITLE_3 && Input::GetVKey(VK_RETURN))
 	{
 		Scene::SetScene(NULL);//タイトルへ
 		////音楽スタート
@@ -62,12 +62,12 @@ void CObjClickTitle::Action()
 			//m_yjが0.0f(初期位置)だった場合の処理
 			if (m_yj <= 0.0f)
 			{
-			m_yj = m_yj + 150.0f;
+			m_yj = m_yj + CLICK_TITLE_CURSOR3;
 			}
 			//m_yjが0以上の場合
 			if (m_yj > 0.0f)
 			{
-			m_yj -= 50.0f;//3つ選択できるようのするため、+の値の三分の一の数を上方向（-y）に動かす
+			m_yj -= CLICK_TITLE_CHOICE;//3つ選択できるようのするため、+の値の三分の一の数を上方向（-y）に動かす
 			}
 
 			m_f = false;//m_fをfalseに→'W'を押し続けてもカーソルが動かないようにする
@@ -87,14 +87,14 @@ void CObjClickTitle::Action()
 			Audio::Start(2);
 
 			//m_yjが100.0f(最大値の位置)だった場合の処理
-			if (m_yj >= 100.0f)
+			if (m_yj >= CLICK_TITLE_MAX)
 			{
-				m_yj = m_yj - 150.0f;
+				m_yj = m_yj - CLICK_TITLE_CURSOR1;
 			}
 			//m_yjが100以下の場合
-			if (m_yj <= 100.0f)
+			if (m_yj <= CLICK_TITLE_UNDER100)
 			{
-				m_yj += 50.0f;//3つ選択できるようのするため、-の値の三分の一の数を上方向（+y）に動かす
+				m_yj += CLICK_TITLE_CHOICE;//3つ選択できるようのするため、-の値の三分の一の数を上方向（+y）に動かす
 			}
 
 			m_f = false;//m_fをfalseに→'W','S'を押し続けてもカーソルが動かないようにする
@@ -116,7 +116,7 @@ void CObjClickTitle::Draw()
 	RECT_F dst;	//描画先表示位置
 
 
-		//切り取り位置の設定
+	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
 	src.m_right = 1024.0f;
@@ -134,14 +134,14 @@ void CObjClickTitle::Draw()
 	//切り取り位置の設定
 	src.m_top = 0.0f;
 	src.m_left = 0.0f;
-	src.m_right = 64.0f;
-	src.m_bottom = 64.0f;
+	src.m_right = DRAW_SIZE;
+	src.m_bottom = DRAW_SIZE;
 
 	//表示位置設定
 	dst.m_top = 335.0f + m_yj;
 	dst.m_right = 450.0f;
-	dst.m_left = dst.m_right + 64.0f;
-	dst.m_bottom = dst.m_top + 64.0f;
+	dst.m_left = dst.m_right + DRAW_SIZE;
+	dst.m_bottom = dst.m_top + DRAW_SIZE;
 
 	//描画設定
 	Draw::Draw(0, &src, &dst, c, 0.0f);
