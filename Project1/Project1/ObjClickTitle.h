@@ -3,7 +3,12 @@
 #include "GameL\SceneObjManager.h"
 //使用するネームスペース
 using namespace GameL;
-
+#define CLICK_TITLE_3 (100.0f)
+#define CLICK_TITLE_UNDER100 (100.0f)
+#define CLICK_TITLE_MAX (100.0f)
+#define CLICK_TITLE_CHOICE (50.0f)
+#define CLICK_TITLE_CURSOR1 (150.0f)
+#define CLICK_TITLE_CURSOR3 (150.0f)
 //オブジェクト：主人公
 class CObjClickTitle : public CObj
 {
