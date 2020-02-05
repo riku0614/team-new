@@ -60,23 +60,23 @@ void CObjMain::Init()
 	m_time = 0;
 
 	//教室マップデータ
-	r[1] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
-	r[2] = Save::ExternalDataOpen(L"教室２右サクラ.csv", &size);
-	r[3] = Save::ExternalDataOpen(L"教室３右サクラ.csv", &size);
-	r[4] = Save::ExternalDataOpen(L"教室４右サクラ.csv", &size);
-	r[5] = Save::ExternalDataOpen(L"教室５右サクラ.csv", &size);
-	r[6] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
+	r[ROOM_1] = Save::ExternalDataOpen(L"教室６右サクラ.csv", &size);
+	r[ROOM_2] = Save::ExternalDataOpen(L"教室２右サクラ.csv", &size);
+	r[ROOM_3] = Save::ExternalDataOpen(L"教室３右サクラ.csv", &size);
+	r[ROOM_4] = Save::ExternalDataOpen(L"教室４右サクラ.csv", &size);
+	r[ROOM_5] = Save::ExternalDataOpen(L"教室５右サクラ.csv", &size);
+	r[ROOM_6] = Save::ExternalDataOpen(L"教室１右サクラ.csv", &size);
 
 	//廊下マップデータ
-	p[0] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
-	p[1] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size); 
-	p[2] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
-	p[3] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
-    p[4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
-	p[5] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
-    p[6] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
-	p[7] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	p[8] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
+	p[FLOOR8] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
+	p[FLOOR7] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size);
+	p[FLOOR6] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
+	p[FLOOR5] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
+    p[FLOOR4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
+	p[FLOOR3] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
+    p[FLOOR2] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
+	p[FLOOR1] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
+	p[FLOOR_NULL] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
 
 }
 
@@ -97,7 +97,7 @@ void CObjMain::Action()
 			
 			nothing_flg = false;
 			map_chg++;
-			if (map_chg == 8)
+			if (map_chg == GAME_CLEAR)
 			{
 				Scene::SetScene(new CSceneEPI);
 			}
@@ -119,16 +119,16 @@ void CObjMain::Action()
 		switch_flg = true;
 	}
 	//教室マップを６回回したらセーブしたマップへのロードに切り替える
-	if (room_chg >= 7)
+	if (room_chg >= ROOM_LIMIT)
 	{
-		room_chg = 1;
+		room_chg = ROOM_1;
 		room_chg_stop = true;
 	}
 	//８階のマップの処理
-	if (map_chg == 0)
+	if (map_chg == FLOOR8)
 	{
 		//廊下マップから教室マップへの切り替え処理
-		if (room_chg >= 1 && room_in == true && stop_flg == true)
+		if (room_chg >= ROOM_1 && room_in == true && stop_flg == true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(4, L"4教室扉SE.wav", SOUND_TYPE::EFFECT);
@@ -138,10 +138,10 @@ void CObjMain::Action()
 
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-			hero->SetX(20.0f*64.0f);
-			hero->SetY(4.0f*64.0f);
-			m_scroll_x = -15.0f*64.0f;
-			m_scroll_y = 5.0f*64.0f;
+			hero->SetX(ROOM_SPAWN_X*BLOCK_SIZE_X);
+			hero->SetY(ROOM_SPAWN_Y*BLOCK_SIZE_Y);
+			m_scroll_x = ROOM_SPAWN_SCROLL_X * BLOCK_SIZE_X;
+			m_scroll_y = ROOM_SPAWN_SCROLL_Y * BLOCK_SIZE_Y;
 
 			//新規にマップをロードする処理とセーブしたマップをロードする処理の切り替え
 			if (room_chg_stop == false)
@@ -198,7 +198,7 @@ void CObjMain::Action()
 
 	}
 	//７階以降のマップの処理
-	if (map_chg >= 1)
+	if (map_chg >= FLOOR7)
 	{
 		if (map_chg >=1 && stop_flg == true&&first_stop==true)
 		{
@@ -241,10 +241,10 @@ void CObjMain::Action()
 
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-			hero->SetX(20.0f*64.0f);
-			hero->SetY(4.0f*64.0f);
-			m_scroll_x = -15.0f*64.0f;
-			m_scroll_y = -5.0f*64.0f;
+			hero->SetX(ROOM_SPAWN_X*BLOCK_SIZE_X);
+			hero->SetY(ROOM_SPAWN_Y*BLOCK_SIZE_Y);
+			m_scroll_x = ROOM_SPAWN_SCROLL_X * BLOCK_SIZE_X;
+			m_scroll_y = ROOM_SPAWN_SCROLL_Y * BLOCK_SIZE_Y;
 			//新規にマップをロードする処理とセーブしたマップをロードする処理の切り替え
 			if (room_chg_stop == false)
 			{
@@ -320,11 +320,11 @@ void CObjMain::Action()
 		{
 			if (m_map[i][j] == SPAWN_ENEMY_Y)
 			{
-				if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
+				if ((j*BLOCK_SIZE_X) + BLOCK_SIZE_X >= hero->GetX() && (j * BLOCK_SIZE_X) - BLOCK_SIZE_X <= hero->GetX())
 				{
 
 					
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * BLOCK_SIZE_X) + -(m_scroll_y));
 					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
 					//生成ポイントを床に変更
@@ -341,14 +341,14 @@ void CObjMain::Action()
 		{
 			if (m_map[i][j] == SPAWN_ENEMY_X)
 			{
-				if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
+				if ((i*BLOCK_SIZE_Y) + BLOCK_SIZE_Y >= hero->GetY() && (i *BLOCK_SIZE_Y) - BLOCK_SIZE_Y <= hero->GetY())
 				{
 
 					
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * BLOCK_SIZE_X) + -(m_scroll_y));
 					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 					//生成ポイントを床に変更
-					m_map[i][j] = 1;
+					m_map[i][j] = FLOOR_0;
 				}
 			}
 		}
@@ -836,7 +836,7 @@ void CObjMain::BlockHit(
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
-									if (map_chg == 8)
+									if (map_chg == GAME_CLEAR)
 									{
 										Scene::SetScene(new CSceneEPI);
 									}
@@ -873,8 +873,8 @@ void CObjMain::BlockHit(
 										searchpoint_font_flg = true;
 
 
-										save_x[map_chg][0] = hero->GetX()+64.0f;
-										save_y[map_chg][0] = hero->GetY()+64.0f;
+										save_x[map_chg][0] = hero->GetX()+BLOCK_SIZE_X;
+										save_y[map_chg][0] = hero->GetY()+ BLOCK_SIZE_Y;
 										save_scroll_x[map_chg][0] = main->GetScrollX();
 										save_scroll_y[map_chg][0] = main->GetScrollY();
 
@@ -897,7 +897,7 @@ void CObjMain::BlockHit(
 								{
 									map_chg++;
 
-									if (map_chg == 8)
+									if (map_chg == GAME_CLEAR)
 									{
 										Scene::SetScene(new CSceneEPI);
 									}
@@ -941,7 +941,7 @@ void CObjMain::BlockHit(
 								{
 									map_chg++;
 
-									if (map_chg == 8)
+									if (map_chg == GAME_CLEAR)
 									{
 										Scene::SetScene(new CSceneEPI);
 									}
@@ -974,8 +974,8 @@ void CObjMain::BlockHit(
 										room_chg++;
 										searchpoint_font_flg = true;
 									
-										save_x[map_chg][0] = hero->GetX() - 64.0f;
-										save_y[map_chg][0] = hero->GetY() + 64.0f;
+										save_x[map_chg][0] = hero->GetX() - BLOCK_SIZE_X;
+										save_y[map_chg][0] = hero->GetY() + BLOCK_SIZE_Y;
 										save_scroll_x[map_chg][0] = main->GetScrollX();
 										save_scroll_y[map_chg][0] = main->GetScrollY();
 
@@ -1001,7 +1001,7 @@ void CObjMain::BlockHit(
 
 									map_chg++;
 
-									if (map_chg == 8)
+									if (map_chg == GAME_CLEAR)
 									{
 										Scene::SetScene(new CSceneEPI);
 									}
@@ -1060,8 +1060,8 @@ void CObjMain::BlockHit(
 				if (r_map[i][j] <= MAP_NULL && r_map[i][j] > FLOOR_0 && r_map[i][j] != GIMMICK && r_map[i][j] != FLOOR_7 && r_map[i][j] != CHAIR)
 				{
 					//要素番号を座標に変更
-					float bx = j * 64.0f;
-					float by = i * 64.0f;
+					float bx = j * BLOCK_SIZE_X;
+					float by = i * BLOCK_SIZE_Y;
 
 					//スクロールの影響
 					float scroll_x = scroll_on_x ? m_scroll_x : 0;
@@ -1116,7 +1116,7 @@ void CObjMain::BlockHit(
 								else if (r_map[i][j] == DOOR_LEFT && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 
-									if (room_in == true && room_chg >= 1)
+									if (room_in == true && room_chg >= ROOM_1)
 									{
 										room_in = false;
 										stop_flg = true;
@@ -1142,7 +1142,7 @@ void CObjMain::BlockHit(
 										
 									}
 									//バールを使わないと開かない扉
-									else if (room_in == true && room_chg == 0)
+									else if (room_in == true && room_chg == ROOM_0)
 									{
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										if (hero->Getflag_3() == true && Input::GetVKey('E'))
@@ -1195,7 +1195,7 @@ void CObjMain::BlockHit(
 							//通常の扉
 							else if (r_map[i][j] == DOOR_DOWN && *c_id == CHAR_HERO && Input::GetVKey('E'))
 							{
-								if (room_in == true && room_chg >= 1)
+								if (room_in == true && room_chg >= ROOM_1)
 								{
 									searchpoint_font_flg = true;
 
@@ -1383,7 +1383,7 @@ void CObjMain::BlockHit(
 										main->SetScrollX(save_scroll_x[map_chg][0]);
 										main->SetScrollY(save_scroll_y[map_chg][0]);
 
-										if (room_chg >= 1)
+										if (room_chg >= ROOM_1)
 										{
 											for (int i = 0; i < ROOM_X; i++)
 											{
@@ -1851,7 +1851,7 @@ void CObjMain::Draw()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] > 0)
+				if (m_map[i][j] > MAP_NULL_0)
 				{
 
 
@@ -2064,7 +2064,7 @@ void CObjMain::Draw()
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] > 0)
+				if (r_map[i][j] > MAP_NULL_0)
 				{
 
 

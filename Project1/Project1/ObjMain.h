@@ -25,6 +25,12 @@ using namespace GameL;
 #define SCROLL_LEFT (450)
 #define SCROLL_DOWN (350)
 #define SCROLL_UP (80)
+#define ROOM_SPAWN_X (20.0f)
+#define ROOM_SPAWN_Y (4.0f)
+#define ROOM_SPAWN_SCROLL_X (-15.0f)
+#define ROOM_SPAWN_SCROLL_Y (-5.0f)
+
+
 
 //オブジェクト：メイン
 class CObjMain : public CObj

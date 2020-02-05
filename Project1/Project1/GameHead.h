@@ -90,6 +90,7 @@ enum ITEM_ID
 
 enum MAP_ID
 {
+	MAP_NULL_0,
 	MAP_KEY = 4,
 	MAP_HEAL = 21,
 	MAP_BAR = 26,
@@ -143,6 +144,31 @@ enum MAP_ID
 
 };
 
+enum STAGE_NUMBER
+{
+	FLOOR8,
+	FLOOR7,
+	FLOOR6,
+	FLOOR5,
+	FLOOR4,
+	FLOOR3,
+	FLOOR2,
+	FLOOR1,
+	GAME_CLEAR,
+	FLOOR_NULL=8,
+};
+
+enum ROOM_NUMBER
+{
+	ROOM_0,
+	ROOM_1,
+	ROOM_2,
+	ROOM_3,
+	ROOM_4,
+	ROOM_5,
+	ROOM_6,
+	ROOM_LIMIT,
+};
 //------------------------------------------------
 //ゲーム内で使用するクラスヘッダ------------------
 
