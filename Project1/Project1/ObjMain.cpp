@@ -176,7 +176,7 @@ void CObjMain::Action()
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 			hero->SetX(0.0f);
-			hero->SetY(64.0f * 4);
+			hero->SetY(BLOCK_SIZE_Y * 4);
 			m_scroll_x = 0.0f;
 			m_scroll_y = 0.0f;
 
@@ -273,28 +273,28 @@ void CObjMain::Action()
 	float hy = hero->GetY();
 
 	//後方スクロールライン
-	if (hx < 80)
+	if (hx < SCROLL_RIGHT)
 	{
-		hero->SetX(80);
+		hero->SetX(SCROLL_RIGHT);
 		m_scroll_x -= hero->GetVX();
 	}
 	//前方スクロールライン
-	if (hx > 450)
+	if (hx > SCROLL_LEFT)
 	{
-		hero->SetX(450);
+		hero->SetX(SCROLL_LEFT);
 		m_scroll_x -= hero->GetVX();
 	}
 	//上方スクロールライン
-	if (hy < 80)
+	if (hy < SCROLL_UP)
 	{
-		hero->SetY(80);
+		hero->SetY(SCROLL_UP);
 		m_scroll_y -= hero->GetVY();
 	}
 
 	//下方スクロールライン
-	if (hy > 350)
+	if (hy > SCROLL_DOWN)
 	{
-		hero->SetY(350);
+		hero->SetY(SCROLL_DOWN);
 		m_scroll_y -= hero->GetVY();
 
 
@@ -318,7 +318,7 @@ void CObjMain::Action()
 	{
 		for (int j = 0; j < MAP_Y; j++)
 		{
-			if (m_map[i][j] == 34)
+			if (m_map[i][j] == SPAWN_ENEMY_Y)
 			{
 				if ((j*64.0f) + 64.0f >= hero->GetX() && (j * 64.0f) - 64.0f <= hero->GetX())
 				{
@@ -328,7 +328,7 @@ void CObjMain::Action()
 					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
 
 					//生成ポイントを床に変更
-					m_map[i][j] = 1;
+					m_map[i][j] = FLOOR_0;
 				}
 			}
 		}
@@ -339,7 +339,7 @@ void CObjMain::Action()
 	{
 		for (int j = 0; j < MAP_Y; j++)
 		{
-			if (m_map[i][j] == 35)
+			if (m_map[i][j] == SPAWN_ENEMY_X)
 			{
 				if ((i*64.0f) + 64.0f >= hero->GetY() && (i * 64.0f) - 64.0f <= hero->GetY())
 				{
@@ -360,7 +360,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (r_map[i][j] == 4)
+				if (r_map[i][j] == MAP_KEY)
 				{
 
 					
@@ -378,7 +378,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 4)
+				if (m_map[i][j] == MAP_KEY)
 				{
 
 					//アイテムオブジェクト作成
@@ -400,7 +400,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 21)
+				if (m_map[i][j] == MAP_HEAL)
 				{
 
 					//アイテムオブジェクト作成
@@ -428,7 +428,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] == 21)
+				if (r_map[i][j] == MAP_HEAL)
 				{
 
 					//アイテムオブジェクト作成
@@ -451,7 +451,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 26)
+				if (m_map[i][j] == MAP_BAR)
 				{
 
 					//アイテムオブジェクト作成
@@ -473,7 +473,7 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] == 26)
+				if (r_map[i][j] == MAP_BAR)
 				{
 
 					//アイテムオブジェクト作成
@@ -496,14 +496,14 @@ void CObjMain::Action()
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 25)
+				if (m_map[i][j] == FAST_ENEMY)
 				{
 
 
 					CObjFastEnemy* objf = new CObjFastEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
 					Objs::InsertObj(objf, OBJ_FASTENEMY, 13);
 
-					m_map[i][j] = 1;
+					m_map[i][j] = FLOOR_0;
 
 				}
 			}
@@ -786,13 +786,13 @@ void CObjMain::BlockHit(
 			{
 
 
-				if (m_map[i][j] <= 99 && m_map[i][j] >=3&&m_map[i][j]!=4 && m_map[i][j] != 5 && 
-					m_map[i][j] != 7 && m_map[i][j] != 21 && m_map[i][j] != 25 && m_map[i][j] != 26 
+				if (m_map[i][j] <= MAP_NULL && m_map[i][j] >=STAIRS&&m_map[i][j]!=MAP_KEY && m_map[i][j] != MAIN_ENEMY &&
+					m_map[i][j] != GIMMICK && m_map[i][j] != FLOOR_5 && m_map[i][j] != FLOOR_6 && m_map[i][j] != FLOOR_7 
 					)
 				{
 					//要素番号を座標に変更
-					float bx = j * 64.0f;
-					float by = i * 64.0f;
+					float bx = j * BLOCK_SIZE_X;
+					float by = i * BLOCK_SIZE_Y;
 
 
 
@@ -801,7 +801,7 @@ void CObjMain::BlockHit(
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 64.0f >= bx) && (*x + (-scroll_x) <= bx + 64.0f) && (*y + (-scroll_y) + 64.0f > by) &&( *y + (-scroll_y) < by + 64.0f))
+					if ((*x + (-scroll_x) + BLOCK_SIZE_X >= bx) && (*x + (-scroll_x) <= bx + BLOCK_SIZE_X) && (*y + (-scroll_y) + BLOCK_SIZE_Y > by) &&( *y + (-scroll_y) < by + BLOCK_SIZE_Y))
 					{
 						//上下左右判定
 
@@ -830,10 +830,10 @@ void CObjMain::BlockHit(
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
-								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
+								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								//階段
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
 									if (map_chg == 8)
@@ -845,7 +845,7 @@ void CObjMain::BlockHit(
 									stop_flg2 = true;
 									first_stop = true;
 									room_chg_stop = false;
-									*k_id = 99;
+									*k_id = ITEM_NULL;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
@@ -858,7 +858,7 @@ void CObjMain::BlockHit(
 									
 								}
 								//扉
-								else if (m_map[i][j] == 17  && *c_id == CHAR_HERO && Input::GetVKey('E') == true)
+								else if (m_map[i][j] == DOOR_LEFT  && *c_id == CHAR_HERO && Input::GetVKey('E') == true)
 								{
 									if (room_in == false)
 									{
@@ -889,13 +889,11 @@ void CObjMain::BlockHit(
 							{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
-								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
-								if (m_map[i][j] == 2)
-									*bt = m_map[i][j];
+								*y = by - BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
 								*vy = 0.0f;//-VX*反発係数
 								
 								//階段
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
 
@@ -906,7 +904,7 @@ void CObjMain::BlockHit(
 
 									
 									
-									*k_id = 99;
+									*k_id = ITEM_NULL;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
@@ -919,7 +917,7 @@ void CObjMain::BlockHit(
 									
 								}
 							    //扉
-								else if (m_map[i][j] == 16  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
+								else if (m_map[i][j] == DOOR_DOWN  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
@@ -936,10 +934,10 @@ void CObjMain::BlockHit(
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
-								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅
+								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								//階段
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
 									map_chg++;
 
@@ -954,7 +952,7 @@ void CObjMain::BlockHit(
 									nothing_flg = false;
 
 									room_chg_stop = false;
-									*k_id = 99;
+									*k_id = ITEM_NULL;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
@@ -966,7 +964,7 @@ void CObjMain::BlockHit(
 									
 								}
 								//扉
-								else if (m_map[i][j] == 18&& *c_id == CHAR_HERO && Input::GetVKey('E') == true)
+								else if (m_map[i][j] == DOOR_RIGHT&& *c_id == CHAR_HERO && Input::GetVKey('E') == true)
 								{
 									if (room_in == false)
 									{
@@ -991,14 +989,14 @@ void CObjMain::BlockHit(
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
-								*y =(by-0.1f) + 64.0f + (scroll_y);//ブロックの位置-主人公の
+								*y =by + BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の
 								//反発係数
 								if (*vy < 0)
 								{
 									*vy = 0.0f;
 								}
 								//階段
-								if (m_map[i][j] == 3 && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 
 									map_chg++;
@@ -1016,7 +1014,7 @@ void CObjMain::BlockHit(
 
 									searchpoint_font_flg = true;
 									
-									*k_id = 99;
+									*k_id = ITEM_NULL;
 
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
@@ -1027,7 +1025,7 @@ void CObjMain::BlockHit(
 									
 								}
 							    //扉
-								else if (m_map[i][j] == 15 && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (m_map[i][j] == DOOR_UP && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == false)
 									{
@@ -1039,7 +1037,7 @@ void CObjMain::BlockHit(
 								
 
 							}
-							if (m_map[i][j] == 15 || m_map[i][j] == 16 || m_map[i][j] == 17 || m_map[i][j] == 18 )
+							if (m_map[i][j] == DOOR_UP || m_map[i][j] == DOOR_DOWN || m_map[i][j] == DOOR_LEFT || m_map[i][j] == DOOR_RIGHT)
 							{
 								searchpoint_font_flg = true;
 							}
@@ -1059,7 +1057,7 @@ void CObjMain::BlockHit(
 			{
 
 
-				if (r_map[i][j] <= 99 && r_map[i][j] > 1 && r_map[i][j] != 7 && r_map[i][j] != 26 && r_map[i][j] != 34 && r_map[i][j] != 35 && r_map[i][j] != 3)
+				if (r_map[i][j] <= MAP_NULL && r_map[i][j] > FLOOR_0 && r_map[i][j] != GIMMICK && r_map[i][j] != FLOOR_7 && r_map[i][j] != CHAIR)
 				{
 					//要素番号を座標に変更
 					float bx = j * 64.0f;
@@ -1098,11 +1096,11 @@ void CObjMain::BlockHit(
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
-								*x = bx + 64.0f + (scroll_x);//ブロックの位置-主人公の幅
+								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								
 								//本を開く処理本を開く処理
-								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
+								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1115,7 +1113,7 @@ void CObjMain::BlockHit(
 									hero->SetHeroStop(true);
 								}
 								//通常の扉
-								else if (r_map[i][j] == 17 && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (r_map[i][j] == DOOR_LEFT && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 
 									if (room_in == true && room_chg >= 1)
@@ -1154,10 +1152,10 @@ void CObjMain::BlockHit(
 											hero->SetFlug_3(false);
 											hero->SetUseItem(true);
 
-											gui->SetID(99);
+											gui->SetID(ITEM_NULL);
 											gui->Settakeflag_3(false);
 
-											hero->SetBarID(99);
+											hero->SetBarID(ITEM_NULL);
 
 											room_in = false;
 											stop_flg = true;
@@ -1175,12 +1173,12 @@ void CObjMain::BlockHit(
 						{
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
-							*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
+							*y = by - BLOCK_SIZE_X + (scroll_y);//ブロックの位置-主人公の幅
 							*vy = 0.0f;	//反発係数
 
 							
 							//本を開く処理
-							if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
+							if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
 							{
 								searchpoint_font_flg = true;
 
@@ -1195,7 +1193,7 @@ void CObjMain::BlockHit(
 								hero->SetHeroStop(true);
 							}
 							//通常の扉
-							else if (r_map[i][j] == 16 && *c_id == CHAR_HERO && Input::GetVKey('E'))
+							else if (r_map[i][j] == DOOR_DOWN && *c_id == CHAR_HERO && Input::GetVKey('E'))
 							{
 								if (room_in == true && room_chg >= 1)
 								{
@@ -1232,11 +1230,11 @@ void CObjMain::BlockHit(
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
-								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅]
+								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅]
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								
 								//本を開く処理
-								if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
+								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1249,7 +1247,7 @@ void CObjMain::BlockHit(
 									hero->SetHeroStop(true);
 								}
 								//通常の時
-								else if (r_map[i][j] == 18 && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (r_map[i][j] == DOOR_RIGHT && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == true && open_flg==true)
 									{
@@ -1294,12 +1292,12 @@ void CObjMain::BlockHit(
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 											hero->SetFlug_3(false);
 											hero->SetUseItem(true);
-											gui->SetID(99);
+											gui->SetID(ITEM_NULL);
 											gui->Settakeflag_3(false);
 
-											hero->SetBarID(99);
+											hero->SetBarID(ITEM_NULL);
 
-											hero->SetX(hero->GetX() - 32.0f);
+											
 
 											open_flg = true;
 											font_open_flg = true;
@@ -1321,14 +1319,14 @@ void CObjMain::BlockHit(
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
-								*y = by + 64.0f + (scroll_y);//ブロックの位置-主人公の幅
+								*y = by + BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
 							    if (*vy < 0)
 								{
 									*vy = 0.0f;
 								}
 
 								//本棚から鍵を取る処理
-								if (r_map[i][j] == 19 && Input::GetVKey('E') == true&&nothing_flg==false)
+								if (r_map[i][j] == BOOK_SHELF && Input::GetVKey('E') == true&&nothing_flg==false)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
@@ -1347,12 +1345,12 @@ void CObjMain::BlockHit(
 
 									nothing_flg = true;
 								}
-								else if (r_map[i][j] == 19 && Input::GetVKey(VK_RETURN) == true && nothing_flg == true)
+								else if (r_map[i][j] == BOOK_SHELF && Input::GetVKey(VK_RETURN) == true && nothing_flg == true)
 								{
 									font_nothing_flg = true;
 								}
 								//本を開く処理
-								else if (r_map[i][j] == 31 && Input::GetVKey('E') == true)
+								else if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1368,7 +1366,7 @@ void CObjMain::BlockHit(
 								}
 
 								//通常の時
-								else if (r_map[i][j] == 15 && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (r_map[i][j] == DOOR_UP && *c_id == CHAR_HERO && Input::GetVKey('E'))
 								{
 									if (room_in == true)
 									{
@@ -1402,7 +1400,7 @@ void CObjMain::BlockHit(
 								
 							}
 							//扉やアイテムなどの調べることができるものに当たった際に主人公の頭上にフォントを表示する
-							if (r_map[i][j] == 31 || r_map[i][j] == 15 || r_map[i][j] == 16 || r_map[i][j] == 17 || r_map[i][j] == 18 || r_map[i][j] == 19)
+							if (r_map[i][j] == BOOK || r_map[i][j] == DOOR_UP || r_map[i][j] == DOOR_DOWN || r_map[i][j] == DOOR_LEFT || r_map[i][j] == DOOR_RIGHT || r_map[i][j] == BOOK_SHELF)
 							{
 								searchpoint_font_flg = true;
 							}
@@ -1452,20 +1450,20 @@ void CObjMain::ItemHit(
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] == 4 || m_map[i][j] == 21 || m_map[i][j] == 26)
+				if (m_map[i][j] == MAP_KEY || m_map[i][j] == MAP_HEAL || m_map[i][j] == MAP_BAR)
 				{
 
 
 
 					//要素番号を座標に変更
-					float bx = j * 64.0f;
-					float by = i * 64.0f;
+					float bx = j * BLOCK_SIZE_X;
+					float by = i * BLOCK_SIZE_Y;
 
 					//スクロールの影響
 					float scroll_x = scroll_on_x ? m_scroll_x : 0;
 					float scroll_y = scroll_on_y ? m_scroll_y : 0;
 					//主人公とブロックの当たり判定
-					if ((*x + (-scroll_x) + 64.0f >= bx) && (*x + (-scroll_x) <= bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f >= by) && (*y + (-scroll_y) <= by + ITEM_SIZE_Y))
+					if ((*x + (-scroll_x) + BLOCK_SIZE_X >= bx) && (*x + (-scroll_x) <= bx + ITEM_SIZE_X) && (*y + (-scroll_y) + BLOCK_SIZE_Y >= by) && (*y + (-scroll_y) <= by + ITEM_SIZE_Y))
 					{
 						//上下左右判定
 
@@ -1487,7 +1485,7 @@ void CObjMain::ItemHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < 87.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r>=0) || r > 315)
@@ -1495,8 +1493,8 @@ void CObjMain::ItemHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								ix = bx / 64;
-								iy = by / 64;
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
@@ -1508,7 +1506,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									m_map[iy][ix] = 1;
+									m_map[iy][ix] = FLOOR_0;
 									
 
 									delete_flg = false;
@@ -1520,9 +1518,9 @@ void CObjMain::ItemHit(
 							{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
-								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
-								ix = bx / 64;
-								iy = by / 64;
+								*y = by - BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
@@ -1534,7 +1532,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									m_map[iy][ix] = 1;
+									m_map[iy][ix] = FLOOR_0;
 
 									
 
@@ -1546,9 +1544,9 @@ void CObjMain::ItemHit(
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
-								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅
-								ix = bx / 64;
-								iy = by / 64;
+								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 								*vx= -(*vx)*0.1f;//-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
@@ -1560,7 +1558,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									m_map[iy][ix] = 1;
+									m_map[iy][ix] = FLOOR_0;
 
 									
 
@@ -1573,8 +1571,8 @@ void CObjMain::ItemHit(
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
 								*y = by + ITEM_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
-								ix = bx / 64;
-								iy = by / 64;
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 								if (*vy < 0)
 								{
 									*vy = 0.0f;
@@ -1589,7 +1587,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									m_map[iy][ix] = 1;
+									m_map[iy][ix] = FLOOR_0;
 
 									
 
@@ -1599,7 +1597,7 @@ void CObjMain::ItemHit(
 
 							}
 							//鍵
-							if (m_map[i][j] == 4)
+							if (m_map[i][j] == MAP_KEY)
 							{
 								searchpoint_font_flg = true;
 								map_Item = true;
@@ -1609,7 +1607,7 @@ void CObjMain::ItemHit(
 								map_Item = false;
 							}
 							//薬
-							if (m_map[i][j] == 21)
+							if (m_map[i][j] == MAP_HEAL)
 							{
 								searchpoint_font_flg = true;
 								map_Item_2 = true;
@@ -1619,7 +1617,7 @@ void CObjMain::ItemHit(
 								map_Item_2 = false;
 							}
 							//バール
-							if (m_map[i][j] == 26)
+							if (m_map[i][j] == MAP_BAR)
 							{
 								searchpoint_font_flg = true;
 								map_Item_3 = true;
@@ -1649,20 +1647,20 @@ void CObjMain::ItemHit(
 		{
 			for (int j = 0; j < ROOM_Y; j++)
 			{
-				if (r_map[i][j] == 4 || r_map[i][j] == 21 || r_map[i][j] == 26)
+				if (r_map[i][j] == MAP_KEY || r_map[i][j] == MAP_HEAL || r_map[i][j] == MAP_BAR)
 				{
 
 
 
 					//要素番号を座標に変更
-					float bx = j * 64.0f;
-					float by = i * 64.0f;
+					float bx = j * BLOCK_SIZE_X;
+					float by = i * BLOCK_SIZE_Y;
 
 				//スクロールの影響
 				float scroll_x = scroll_on_x ? m_scroll_x : 0;
 				float scroll_y = scroll_on_y ? m_scroll_y : 0;
 				//主人公とブロックの当たり判定
-				if ((*x + (-scroll_x) + 64.0f > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + 64.0f > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
+				if ((*x + (-scroll_x) + BLOCK_SIZE_X > bx) && (*x + (-scroll_x) < bx + ITEM_SIZE_X) && (*y + (-scroll_y) + BLOCK_SIZE_Y > by) && (*y + (-scroll_y) < by + ITEM_SIZE_Y))
 				{
 					//上下左右判定
 
@@ -1693,8 +1691,8 @@ void CObjMain::ItemHit(
 							 //右
 							 *right = true;//主人公から見て、左の部分が衝突している
 							 *x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
-							 ix = bx / 64;
-							 iy = by / 64;
+							 ix = bx / BLOCK_SIZE_X;
+							 iy = by / BLOCK_SIZE_Y;
 
 							 if (delete_flg == true)
 							 {
@@ -1704,7 +1702,7 @@ void CObjMain::ItemHit(
 								 //音楽スタート
 								 Audio::Start(10);
 
-								 r_map[iy][ix] = 1;
+								 r_map[iy][ix] = FLOOR_0;
 
 
 
@@ -1717,9 +1715,9 @@ void CObjMain::ItemHit(
 						{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
-								*y = by - 64.0f + (scroll_y);//ブロックの位置-主人公の幅
-								ix = bx / 64;
-								iy = by / 64;
+								*y = by - BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 
 								if (delete_flg == true)
 								{
@@ -1729,7 +1727,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									r_map[iy][ix] = 1;
+									r_map[iy][ix] = FLOOR_0;
 
 									delete_flg = false;
 								}
@@ -1740,9 +1738,9 @@ void CObjMain::ItemHit(
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
-								*x = bx - 64.0f + (scroll_x);//ブロックの位置-主人公の幅
-								ix = bx / 64.0f;
-								iy = by / 64.0f;
+								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
+								ix = bx / BLOCK_SIZE_X;
+								iy = by / BLOCK_SIZE_Y;
 
 								if (delete_flg == true)
 								{
@@ -1752,7 +1750,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									r_map[iy][ix] = 1;
+									r_map[iy][ix] = FLOOR_0;
 
 									delete_flg = false;
 								}
@@ -1764,8 +1762,8 @@ void CObjMain::ItemHit(
 							//下
 							*up = true;//主人公から見て、上の部分が衝突している
 							*y = by + ITEM_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
-							ix = bx / 64;
-							iy = by / 64;
+							ix = bx / BLOCK_SIZE_X;
+							iy = by / BLOCK_SIZE_X;
 
 								if (delete_flg == true)
 								{
@@ -1775,7 +1773,7 @@ void CObjMain::ItemHit(
 									//音楽スタート
 									Audio::Start(10);
 
-									r_map[iy][ix] = 1;
+									r_map[iy][ix] = FLOOR_0;
 
 									delete_flg = false;
 								}
@@ -1787,7 +1785,7 @@ void CObjMain::ItemHit(
 
 						}
 						//鍵
-						if (r_map[i][j] == 4)
+						if (r_map[i][j] == MAP_KEY)
 						{
 							searchpoint_font_flg = true;
 							map_Item = true;
@@ -1797,7 +1795,7 @@ void CObjMain::ItemHit(
 							map_Item = false;
 						}
 						//薬
-						if (r_map[i][j] == 21)
+						if (r_map[i][j] == MAP_HEAL)
 						{
 							searchpoint_font_flg = true;
 							map_Item_2 = true;
@@ -1807,7 +1805,7 @@ void CObjMain::ItemHit(
 							map_Item_2 = false;
 						}
 						//バールのようなもの
-						if (r_map[i][j] == 26)
+						if (r_map[i][j] == MAP_BAR)
 						{
 							searchpoint_font_flg = true;
 							map_Item_3 = true;
@@ -1865,7 +1863,7 @@ void CObjMain::Draw()
 
 
 					//床テクスチャ
-					if (m_map[i][j] == 1 || m_map[i][j] == 4 || m_map[i][j] == 7 || m_map[i][j] == 13 || m_map[i][j] == 21 || m_map[i][j] == 25 || m_map[i][j] == 26 || m_map[i][j] == 5)
+					if (m_map[i][j] == FLOOR_0 || m_map[i][j] == FLOOR_1 || m_map[i][j] == FLOOR_2 || m_map[i][j] == FLOOR_3 || m_map[i][j] == FLOOR_4 || m_map[i][j] == FLOOR_5 || m_map[i][j] == FLOOR_6 || m_map[i][j] == FLOOR_7)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1874,19 +1872,10 @@ void CObjMain::Draw()
 
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
-					//13がなければ　床
 
-					if (m_map[i][j] == 34 || m_map[i][j] == 35)
-					{
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = src.m_left + DRAW_SIZE;
-						src.m_bottom = src.m_top + DRAW_SIZE;
-
-						Draw::Draw(39, &src, &dst, c, 0.0f);
-					}
+					
 					//階段テクスチャ
-					if (m_map[i][j] == 3)
+					if (m_map[i][j] == STAIRS)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1896,7 +1885,7 @@ void CObjMain::Draw()
 						Draw::Draw(7, &src, &dst, c, 0.0f);
 					}
 					//壁テクスチャ４つ
-					if (m_map[i][j] == 9)
+					if (m_map[i][j] == WALL_UP)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1905,7 +1894,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 10)
+					if (m_map[i][j] == WALL_RIGHT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1914,7 +1903,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 11)
+					if (m_map[i][j] == WALL_LEFT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1923,7 +1912,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 12)
+					if (m_map[i][j] == WALL_DOWN)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -1934,82 +1923,82 @@ void CObjMain::Draw()
 					}//壁テクスチャ４つ↑
 
 					//扉テクスチャ４つ
-					if (m_map[i][j] == 15)
+					if (m_map[i][j] == DOOR_UP)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(25, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 16)
+					if (m_map[i][j] == DOOR_DOWN)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(26, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 17)
+					if (m_map[i][j] == DOOR_LEFT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(28, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 18)
+					if (m_map[i][j] == DOOR_RIGHT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(27, &src, &dst, c, 0.0f);
 					}//扉テクスチャ４つ↑
 					 //壁角4つ
-					if (m_map[i][j] == 27)
+					if (m_map[i][j] == WALL_ANGLE1)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 28)
+					if (m_map[i][j] == WALL_ANGLE2)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 29)
+					if (m_map[i][j] == WALL_ANGLE3)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 30)
+					if (m_map[i][j] == WALL_ANGLE4)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
 					}//角壁4つ↑
 
 					 //壁角２・4つ
-					if (m_map[i][j] == 31)
+					if (m_map[i][j] == WALL_ANGLE5)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2018,7 +2007,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(38, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 32)
+					if (m_map[i][j] == WALL_ANGLE6)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2027,7 +2016,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(39, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 34)
+					if (m_map[i][j] == WALL_ANGLE8)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2036,7 +2025,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
-					if (m_map[i][j] == 33)
+					if (m_map[i][j] == WALL_ANGLE7)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2045,8 +2034,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(40, &src, &dst, c, 0.0f);
 					}
-
-					if (m_map[i][j] == 50)
+					if (m_map[i][j] == WALL_ANGLE9)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2056,7 +2044,7 @@ void CObjMain::Draw()
 						Draw::Draw(41, &src, &dst, c, 0.0f);
 					}
 					//角壁２・5つ↑
-					if (m_map[i][j] == 36)
+					if (m_map[i][j] == HOLE)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2083,13 +2071,14 @@ void CObjMain::Draw()
 					//表示位置の設定
 					dst.m_top = i * DRAW_SIZE + m_scroll_y;
 					dst.m_left = j * DRAW_SIZE + m_scroll_x;
-					dst.m_right = dst.m_left + 64.0;
-					dst.m_bottom = dst.m_top + 64.0;
+					dst.m_right = dst.m_left + DRAW_SIZE;
+					dst.m_bottom = dst.m_top + DRAW_SIZE;
 
 
 					//床テクスチャ
-					if (r_map[i][j] >= 1 && r_map[i][j] <= 8 || r_map[i][j] == 5 || r_map[i][j] == 7 || r_map[i][j] == 8 || r_map[i][j] == 13 || r_map[i][j] == 31
-						|| r_map[i][j] == 26 || r_map[i][j] == 36 || r_map[i][j] == 37 || r_map[i][j] == 38 || r_map[i][j] == 39 || r_map[i][j] == 21
+					if (r_map[i][j] >= FLOOR_0 && r_map[i][j] <= FLOOR_8 || r_map[i][j] == FLOOR_2  ||
+						r_map[i][j] == FLOOR_3 ||r_map[i][j] == FLOOR_4 || r_map[i][j] == FLOOR_5 || r_map[i][j] == FLOOR_7 ||
+						r_map[i][j] == FLOOR_10 || r_map[i][j] == FLOOR_11 || r_map[i][j] == FLOOR_12 || r_map[i][j] == FLOOR_13 || r_map[i][j] == FLOOR_14
 						)
 					{
 						src.m_top = 0.0f;
@@ -2100,7 +2089,7 @@ void CObjMain::Draw()
 						Draw::Draw(1, &src, &dst, c, 0.0f);
 					}
 					//机まとめ
-					if (r_map[i][j] == 2)
+					if (r_map[i][j] == DESK)
 					{
 						src.m_top = 100.0f;
 						src.m_left = 350.0f;
@@ -2110,7 +2099,7 @@ void CObjMain::Draw()
 						Draw::Draw(30, &src, &dst, c, 0.0f);
 					}
 					//椅子まとめ
-					if (r_map[i][j] == 3)
+					if (r_map[i][j] == CHAIR)
 					{
 						src.m_top = 50.0f;
 						src.m_left = 320.0f;
@@ -2119,18 +2108,9 @@ void CObjMain::Draw()
 
 						Draw::Draw(31, &src, &dst, c, 0.0f);
 					}
-					//敵の出現床
-					if (r_map[i][j] == 34 || r_map[i][j] == 35)
-					{
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = src.m_left + DRAW_SIZE;
-						src.m_bottom = src.m_top + DRAW_SIZE;
-
-						Draw::Draw(43, &src, &dst, c, 0.0f);
-					}
+					
 					//壁テクスチャ4つ
-					if (r_map[i][j] == 9 || r_map[i][j] == 19)
+					if (r_map[i][j] == WALL_UP || r_map[i][j] == BOOK_SHELF)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2139,7 +2119,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(3, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 10)
+					if (r_map[i][j] == WALL_RIGHT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2148,7 +2128,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(19, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 11)
+					if (r_map[i][j] == WALL_LEFT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2157,7 +2137,7 @@ void CObjMain::Draw()
 
 						Draw::Draw(18, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 12)
+					if (r_map[i][j] == WALL_DOWN)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2168,76 +2148,76 @@ void CObjMain::Draw()
 					}//壁テクスチャ４つ↑
 
 					//扉テクスチャ4つ
-					if (r_map[i][j] == 15)
+					if (r_map[i][j] == DOOR_UP)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(26, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 16)
+					if (r_map[i][j] == DOOR_DOWN)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(25, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 17)
+					if (r_map[i][j] == DOOR_LEFT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(28, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 18)
+					if (r_map[i][j] == DOOR_RIGHT)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 50.0f;
-						src.m_bottom = src.m_top + 50.0f;
+						src.m_right = src.m_left + DRAW_DOOR_SIZE;
+						src.m_bottom = src.m_top + DRAW_DOOR_SIZE;
 
 						Draw::Draw(27, &src, &dst, c, 0.0f);
 					}//扉４つ↑
 
 					 //壁角4つ
-					if (r_map[i][j] == 27)
+					if (r_map[i][j] == WALL_ANGLE1)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(34, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 28)
+					if (r_map[i][j] == WALL_ANGLE2)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(35, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 29)
+					if (r_map[i][j] == WALL_ANGLE3)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(36, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 30)
+					if (r_map[i][j] == WALL_ANGLE4)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
-						src.m_right = src.m_left + 63.0f;
+						src.m_right = src.m_left + DRAW_FIX_SIZE;
 						src.m_bottom = src.m_top + DRAW_SIZE;
 
 						Draw::Draw(37, &src, &dst, c, 0.0f);
@@ -2245,7 +2225,7 @@ void CObjMain::Draw()
 
 
 					//本棚
-					if (r_map[i][j] == 19)
+					if (r_map[i][j] == BOOK_SHELF)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2254,17 +2234,8 @@ void CObjMain::Draw()
 
 						Draw::Draw(29, &src, &dst, c, 0.0f);
 					}
-					if (r_map[i][j] == 31)
-					{
-						src.m_top = 0.0f;
-						src.m_left = 0.0f;
-						src.m_right = src.m_left + DRAW_SIZE;
-						src.m_bottom = src.m_top + DRAW_SIZE;
-
-						Draw::Draw(33, &src, &dst, c, 0.0f);
-					}
 					//本
-					if (r_map[i][j] == 40)
+					if (r_map[i][j] == BOOK)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2273,8 +2244,9 @@ void CObjMain::Draw()
 
 						Draw::Draw(33, &src, &dst, c, 0.0f);
 					}
+					
 					//教卓
-					if (r_map[i][j] == 36)
+					if (r_map[i][j] == TEACHING_1)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2284,7 +2256,7 @@ void CObjMain::Draw()
 						Draw::Draw(50, &src, &dst, c, 0.0f);
 					}
 					//教卓
-					if (r_map[i][j] == 37)
+					if (r_map[i][j] == TEACHING_2)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2294,7 +2266,7 @@ void CObjMain::Draw()
 						Draw::Draw(51, &src, &dst, c, 0.0f);
 					}
 					//教卓
-					if (r_map[i][j] == 38)
+					if (r_map[i][j] == TEACHING_3)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;
@@ -2304,7 +2276,7 @@ void CObjMain::Draw()
 						Draw::Draw(52, &src, &dst, c, 0.0f);
 					}
 					//教卓
-					if (r_map[i][j] == 39)
+					if (r_map[i][j] == TEACHING_4)
 					{
 						src.m_top = 0.0f;
 						src.m_left = 0.0f;

@@ -19,6 +19,12 @@ using namespace GameL;
 #define ITEM_SIZE_Y (32.0f)
 #define ROOM_NUMBER (7)
 #define DRAW_SIZE (64.0f)
+#define DRAW_FIX_SIZE (63.0f)
+#define DRAW_DOOR_SIZE (50.0f)
+#define SCROLL_RIGHT (80)
+#define SCROLL_LEFT (450)
+#define SCROLL_DOWN (350)
+#define SCROLL_UP (80)
 
 //オブジェクト：メイン
 class CObjMain : public CObj
