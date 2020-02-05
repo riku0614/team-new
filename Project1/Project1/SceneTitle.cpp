@@ -37,10 +37,7 @@ void CSceneTitle::InitScene()
 	//音楽スタート
 	Audio::Start(0);
 
-	//出力させる文字のグラフィック作成
-	Font::SetStrTex(L"怪穢");
-	Font::SetStrTex(L"～カイエ～");
-	Font::SetStrTex(L"最初から");
+	
 
 	//矢印追加
 	Draw::LoadImage(L"カーソル.png", 0, TEX_SIZE_512);

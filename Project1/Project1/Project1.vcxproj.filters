@@ -327,6 +327,6 @@
   <ItemGroup>
     <Library Include="GameL.lib">
       <Filter>リソース ファイル</Filter>
-    </Library>
+    </ClCompile>
   </ItemGroup>
 </Project>
