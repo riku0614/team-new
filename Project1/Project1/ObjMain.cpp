@@ -83,6 +83,25 @@ void CObjMain::Init()
 //アクション
 void CObjMain::Action()
 {
+	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+
+	if (Input::GetVKey('R') == true)
+	{
+		if (map_chg > 0)
+		{
+			spawn_pointX[map_chg] = SpawnChangerX(map_chg);
+			spawn_pointY[map_chg] = SpawnChangerY(map_chg);
+			m_scroll_x = -spawn_pointX[map_chg];
+			m_scroll_y = -spawn_pointY[map_chg];
+		}
+		else
+		{
+			hero->SetX(0.0f);
+			hero->SetY(BLOCK_SIZE_Y * 4);
+			m_scroll_x = 0.0f;
+			m_scroll_y = 0.0f;
+		}
+	}
 	
 	searchpoint_font_flg = false;
 	//ステージ強制移動コマンド
@@ -137,7 +156,7 @@ void CObjMain::Action()
 			Audio::Start(4);
 
 			//主人公の初期位置を変更
-			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+			
 			hero->SetX(ROOM_SPAWN_X*BLOCK_SIZE_X);
 			hero->SetY(ROOM_SPAWN_Y*BLOCK_SIZE_Y);
 			m_scroll_x = ROOM_SPAWN_SCROLL_X * BLOCK_SIZE_X;
@@ -267,8 +286,7 @@ void CObjMain::Action()
 	}
 
 
-	//主人公の位置を取得
-	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
+	
 	float hx = hero->GetX();
 	float hy = hero->GetY();
 
@@ -833,7 +851,7 @@ void CObjMain::BlockHit(
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E')==true)
 								{
 									map_chg++;
 									if (map_chg == GAME_CLEAR)
@@ -893,7 +911,7 @@ void CObjMain::BlockHit(
 								*vy = 0.0f;//-VX*反発係数
 								
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
 								{
 									map_chg++;
 
@@ -937,7 +955,7 @@ void CObjMain::BlockHit(
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								*vx = -(*vx)*0.1f;//-VX*反発係数
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
 								{
 									map_chg++;
 
@@ -996,7 +1014,7 @@ void CObjMain::BlockHit(
 									*vy = 0.0f;
 								}
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
 								{
 
 									map_chg++;
