@@ -1,332 +1,369 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="ソース ファイル\アイテム">
-      <UniqueIdentifier>{ebb2f83b-d6f1-400b-b833-cf09e1b9710c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\メイン">
-      <UniqueIdentifier>{6d84b656-14e9-4d0f-987c-1e028f32b02f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ギミック">
-      <UniqueIdentifier>{7a2f6255-ca6e-45cb-876b-d66b5bff51bf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\UI関係">
-      <UniqueIdentifier>{d7465f0e-8004-4741-88c3-04bc03143df5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\タイトル">
-      <UniqueIdentifier>{7412df36-5108-4b2b-a75d-a2ed2475e935}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ゲームクリア">
-      <UniqueIdentifier>{88b1b4df-c16d-40cb-9be0-04c646b40600}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\ゲームオーバー">
-      <UniqueIdentifier>{3968e953-7ab5-4ec1-9537-e9f718f181a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\主人公">
-      <UniqueIdentifier>{279f75bb-0097-4213-82eb-3a2dad2b458a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\教室">
-      <UniqueIdentifier>{85ed4234-522e-45fa-a82e-62693fc614e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\関数系">
-      <UniqueIdentifier>{f4b868cd-2bff-4904-b0d7-ada0d9618b62}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\敵（特殊）">
-      <UniqueIdentifier>{e0f29d43-6475-48c8-9c0c-149b75a7a06d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\敵（通常）">
-      <UniqueIdentifier>{b43a7534-9771-4a12-80b9-3d45b7b71ac9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\プロローグ関係">
-      <UniqueIdentifier>{d62bb4ef-bb71-400c-802f-d05aa5699ce8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\エピローグ">
-      <UniqueIdentifier>{cd9a04a0-0583-4f6d-b9bc-e831dc3b44c3}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GameHead.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Objbar.h">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClInclude>
-    <ClInclude Include="objheal.h">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjItem.h">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMain.h">
-      <Filter>ソース ファイル\メイン</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMain.h">
-      <Filter>ソース ファイル\メイン</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick2.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick3.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick4.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick5.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick6.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick7.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick8.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGameUI.h">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjRoomGimmick.h">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjText.h">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjClickTitle.h">
-      <Filter>ソース ファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjMenu.h">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameUI.h">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneTitle.h">
-      <Filter>ソース ファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneMenu.h">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGameClear.h">
-      <Filter>ソース ファイル\ゲームクリア</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjTitle.h">
-      <Filter>ソース ファイル\タイトル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameClear.h">
-      <Filter>ソース ファイル\ゲームクリア</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGameOver.h">
-      <Filter>ソース ファイル\ゲームオーバー</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneGameOver.h">
-      <Filter>ソース ファイル\ゲームオーバー</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjHero.h">
-      <Filter>ソース ファイル\主人公</Filter>
-    </ClInclude>
-    <ClInclude Include="UtilityModule.h">
-      <Filter>ソース ファイル\関数系</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjFastEnemy.h">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjSpawnEnemy.h">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_2.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_3.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_4.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_5.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_6.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_7.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjPRO.h">
-      <Filter>ソース ファイル\プロローグ関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ScenePRO.h">
-      <Filter>ソース ファイル\プロローグ関係</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_8.h">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEPI.h">
-      <Filter>ソース ファイル\エピローグ</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneEPI.h">
-      <Filter>ソース ファイル\エピローグ</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>ソース ファイル</Filter>
+    <ClCompile Include="GameL\Audio.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DirectXDevice.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\Draw2DTex_Source.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DrawFont.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\DrawTexture.cpp">
+      <Filter>ライブラリソースコード</Filter>
     </ClCompile>
     <ClCompile Include="GameL\GameL_Main.cpp">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\HitBoxManager.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\MultiThread.cpp">
+      <Filter>ライブラリソースコード</Filter>
     </ClCompile>
     <ClCompile Include="Objbar.cpp">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClCompile>
-    <ClCompile Include="objheal.cpp">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjItem.cpp">
-      <Filter>ソース ファイル\アイテム</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjMain.cpp">
-      <Filter>ソース ファイル\メイン</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMain.cpp">
-      <Filter>ソース ファイル\メイン</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick2.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick3.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick4.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick5.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick6.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick7.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick8.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGameUI.cpp">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjRoomGimmick.cpp">
-      <Filter>ソース ファイル\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjText.cpp">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\アイテム</Filter>
     </ClCompile>
     <ClCompile Include="ObjClickTitle.cpp">
-      <Filter>ソース ファイル\タイトル</Filter>
+      <Filter>ゲームソースコード\システム</Filter>
     </ClCompile>
-    <ClCompile Include="ObjMenu.cpp">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameUI.cpp">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneTitle.cpp">
-      <Filter>ソース ファイル\タイトル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneMenu.cpp">
-      <Filter>ソース ファイル\UI関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGameClear.cpp">
-      <Filter>ソース ファイル\ゲームクリア</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjTitle.cpp">
-      <Filter>ソース ファイル\タイトル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameClear.cpp">
-      <Filter>ソース ファイル\ゲームクリア</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGameOver.cpp">
-      <Filter>ソース ファイル\ゲームオーバー</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneGameOver.cpp">
-      <Filter>ソース ファイル\ゲームオーバー</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjHero.cpp">
-      <Filter>ソース ファイル\主人公</Filter>
-    </ClCompile>
-    <ClCompile Include="UtilityModule.cpp">
-      <Filter>ソース ファイル\関数系</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjFastEnemy.cpp">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjSpawnEnemy.cpp">
-      <Filter>ソース ファイル\敵（特殊）</Filter>
+    <ClCompile Include="ObjEnemy.cpp">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_2.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_3.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_4.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_5.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_6.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_7.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjPRO.cpp">
-      <Filter>ソース ファイル\プロローグ関係</Filter>
-    </ClCompile>
-    <ClCompile Include="ScenePRO.cpp">
-      <Filter>ソース ファイル\プロローグ関係</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEnemy_8.cpp">
-      <Filter>ソース ファイル\敵（通常）</Filter>
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
     <ClCompile Include="ObjEPI.cpp">
-      <Filter>ソース ファイル\エピローグ</Filter>
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjFastEnemy.cpp">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameClear.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameOver.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGameUI.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick2.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick3.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick4.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick5.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick6.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick7.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjGimmick8.cpp">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClCompile>
+    <ClCompile Include="objheal.cpp">
+      <Filter>ゲームソースコード\アイテム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjHero.cpp">
+      <Filter>ゲームソースコード\主人公</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjItem.cpp">
+      <Filter>ゲームソースコード\アイテム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMain.cpp">
+      <Filter>ゲームソースコード\マップ</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjMenu.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjPRO.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjSpawnEnemy.cpp">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjText.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTitle.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
     </ClCompile>
     <ClCompile Include="SceneEPI.cpp">
-      <Filter>ソース ファイル\エピローグ</Filter>
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameClear.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameOver.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneGameUI.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMain.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMenu.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePRO.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneTitle.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SceneManager.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SceneObjManager.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\SetWindow.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\UserData.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="GameL\WinInputs.cpp">
+      <Filter>ライブラリソースコード</Filter>
+    </ClCompile>
+    <ClCompile Include="UtilityModule.cpp">
+      <Filter>ゲームソースコード\関数</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="GameL.lib">
-      <Filter>リソース ファイル</Filter>
-    </ClCompile>
+    <ClInclude Include="GameL\Audio.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DirectXDevice.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DrawFont.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\DrawTexture.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\HitBoxManager.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\MultiThread.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameHead.h">
+      <Filter>ゲームヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="Objbar.h">
+      <Filter>ゲームソースコード\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjClickTitle.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_8.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_2.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_3.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_4.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_5.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_6.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEnemy_7.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjEPI.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjFastEnemy.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameClear.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameOver.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGameUI.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick2.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick3.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick4.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick5.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick6.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick7.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjGimmick8.h">
+      <Filter>ゲームソースコード\ギミック</Filter>
+    </ClInclude>
+    <ClInclude Include="objheal.h">
+      <Filter>ゲームソースコード\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjHero.h">
+      <Filter>ゲームソースコード\主人公</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjItem.h">
+      <Filter>ゲームソースコード\アイテム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMain.h">
+      <Filter>ゲームソースコード\マップ</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjMenu.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjPRO.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjSpawnEnemy.h">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjText.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTitle.h">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneEPI.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameClear.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameOver.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneGameUI.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMain.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMenu.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePRO.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTitle.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneManager.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SceneObjManager.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\SetWindow.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\UserData.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="GameL\WinInputs.h">
+      <Filter>ライブラリヘッダー</Filter>
+    </ClInclude>
+    <ClInclude Include="UtilityModule.h">
+      <Filter>ゲームソースコード\関数</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ゲームソースコード">
+      <UniqueIdentifier>{0975e5ec-81b5-42a5-80c6-551452bba4b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ライブラリソースコード">
+      <UniqueIdentifier>{a6f4d5b1-07b0-4eb1-927d-fd8548d0f39b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ライブラリヘッダー">
+      <UniqueIdentifier>{3a6b7ef3-8c9d-4cde-b95f-2370097a6b42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームヘッダー">
+      <UniqueIdentifier>{25d6e71c-4577-4ea0-aceb-d582b3bf3c59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\アイテム">
+      <UniqueIdentifier>{8e39135a-27c0-46dd-922f-25568334f824}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\システム">
+      <UniqueIdentifier>{6e13ff6c-af5d-492f-886d-3bdf541eeccf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\敵キャラクター">
+      <UniqueIdentifier>{cb51eb52-12ce-4fcc-b5cd-fd6e21a1c960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\ギミック">
+      <UniqueIdentifier>{5ebab5e1-ce7f-424c-883e-65147f1621d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\主人公">
+      <UniqueIdentifier>{bac82c0f-47b4-4c3d-acdf-584595057cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\マップ">
+      <UniqueIdentifier>{dfe0e6f9-45fc-479a-bfec-4f9d8d9ec0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\シーン">
+      <UniqueIdentifier>{45587f58-c135-4d72-90f7-1915d216ee83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\関数">
+      <UniqueIdentifier>{3b98d1b4-5be1-4fe8-8759-185e949892d2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

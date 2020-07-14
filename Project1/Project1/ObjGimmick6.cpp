@@ -39,7 +39,8 @@ void CObjGimmick6::Init()
 	pj = 0;
 
 
-
+	//当たり判定用HitBoxを作成
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK6, 1);
 
 }
 
@@ -58,7 +59,7 @@ void CObjGimmick6::Action()
 	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//当たり判定用HitBoxを作成
-		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK6, 1);
 	}
 
 	//HitBoxの位置の変更

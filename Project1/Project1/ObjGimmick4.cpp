@@ -38,7 +38,8 @@ void CObjGimmick4::Init()
 	pi = 0;
 	pj = 0;
 
-
+	//“–‚½‚è”»’è—pHitBox‚ğì¬
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK4, 3);
 
 
 }
@@ -58,7 +59,7 @@ void CObjGimmick4::Action()
 	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//“–‚½‚è”»’è—pHitBox‚ğì¬
-		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK, 1);
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK4, 1);
 	}
 
 

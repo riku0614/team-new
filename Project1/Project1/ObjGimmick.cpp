@@ -67,7 +67,7 @@ void CObjGimmick::Action()
 	if (hit != nullptr)
 	{
 
-		hit->SetPos(gx + main->GetScrollX(), gy + main->GetScrollY());
+ 		hit->SetPos(gx + -(main->GetScrollX()), gy + -(main->GetScrollY()));
 
 		if (hit->CheckObjNameHit(OBJ_HERO) != nullptr)
 		{

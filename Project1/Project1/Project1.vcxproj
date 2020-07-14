@@ -158,7 +158,6 @@
     <ClInclude Include="ObjMain.h" />
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjPRO.h" />
-    <ClInclude Include="ObjRoomGimmick.h" />
     <ClInclude Include="ObjSpawnEnemy.h" />
     <ClInclude Include="ObjText.h" />
     <ClInclude Include="ObjTitle.h" />
@@ -215,7 +214,6 @@
     <ClCompile Include="ObjMain.cpp" />
     <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjPRO.cpp" />
-    <ClCompile Include="ObjRoomGimmick.cpp" />
     <ClCompile Include="ObjSpawnEnemy.cpp" />
     <ClCompile Include="ObjText.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
@@ -227,7 +225,6 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="ScenePRO.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

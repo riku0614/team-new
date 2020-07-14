@@ -7,6 +7,7 @@
 using namespace GameL;
 
 //マクロ
+#define GAME_CLEAR (3)
 #define MAP_X  (75)
 #define MAP_Y  (75)
 #define ROOM_X (25)
@@ -21,10 +22,10 @@ using namespace GameL;
 #define DRAW_SIZE (64.0f)
 #define DRAW_FIX_SIZE (63.0f)
 #define DRAW_DOOR_SIZE (50.0f)
-#define SCROLL_RIGHT (80)
-#define SCROLL_LEFT (450)
-#define SCROLL_DOWN (350)
-#define SCROLL_UP (80)
+#define CORRIDOR_SCROLL_RIGHT (80.0f)
+#define CORRIDOR_SCROLL_LEFT (350.0f)
+#define CORRIDOR_SCROLL_DOWN (300.0f)
+#define CORRIDOR_SCROLL_UP (80.0f)
 #define ROOM_SPAWN_X (20.0f)
 #define ROOM_SPAWN_Y (4.0f)
 #define ROOM_SPAWN_SCROLL_X (-15.0f)
@@ -122,6 +123,7 @@ class CObjMain : public CObj
 		bool pepepe;
 		bool pepepe_2;
 		bool room_chg_stop;//教室マップデータを変数へ書き写す処理の停止フラグ
+		
 
 		float m_stamina_limid;//スタミナの限界値
 

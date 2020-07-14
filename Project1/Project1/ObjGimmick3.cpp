@@ -39,7 +39,7 @@ void CObjGimmick3::Init()
 	pj = 0;
 
 
-	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 1);
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 3);
 
 }
 
@@ -59,7 +59,7 @@ void CObjGimmick3::Action()
 	else if (main->RoomFlag() == false && main->GetFlug() == true)
 	{
 		//“–‚½‚è”»’è—pHitBox‚ğì¬
-		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 1);
+		Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK3, 3);
 	}
 
 	//HitBox‚ÌˆÊ’u‚Ì•ÏX

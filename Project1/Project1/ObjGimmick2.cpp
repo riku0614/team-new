@@ -39,7 +39,7 @@ void CObjGimmick2::Init()
 	pj = 0;
 
 
-	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK2, 1);
+	Hits::SetHitBox(this, gx, gy, 64, 64, ELEMENT_BLUE, OBJ_GIMMICK2, 2);
 
 }
 

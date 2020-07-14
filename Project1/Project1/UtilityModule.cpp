@@ -73,19 +73,19 @@ void MapChanger(int m ,int m_map[MAP_X][MAP_Y], unique_ptr<wchar_t>* p)
 
 	
 	
-		for (int i = 0; i < MAP_X; i++)
+	for (int i = 0; i < MAP_X; i++)
+	{
+		for (int j = 0; j < MAP_Y; j++)
 		{
-			for (int j = 0; j < MAP_Y; j++)
-			{
 				int w = 0;
 				swscanf_s(&p[m].get()[count], L"%d", &w);
 
 				map[i][j] = w;
 				count += 3;
 
-			}
 		}
-		memcpy(m_map, map, sizeof(int)*(MAP_X * MAP_Y));
+	}
+	memcpy(m_map, map, sizeof(int)*(MAP_X * MAP_Y));
 }
 //RoomMapChange関数
 /*
@@ -140,27 +140,7 @@ float SpawnChangerX(int m)
 	{
 		return BLOCK_SIZE_X;
 	}
-	else if (m == 2)      //6
-	{
-		return BLOCK_SIZE_X * 55.0f;
-	}
-	else if (m == 3)      //5
-	{
-		return BLOCK_SIZE_X * 66.0f;
-	}
-	else if (m == 4)      //4 
-	{
-		return BLOCK_SIZE_X *2.0f;
-	}
-	else if (m == 5)	  //3
-	{
-		return BLOCK_SIZE_X *34.0f;
-	}
-	else if (m == 6)      //2
-	{
-		return BLOCK_SIZE_X*58.0f;
-	}
-	else if (m == 7)      //1階
+	else if (m == 2)      //1階
 	{
 		return BLOCK_SIZE_X *34.0f;
 	}
@@ -178,27 +158,7 @@ float SpawnChangerY(int m)
 	{
 		return BLOCK_SIZE_Y;
 	}
-	else if (m == 2)     //6
-	{
-		return BLOCK_SIZE_Y * 67.0f;
-	}
-	else if (m == 3)     //5
-	{
-		return BLOCK_SIZE_Y * 67.0f;
-	}
-	else if (m == 4)     //4
-	{
-		return BLOCK_SIZE_Y * 67.0f;
-	}
-	else if (m == 5)     //3
-	{
-		return BLOCK_SIZE_Y;
-	}
-	else if (m == 6)     //2
-	{
-		return BLOCK_SIZE_Y *66.0f;
-	}
-	else if (m == 7)      //1階
+	else if (m == 2)      //1階
 	{
 		return 0.0f;
 	}
@@ -242,7 +202,8 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 
 			}
 		}
-		else if (m == 1)
+
+		if (m == 1)
 		{
 			for (int i = 0; i < MAP_X; i++)
 			{
@@ -266,7 +227,8 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 
 			}
 		}
-		else if (m == 2)
+
+		if (m == 2)
 		{
 			for (int i = 0; i < MAP_X; i++)
 			{
@@ -284,127 +246,6 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 						gmk3->SetX(i);
 						gmk3->SetY(j);
 
-						
-					}
-				}
-
-			}
-		}
-		else if (m == 3)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == GIMMICK)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//gimmick４オブジェクト作成
-						CObjGimmick4* objg4 = new CObjGimmick4(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(objg4, OBJ_GIMMICK4, 11);
-
-						CObjGimmick4* gmk4 = (CObjGimmick4*)Objs::GetObj(OBJ_GIMMICK4);
-						gmk4->SetX(i);
-						gmk4->SetY(j);
-
-						
-					}
-				}
-
-			}
-		}
-		else if (m == 4)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == GIMMICK)
-					{
-						m_map[i][j] = FLOOR_0;
-
-						//gimmick５オブジェクト作成
-						CObjGimmick5* objg5 = new CObjGimmick5(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(objg5, OBJ_GIMMICK5, 11);
-
-						CObjGimmick5* gmk5 = (CObjGimmick5*)Objs::GetObj(OBJ_GIMMICK5);
-						gmk5->SetX(i);
-						gmk5->SetY(j);
-
-						
-					}
-				}
-
-			}
-		}
-		else if (m == 5)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == GIMMICK)
-					{
-						m_map[i][j] = FLOOR_0;
-
-						//gimmick６オブジェクト作成
-						CObjGimmick6* objg6 = new CObjGimmick6(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(objg6, OBJ_GIMMICK6, 11);
-
-						CObjGimmick6* gmk6 = (CObjGimmick6*)Objs::GetObj(OBJ_GIMMICK6);
-						gmk6->SetX(i);
-						gmk6->SetY(j);
-
-						
-					}
-				}
-
-			}
-		}
-		else if (m == 6)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == GIMMICK)
-					{
-						m_map[i][j] = FLOOR_0;
-
-						//gimmick７オブジェクト作成
-						CObjGimmick7* objg7 = new CObjGimmick7(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(objg7, OBJ_GIMMICK7, 11);
-
-						CObjGimmick7* gmk7 = (CObjGimmick7*)Objs::GetObj(OBJ_GIMMICK7);
-						gmk7->SetX(i);
-						gmk7->SetY(j);
-
-						
-					}
-				}
-
-			}
-		}
-		else if (m == 7)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == GIMMICK)
-					{
-						m_map[i][j] = FLOOR_0;
-
-						//gimmick８オブジェクト作成
-						CObjGimmick8* objg8 = new CObjGimmick8(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(objg8, OBJ_GIMMICK8, 11);
-
-						CObjGimmick8* gmk8 = (CObjGimmick8*)Objs::GetObj(OBJ_GIMMICK8);
-						gmk8->SetX(i);
-						gmk8->SetY(j);
-
 
 					}
 				}
@@ -412,7 +253,6 @@ void HitBoxChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in, int r, int r_ma
 			}
 		}
 	}
-
 }
 
 //EnemySpawnChanger関数
@@ -443,7 +283,7 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						CObjEnemy* obje = new CObjEnemy(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
 						Objs::InsertObj(obje, OBJ_ENEMY, 11);
 
-						
+
 
 					}
 				}
@@ -484,103 +324,6 @@ void EnemySpawnChanger(int m, int m_map[MAP_X][MAP_Y], bool room_in)
 						//ステージ３の敵オブジェクト作成
 						CObjEnemy3* obje3 = new CObjEnemy3(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
 						Objs::InsertObj(obje3, OBJ_ENEMY3, 11);
-					}
-				}
-
-			}
-		}
-		else if (m == 3)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == MAIN_ENEMY)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//ステージ４の敵オブジェクト作成
-						CObjEnemy4* obje4 = new CObjEnemy4(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(obje4, OBJ_ENEMY4, 11);
-					}
-				}
-
-			}
-		}
-		else if (m == 4)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == MAIN_ENEMY)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//ステージ５の敵オブジェクト作成
-						CObjEnemy5* obje5 = new CObjEnemy5(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(obje5, OBJ_ENEMY5, 11);
-					}
-				}
-
-			}
-		}
-		else if (m == 5)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == MAIN_ENEMY)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//ステージ６の敵オブジェクト作成
-						CObjEnemy6* obje6 = new CObjEnemy6(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(obje6, OBJ_ENEMY6, 11);
-					}
-				}
-
-			}
-		}
-		else if (m == 6)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == MAIN_ENEMY)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//ステージ７の敵オブジェクト作成
-						CObjEnemy7* obje7 = new CObjEnemy7(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(obje7, OBJ_ENEMY7, 11);
-					}
-				}
-
-			}
-		}
-		else if (m == 7)
-		{
-			for (int i = 0; i < MAP_X; i++)
-			{
-				for (int j = 0; j < MAP_Y; j++)
-				{
-					if (m_map[i][j] == MAIN_ENEMY)
-					{
-
-						m_map[i][j] = FLOOR_0;
-
-						//ステージ８の敵オブジェクト作成
-						CObjEnemy8* obje8 = new CObjEnemy8(j*BLOCK_SIZE_Y, i*BLOCK_SIZE_X);
-						Objs::InsertObj(obje8, OBJ_ENEMY8, 11);
-						
-
 					}
 				}
 

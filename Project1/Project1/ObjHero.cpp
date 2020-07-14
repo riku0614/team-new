@@ -79,6 +79,11 @@ void CObjHero::Init()
 //アクション
 void CObjHero::Action()
 {
+	//自身のhitboxを持ってくる
+	CHitBox* hit = Hits::GetHitBox(this);
+	hit->SetInvincibility(true);
+
+
 	//ゲームメインにフラグをセットする
 	CObjMain* Main = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
@@ -266,11 +271,14 @@ void CObjHero::Action()
 	if (m_vx > 0)
 		vx = 500 - pbb->GetScrollX();
 	else
-		vx = 0 - pbb->GetScrollX();
-
+		vx = -500 - pbb->GetScrollX();
+	if (m_vy > 0)
+		vy = 400 - pbb->GetScrollY();
+	else
+		vy = 400 - pbb->GetScrollY();
 
 	//ray判定
-	b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, 0.0f, &pxx, &pyy, &r);
+	b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, vy, &pxx, &pyy, &r);
 
 	if (b == true)
 	{
@@ -280,14 +288,17 @@ void CObjHero::Action()
 
 		float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
 		float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
-
-
+		float cc = (m_py)-py;
+		float dd = (m_py + m_vy) - py;
 		//主人公の幅分オフセット
 		if (vx > 0)
 			px += -64;
 		else
 			px += 2;
+		if (vy > 0)
 
+
+		
 
 		//AとBが逆を向いている（主人公が移動先の壁を越えている）
 		if (aa*bb < 0)
@@ -308,8 +319,7 @@ void CObjHero::Action()
 		&m_block_type, &m_id, &k_id
 	);
 
-	//自身のhitboxを持ってくる
-	CHitBox* hit = Hits::GetHitBox(this);
+	
 
 	//アイテムの当たり判定実行
 	Main->ItemHit(&m_px, &m_py, true, true,

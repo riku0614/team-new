@@ -70,13 +70,9 @@ void CObjMain::Init()
 	//廊下マップデータ
 	p[FLOOR8] = Save::ExternalDataOpen(L"チーム開発マップ案8階.csv", &size);
 	p[FLOOR7] = Save::ExternalDataOpen(L"チーム開発マップ案7階.csv", &size);
-	p[FLOOR6] = Save::ExternalDataOpen(L"チーム開発マップ案6階.csv", &size);
-	p[FLOOR5] = Save::ExternalDataOpen(L"チーム開発マップ案5階.csv", &size);
-    p[FLOOR4] = Save::ExternalDataOpen(L"チーム開発マップ案4階.csv", &size);
-	p[FLOOR3] = Save::ExternalDataOpen(L"チーム開発マップ案3階.csv", &size);
-    p[FLOOR2] = Save::ExternalDataOpen(L"チーム開発マップ案2階.csv", &size);
-	p[FLOOR1] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
-	p[FLOOR_NULL] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
+	p[FLOOR6] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
+	p[GAME_CLEAR] = Save::ExternalDataOpen(L"チーム開発マップ案1階.csv", &size);
+
 
 }
 
@@ -289,44 +285,45 @@ void CObjMain::Action()
 	
 	float hx = hero->GetX();
 	float hy = hero->GetY();
-
+	
 	//後方スクロールライン
-	if (hx < SCROLL_RIGHT)
+	if (hx < CORRIDOR_SCROLL_RIGHT)
 	{
-		hero->SetX(SCROLL_RIGHT);
+		hero->SetX(CORRIDOR_SCROLL_RIGHT);
 		m_scroll_x -= hero->GetVX();
 	}
 	//前方スクロールライン
-	if (hx > SCROLL_LEFT)
+	if (hx > CORRIDOR_SCROLL_LEFT)
 	{
-		hero->SetX(SCROLL_LEFT);
+		hero->SetX(CORRIDOR_SCROLL_LEFT);
 		m_scroll_x -= hero->GetVX();
 	}
 	//上方スクロールライン
-	if (hy < SCROLL_UP)
+	if (hy < CORRIDOR_SCROLL_UP)
 	{
-		hero->SetY(SCROLL_UP);
+		hero->SetY(CORRIDOR_SCROLL_UP);
 		m_scroll_y -= hero->GetVY();
 	}
 
 	//下方スクロールライン
-	if (hy > SCROLL_DOWN)
+	if (hy > CORRIDOR_SCROLL_DOWN)
 	{
-		hero->SetY(SCROLL_DOWN);
+		hero->SetY(CORRIDOR_SCROLL_DOWN);
 		m_scroll_y -= hero->GetVY();
 
 
 	}
-
+	
+	
 	//ギミックのヒットボックスをマップごとに変更する処理
 	if (stop_flg == true)
 	{
-		stop_flg2 = false;
+		
 
 		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
 		EnemySpawnChanger(map_chg, m_map, room_in);
 
-		
+		stop_flg2 = false;
 
 
 	}
@@ -382,7 +379,7 @@ void CObjMain::Action()
 				{
 
 					
-					CObjItem * obji = new CObjItem(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjItem * obji = new CObjItem(j*BLOCK_SIZE_X - m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(obji, OBJ_ITEM, 16);
 
 				}
@@ -400,7 +397,7 @@ void CObjMain::Action()
 				{
 
 					//アイテムオブジェクト作成
-					CObjItem * objir = new CObjItem(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjItem * objir = new CObjItem(j*BLOCK_SIZE_X - m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(objir, OBJ_ITEM, 16);
 
 
@@ -422,7 +419,7 @@ void CObjMain::Action()
 				{
 
 					//アイテムオブジェクト作成
-					CObjheal * objh = new CObjheal(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjheal * objh = new CObjheal(j*BLOCK_SIZE_X- m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(objh, OBJ_HEAL, 16);
 
 
@@ -450,7 +447,7 @@ void CObjMain::Action()
 				{
 
 					//アイテムオブジェクト作成
-					CObjheal * objh = new CObjheal(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjheal * objh = new CObjheal(j*BLOCK_SIZE_X - m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(objh, OBJ_HEAL, 16);
 
 
@@ -473,7 +470,7 @@ void CObjMain::Action()
 				{
 
 					//アイテムオブジェクト作成
-					CObjbar * objba = new CObjbar(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjbar * objba = new CObjbar(j*BLOCK_SIZE_X - m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(objba, OBJ_BAR, 16);
 
 
@@ -495,7 +492,7 @@ void CObjMain::Action()
 				{
 
 					//アイテムオブジェクト作成
-					CObjbar * objba = new CObjbar(j*64.0f - m_scroll_x, i*64.0f - m_scroll_y);
+					CObjbar * objba = new CObjbar(j*BLOCK_SIZE_X - m_scroll_x, i*BLOCK_SIZE_Y - m_scroll_y);
 					Objs::InsertObj(objba, OBJ_BAR, 16);
 
 
@@ -518,7 +515,7 @@ void CObjMain::Action()
 				{
 
 
-					CObjFastEnemy* objf = new CObjFastEnemy(hx + -(m_scroll_x), hy + (5 * 64.0f) + -(m_scroll_y));
+					CObjFastEnemy* objf = new CObjFastEnemy(hx + -(m_scroll_x), hy + (5 * BLOCK_SIZE_Y) + -(m_scroll_y));
 					Objs::InsertObj(objf, OBJ_FASTENEMY, 13);
 
 					m_map[i][j] = FLOOR_0;
@@ -662,7 +659,7 @@ bool CObjMain::HeroBlockCrossPoint(
 		{
 			for (int j = 0; j < MAP_Y; j++)
 			{
-				if (m_map[i][j] > 0)
+				if (m_map[i][j] > 0&&m_map[i][j]!=36)
 				{
 					//ブロックの４辺から交点を探す
 					for (int k = 0; k < 4; k++)
@@ -841,7 +838,7 @@ void CObjMain::BlockHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < 89.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r >= 0) || r > 315)
@@ -1503,7 +1500,7 @@ void CObjMain::ItemHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 87.0f)
+						if (len < 88.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r>=0) || r > 315)
@@ -1513,7 +1510,7 @@ void CObjMain::ItemHit(
 								*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								*vx = (*vx)*0.1f;//-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1532,7 +1529,7 @@ void CObjMain::ItemHit(
 
 								
 							}
-							if (r > 45 && r < 135)
+							else if (r > 45 && r < 135)
 							{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
@@ -1558,14 +1555,14 @@ void CObjMain::ItemHit(
 								}
 								
 							}
-							if (r > 135 && r < 225)
+							else if (r > 135 && r < 225)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx= -(*vx)*0.1f;//-VX*反発係数
+								*vx= (*vx)*0.1f;//-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1584,7 +1581,7 @@ void CObjMain::ItemHit(
 								}
 								
 							}
-							if (r > 225 && r < 315)
+							else if (r > 225 && r < 315)
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している

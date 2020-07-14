@@ -209,7 +209,6 @@ enum ROOM_NUMBER
 #include "ObjGimmick6.h"
 #include "ObjGimmick7.h"
 #include "ObjGimmick8.h"
-#include "ObjRoomGimmick.h"
 
 #include "objheal.h"
 #include "ObjFastEnemy.h"
