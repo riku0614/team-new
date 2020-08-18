@@ -90,15 +90,10 @@ void CObjEnemy::Action()
 	if     (m_ex<(WINDOW_MAX_X + -(scrollx)) && m_ex>(WINDOW_MIN_X + -(scrollx)) &&
 		    m_ey<(WINDOW_MAX_Y + -(scrolly)) && m_ey>(WINDOW_MIN_Y + -(scrolly)))
 	{
-		if (hx - m_ex > hy - m_ey&&m_hit_left||
-			hx - m_ex > hy - m_ey && m_hit_right)
-		{
-			m_vx = (hx + -(scrollx)-m_ex);
-		}
-		else
-		{
-			m_vy = (hy + -(scrolly)-m_ey);
-		}
+		
+		m_vx = (hx + -(scrollx)-m_ex);
+		m_vy = (hy + -(scrolly)-m_ey);
+		
 		m_ani_time++;
 	}
 	//画面外に数秒いるかつ主人公がカギをもっていると主人公の近くにワープする

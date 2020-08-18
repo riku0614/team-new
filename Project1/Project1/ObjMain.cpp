@@ -822,7 +822,7 @@ void CObjMain::MapHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 89.0f)
+						if (len < 88.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r >= 0) || r > 315)
@@ -851,11 +851,6 @@ void CObjMain::MapHit(
 									
 									nothing_flg = false;
 
-
-								
-
-								
-									
 								}
 								//扉
 								else if (m_map[i][j] == DOOR_LEFT  && *c_id == CHAR_HERO && Input::GetVKey('E') == true)
@@ -890,7 +885,7 @@ void CObjMain::MapHit(
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
 								*y = by - BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
-								*vy = 0.0f;//-VX*反発係数
+								
 								
 								//階段
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
@@ -935,7 +930,6 @@ void CObjMain::MapHit(
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.5f;//-VX*反発係数
 								//階段
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
 								{
@@ -955,13 +949,6 @@ void CObjMain::MapHit(
 									*k_id = ITEM_NULL;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
-
-									
-									
-
-									
-
-									
 								}
 								//扉
 								else if (m_map[i][j] == DOOR_RIGHT&& *c_id == CHAR_HERO && Input::GetVKey('E') == true)
@@ -1089,7 +1076,7 @@ void CObjMain::MapHit(
 							r = 360.0f - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 87.0f)
+						if (len < 88.0f)
 						{
 							//角度で左右を判定
 							if ((r < 45 && r > 0) || r > 315)
@@ -1097,7 +1084,7 @@ void CObjMain::MapHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								//*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 								
 								//本を開く処理本を開く処理
 								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
@@ -1174,7 +1161,7 @@ void CObjMain::MapHit(
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
 							*y = by - BLOCK_SIZE_X + (scroll_y);//ブロックの位置-主人公の幅
-							*vy = 1.0f;	//反発係数
+							
 
 							
 							//本を開く処理
@@ -1320,10 +1307,7 @@ void CObjMain::MapHit(
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
 								*y = by + BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
-							    if (*vy < 0)
-								{
-									*vy = 0.0f;
-								}
+							    
 
 								//本棚から鍵を取る処理
 								if (r_map[i][j] == BOOK_SHELF && Input::GetVKey('E') == true&&nothing_flg==false)
@@ -1652,9 +1636,9 @@ void CObjMain::ItemHit(
 
 
 
-					//要素番号を座標に変更
-					float bx = j * BLOCK_SIZE_X;
-					float by = i * BLOCK_SIZE_Y;
+				//要素番号を座標に変更
+				float bx = j * BLOCK_SIZE_X;
+				float by = i * BLOCK_SIZE_Y;
 
 				//スクロールの影響
 				float scroll_x = scroll_on_x ? m_scroll_x : 0;

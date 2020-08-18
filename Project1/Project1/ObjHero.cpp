@@ -106,7 +106,7 @@ void CObjHero::Action()
 		{
 
 			//ダッシュ時の速度
-			m_speed_power = 1.5f;
+			m_speed_power = 5.5f;
 			m_ani_max_time = 4;
 
 			m_stamina_limid -= 0.5f;
@@ -114,7 +114,7 @@ void CObjHero::Action()
 		else
 		{
 			//通常速度
-			m_speed_power = 1.0f;
+			m_speed_power = 5.0f;
 			m_ani_max_time = 4;
 
 			if (m_stamina_limid < 90.0f)
@@ -133,19 +133,19 @@ void CObjHero::Action()
 			m_posture = 1.0f;
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey('W') == true && Input::GetVKey('S') != true)
+		if (Input::GetVKey('W') == true && Input::GetVKey('S') != true)
 		{
 			m_vy -= m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey('S') == true && Input::GetVKey('W') != true)
+		if (Input::GetVKey('S') == true && Input::GetVKey('W') != true)
 		{
 			m_vy += m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
 		}
-		else if (Input::GetVKey('D') == true && Input::GetVKey('A') != true)
+		if (Input::GetVKey('D') == true && Input::GetVKey('A') != true)
 		{
 			m_vx += m_speed_power;
 			m_posture = 0.0f;
@@ -159,6 +159,27 @@ void CObjHero::Action()
 		Main->SetStoryFlag2(true);
 		m_hero_stop = false;
 	}
+
+	//ベクトルの長さを求める（三平方の定理）
+	float r = 0.0f;
+	r = m_vx * m_vx + m_vy * m_vy;
+	r = sqrt(r);
+
+	//長さが0かどうか調べる
+	if (r != 0.0f)
+	{
+		m_vx = m_speed_power / r * m_vx;
+		m_vy = m_speed_power / r * m_vy;
+	}
+	
+	//摩擦
+	m_vx += -(m_vx*0.098f);
+	m_vy += -(m_vy*0.098f);
+
+
+	//位置の更新
+	m_px += m_vx+m_speed_power;
+	m_py += m_vy+m_speed_power;
 
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
@@ -252,72 +273,7 @@ void CObjHero::Action()
 		m_ani_frame = 0;
 	}
 
-	//摩擦
-	m_vx += -(m_vx*0.098f);
-	m_vy += -(m_vy*0.098f);
-
-	////高速移動によるblock判定
-	//bool b;
-	//float pxx, pyy, r;
-	//CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
-
-	//if (pbb->GetScrollX() > 0)
-	//	pbb->SetScrollX(0);
-
-	////移動方向にrayを飛ばす
-	//float vx;
-	//float vy;
-
-	//if (m_vx > 0)
-	//	vx = 500 - pbb->GetScrollX();
-	//else
-	//	vx = -500 - pbb->GetScrollX();
-
-	//if (m_vy > 0)
-	//	vy = 500 - pbb->GetScrollY();
-	//else
-	//	vy = -500 - pbb->GetScrollY();
-
-	////ray判定
-	//b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, vy, &pxx, &pyy, &r);
-
-	//if (b == true)
-	//{
-	//	//交点取得
-	//	px = pxx + pbb->GetScrollX();
-	//	py = pyy - pbb->GetScrollY();
-
-	//	float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
-	//	float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
-	//	float cc = (m_py)-py;
-	//	float dd = (m_py + m_vy) - py;
-	//	//主人公の幅分オフセット
-	//	if (vx > 0)
-	//		px += -64;
-	//	else
-	//		px += 2;
-	//	if (vy > 0)
-	//		py += -64;
-	//	else
-	//		py += 2;
-
-	//	//AとBが逆を向いている（主人公が移動先の壁を越えている）
-	//	if (aa*bb < 0)
-	//	{
-	//		//移動ベクトルを（交点→主人公の位置）ベクトルにする
-	//		m_vx = px - m_px;
-	//	}
-	//	if (cc*dd < 0)
-	//	{
-	//		m_vy = py - m_py;
-	//	}
-
-	//}
-	//else
-	//{
-	/*px = 0.0f;
-	py = 0.0f;*/
-	/*}*/
+	
 	
 
 	Main->MapHit(&m_px, &m_py, true, true,
@@ -333,9 +289,7 @@ void CObjHero::Action()
 		&m_block_type
 	);
 
-	//位置の更新
-	m_px += m_vx;
-	m_py += m_vy;
+	
 
 
 
