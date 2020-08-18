@@ -81,7 +81,7 @@ void CObjMain::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	
+	//'E'表示初期化
 	searchpoint_font_flg = false;
 
 	//ステージ強制移動コマンド
@@ -1583,7 +1583,6 @@ void CObjMain::ItemHit(
 							//鍵
 							if (m_map[i][j] == MAP_KEY)
 							{
-								searchpoint_font_flg = true;
 								map_Item = true;
 							}
 							else
@@ -1593,7 +1592,6 @@ void CObjMain::ItemHit(
 							//薬
 							if (m_map[i][j] == MAP_HEAL)
 							{
-								searchpoint_font_flg = true;
 								map_Item_2 = true;
 							}
 							else
@@ -1603,7 +1601,6 @@ void CObjMain::ItemHit(
 							//バール
 							if (m_map[i][j] == MAP_BAR)
 							{
-								searchpoint_font_flg = true;
 								map_Item_3 = true;
 							}
 							else
@@ -1771,7 +1768,6 @@ void CObjMain::ItemHit(
 						//鍵
 						if (r_map[i][j] == MAP_KEY)
 						{
-							searchpoint_font_flg = true;
 							map_Item = true;
 						}
 						else
@@ -1781,7 +1777,6 @@ void CObjMain::ItemHit(
 						//薬
 						if (r_map[i][j] == MAP_HEAL)
 						{
-							searchpoint_font_flg = true;
 							map_Item_2 = true;
 						}
 						else
@@ -1791,7 +1786,6 @@ void CObjMain::ItemHit(
 						//バールのようなもの
 						if (r_map[i][j] == MAP_BAR)
 						{
-							searchpoint_font_flg = true;
 							map_Item_3 = true;
 						}
 						else
@@ -2276,14 +2270,11 @@ void CObjMain::Draw()
 		}
 
 	}
-	//サーチポイントフォント
+	//'E'表示フラグ
 	if (searchpoint_font_flg == true)
 	{
-		Font::StrDraw(L"E", hero->GetX()+25.0f, hero->GetY()-20.0f, 23, c);
-
+		Font::StrDraw(L"E", hero->GetX() + 26.0f, hero->GetY() - 20.0f, 25, c);
 	}
-
-
 	//バールのようなもの持ってない状態で特殊なドアを調べると出るフォント
 	if (font_close_flg == true && m_time <= 100)
 	{

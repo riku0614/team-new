@@ -79,9 +79,6 @@
     <ClCompile Include="ObjMenu.cpp">
       <Filter>ゲームソースコード\システム</Filter>
     </ClCompile>
-    <ClCompile Include="ObjPRO.cpp">
-      <Filter>ゲームソースコード\システム</Filter>
-    </ClCompile>
     <ClCompile Include="ObjSpawnEnemy.cpp">
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
@@ -132,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="UtilityModule.cpp">
       <Filter>ゲームソースコード\関数</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjPRO.cpp">
+      <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

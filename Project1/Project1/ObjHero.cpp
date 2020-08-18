@@ -184,37 +184,32 @@ void CObjHero::Action()
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 
-
 	//1番目のアイテムをとる処理
-	if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
+	if (mi_hit_left == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		mi_hit_right == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		mi_hit_down == true && UI->takeItemflag() == false && Main->GetMapItem() == true ||
+		mi_hit_up == true && UI->takeItemflag() == false && Main->GetMapItem() == true)
 
 
 	{
+		//アイテム取得した時のテキスト表示用
 		Main->SetKeyFlag(true);
-		peperon_flag = true;
+		//マップ上のアイテム削除用
+		m_DeleteItem_flag = true;
+		//アイテムを所持していることにする
 		k_id = ITEM_KEY;
+		//
 		Main->SetDelete(true);
 	}
 
 	//2番目のアイテムをとる処理
-	else if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
+	else if (mi_hit_left == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		mi_hit_right == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		mi_hit_down == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true ||
+		mi_hit_up == true && UI->takeItemflag_2() == false && Main->GetMapItem_2() == true)
 	{
 		Main->SetHealFlag(true);
-		peperon_flag_2 = true;
+		m_DeleteItem_flag_2 = true;
 		h_id = ITEM_HEAL;
 		Main->SetDelete(true);
 
@@ -222,17 +217,13 @@ void CObjHero::Action()
 	}
 
 	//3番目のアイテムを取る処理
-	else if (Input::GetVKey('E') == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey('E') == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey('E') == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey('E') == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
-		Input::GetVKey(VK_RETURN) == true && mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
+	else if (mi_hit_left == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		mi_hit_right == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		mi_hit_down == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true ||
+		mi_hit_up == true && UI->takeItemflag_3() == false && Main->GetMapItem_3() == true)
 	{
 		Main->SetBarFlag(true);
-		peperon_flag_3 = true;
+		m_DeleteItem_flag_3 = true;
 		b_id = ITEM_BAR;
 		Main->SetDelete(true);
 	}
