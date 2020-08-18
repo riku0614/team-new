@@ -71,12 +71,12 @@ class CObjMain : public CObj
 		bool GetFlug2() { return stop_flg2; }//↑のギミック用
 
 		
-		//マップ上のアイテムデータをアイテムオブジェクトに送る用の関数
-		void SetMapItem(bool mi) { map_Item; }//鍵
+		//マップ上のアイテムデータをアイテムオブジェクトに送る用の関数(インライン関数)
+		void SetMapItem(bool mi) { map_Item = mi; }//鍵
 		bool GetMapItem() { return map_Item; }
-		void SetMapItem_2(bool mi) { map_Item_2; }//回復薬
+		void SetMapItem_2(bool mi) { map_Item_2 = mi; }//回復薬
 		bool GetMapItem_2() { return map_Item_2; }
-		void SetMapItem_3(bool mi) { map_Item_3; }//バール
+		void SetMapItem_3(bool mi) { map_Item_3 = mi; }//バール
 		bool GetMapItem_3() { return map_Item_3; }
 
 		int m_map[MAP_X][MAP_Y];//マップ情報ブロック数（X＝７５個、Y=７５個）
@@ -145,7 +145,7 @@ class CObjMain : public CObj
 		bool font_nothing_flg;
 		//開かないテキスト表示用
 		bool keepout_font_flg;
-		//落ちているアイテムオブジェクトの上に取得できるキーを表示する用
+		//扉や階段、本棚等に触れると'E'と主人公の頭上に表示するフラグ
 		bool searchpoint_font_flg;
 
 		int m_ani_time;  //アニメーションフレーム動作間隔
