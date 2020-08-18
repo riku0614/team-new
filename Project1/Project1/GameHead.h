@@ -186,11 +186,7 @@ enum ROOM_NUMBER
 #include "ObjEnemy.h"
 #include "ObjEnemy_2.h"
 #include "ObjEnemy_3.h"
-#include "ObjEnemy_4.h"
-#include "ObjEnemy_5.h"
-#include "ObjEnemy_6.h"
-#include "ObjEnemy_7.h"
-#include "ObjEnemy_8.h"
+
 
 #include "ObjGameUI.h"
 #include "ObjGameOver.h"
@@ -204,11 +200,7 @@ enum ROOM_NUMBER
 #include "ObjGimmick.h"
 #include "ObjGimmick2.h"
 #include "ObjGimmick3.h"
-#include "ObjGimmick4.h"
-#include "ObjGimmick5.h"
-#include "ObjGimmick6.h"
-#include "ObjGimmick7.h"
-#include "ObjGimmick8.h"
+
 
 #include "objheal.h"
 #include "ObjFastEnemy.h"

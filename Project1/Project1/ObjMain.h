@@ -42,9 +42,9 @@ class CObjMain : public CObj
 		void Init();	//イニシャライズ
 		void Action();	//アクション
 		void Draw();	//ドロー
-		void SetScrollX(float s) { m_scroll_x = s; }//X方向のスクロール
+		void SetScrollX(float s) { m_scroll_x = s; }//X方向のスクロール情報受け渡し関数
 		float GetScrollX() { return m_scroll_x; }
-		void SetScrollY(float r) { m_scroll_y = r; }//Y方向へのスクロール
+		void SetScrollY(float r) { m_scroll_y = r; }//Y方向へのスクロール情報受け渡し関数
 		float GetScrollY() { return m_scroll_y; }
 
 		void SetDelete(bool b) { delete_flg = b; }//アイテムの消去用
@@ -70,15 +70,13 @@ class CObjMain : public CObj
 
 		bool GetFlug2() { return stop_flg2; }//↑のギミック用
 
-		int GetHitboxCount1() { return g_count1; }
-        int GetHitboxCount2() { return g_count2; }
-
-
-		void SetMapItem(bool mi) { map_Item; }
+		
+		//マップ上のアイテムデータをアイテムオブジェクトに送る用の関数
+		void SetMapItem(bool mi) { map_Item; }//鍵
 		bool GetMapItem() { return map_Item; }
-		void SetMapItem_2(bool mi) { map_Item_2; }
+		void SetMapItem_2(bool mi) { map_Item_2; }//回復薬
 		bool GetMapItem_2() { return map_Item_2; }
-		void SetMapItem_3(bool mi) { map_Item_3; }
+		void SetMapItem_3(bool mi) { map_Item_3; }//バール
 		bool GetMapItem_3() { return map_Item_3; }
 
 		int m_map[MAP_X][MAP_Y];//マップ情報ブロック数（X＝７５個、Y=７５個）
@@ -86,7 +84,7 @@ class CObjMain : public CObj
 
 
 		//BlockHit関数の宣言
-		void BlockHit(
+		void MapHit(
 			float *x, float *y, bool scroll_on_x,bool scroll_on_y,
 			bool *up, bool *down, bool *left, bool *right,
 			float *vx, float *vy, int *bt, int *c_id, int *k_id
@@ -110,10 +108,11 @@ class CObjMain : public CObj
 		float save_y[MAP_NUMBER][2];
 		float save_scroll_x[MAP_NUMBER][2];//マップを行き来する用のスクロール情報を登録する配列
 		float save_scroll_y[MAP_NUMBER][2];
-		int save_map[MAP_X][MAP_Y];
-		int save_room_map[ROOM_X][ROOM_Y][ROOM_NUMBER];
 
-		unsigned int rand_map;
+		int save_map[MAP_X][MAP_Y];//教室に入った際に現在の廊下のマップ情報を保存するもの
+		int save_room_map[ROOM_X][ROOM_Y][ROOM_NUMBER];//ランダムに選ばれたマップ情報を中に入れていき一定数ループしたらこの変数から呼び出す
+
+		unsigned int rand_map;//ランダムにマップを呼ぶ用の変数
 
 		bool stop_flg;    //マップ切り替えやギミックや敵キャラ、アイテムを配置する処理を一度だけ回す用のフラグ
 		bool stop_flg2;   //↑のギミック切り替え用
@@ -128,17 +127,25 @@ class CObjMain : public CObj
 		float m_stamina_limid;//スタミナの限界値
 
 		//テキスト表示用関数
+		//鍵の取得
 		bool font_key_flg;
 		bool font_key_flg2;
+		//テキストブック用
 		bool font_story_flg;
 		bool font_story_flg2;
+		//バール取得
 		bool font_bar_flg;
+		//回復薬の取得
 		bool font_heal_flg;
+		//開閉テキスト用
 		bool font_open_flg;
 		bool font_close_flg;
 		bool font_open_flg2;
+		//何もないテキスト表示用
 		bool font_nothing_flg;
+		//開かないテキスト表示用
 		bool keepout_font_flg;
+		//落ちているアイテムオブジェクトの上に取得できるキーを表示する用
 		bool searchpoint_font_flg;
 
 		int m_ani_time;  //アニメーションフレーム動作間隔

@@ -40,11 +40,9 @@ class CObjSpwanEnemy : public CObj
 public:
 	CObjSpwanEnemy(float x, float y);
 	~CObjSpwanEnemy() {};
-	CObjSpwanEnemy(int m_map[75][75]);
 	void Init();   //イニシャライズ
 	void Action(); //アクション
 	void Draw();   //ドロー
-	bool OverFlowCheck(int x, int y);
 
 	float GetX() { return m_ex; }
 	float GetY() { return m_ey; }

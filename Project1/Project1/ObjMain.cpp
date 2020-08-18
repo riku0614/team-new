@@ -81,25 +81,9 @@ void CObjMain::Action()
 {
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	if (Input::GetVKey('R') == true)
-	{
-		if (map_chg > 0)
-		{
-			spawn_pointX[map_chg] = SpawnChangerX(map_chg);
-			spawn_pointY[map_chg] = SpawnChangerY(map_chg);
-			m_scroll_x = -spawn_pointX[map_chg];
-			m_scroll_y = -spawn_pointY[map_chg];
-		}
-		else
-		{
-			hero->SetX(0.0f);
-			hero->SetY(BLOCK_SIZE_Y * 4);
-			m_scroll_x = 0.0f;
-			m_scroll_y = 0.0f;
-		}
-	}
 	
 	searchpoint_font_flg = false;
+
 	//ステージ強制移動コマンド
 	if (Input::GetVKey(VK_SPACE) == true)
 	{
@@ -631,7 +615,7 @@ bool CObjMain::LineCrossPoint(
   引数3,4 float  vx,vy        :主人公の移動ベクトル
   引数5,6 float* out_px,out_y :Blockとの交点
   引数7   float* out          :一から交点までの距離
-  主人公の位置＋移動ベクトルと各ブロックの変で好転の判定を行い
+  主人公の位置＋移動ベクトルと各ブロックの変で交点の判定を行い
   最も近い交点の位置と距離を返す*/
 bool CObjMain::HeroBlockCrossPoint(
 	float x, float y, float vx, float vy,
@@ -739,7 +723,7 @@ bool CObjMain::HeroBlockCrossPoint(
 
 
 }
-/*BlockHit関数
+/*MapHit関数
   引数１　　float* x             :判定を行うobjectのX位置
   引数２　　float* y             :判定を行うobjectのY位置
   引数３　　bool  scroll_on_x    :判定を行うobjectはスクロールに影響を与えるかどうか（true=与える　false=与えない）
@@ -766,7 +750,7 @@ bool CObjMain::HeroBlockCrossPoint(
 
   */
 
-void CObjMain::BlockHit(
+void CObjMain::MapHit(
 	float *x, float *y, bool scroll_on_x, bool scroll_on_y,
 	bool *up, bool *down, bool *left, bool *right,
 	float *vx, float *vy, int *bt, int *c_id, int *k_id
@@ -846,9 +830,10 @@ void CObjMain::BlockHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+
+								//*vx = -(*vx)*0.5f;//-VX*反発係数
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E')==true)
+ 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E')==true)
 								{
 									map_chg++;
 									if (map_chg == GAME_CLEAR)
@@ -950,7 +935,7 @@ void CObjMain::BlockHit(
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								*vx = -(*vx)*0.5f;//-VX*反発係数
 								//階段
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
 								{
@@ -1008,7 +993,7 @@ void CObjMain::BlockHit(
 								//反発係数
 								if (*vy < 0)
 								{
-									*vy = 0.0f;
+									*vy = 1.0f;
 								}
 								//階段
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
@@ -1112,7 +1097,7 @@ void CObjMain::BlockHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								//*vx = -(*vx)*0.1f;//-VX*反発係数
 								
 								//本を開く処理本を開く処理
 								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
@@ -1189,7 +1174,7 @@ void CObjMain::BlockHit(
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
 							*y = by - BLOCK_SIZE_X + (scroll_y);//ブロックの位置-主人公の幅
-							*vy = 0.0f;	//反発係数
+							*vy = 1.0f;	//反発係数
 
 							
 							//本を開く処理
@@ -1246,7 +1231,7 @@ void CObjMain::BlockHit(
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅]
-								*vx = -(*vx)*0.1f;//-VX*反発係数
+								
 								
 								//本を開く処理
 								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
@@ -1794,7 +1779,7 @@ void CObjMain::ItemHit(
 								}
 								if (*vy < 0)
 								{
-									*vy = 0.0f;
+									*vy = 1.0f;
 								}
 
 

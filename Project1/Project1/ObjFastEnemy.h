@@ -34,11 +34,10 @@ class CObjFastEnemy : public CObj
 public:
 	CObjFastEnemy(float x, float y);
 	~CObjFastEnemy() {};
-	CObjFastEnemy(int m_map[75][75]);
+	
 	void Init();   //イニシャライズ
 	void Action(); //アクション
 	void Draw();   //ドロー
-	bool OverFlowCheck(int x, int y);
 
 	float GetX() { return m_ex; }
 	float GetY() { return m_ey; }

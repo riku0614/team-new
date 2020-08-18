@@ -40,21 +40,6 @@
     <ClCompile Include="ObjEnemy_3.cpp">
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
-    <ClCompile Include="ObjEnemy_4.cpp">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy_5.cpp">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy_6.cpp">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy_7.cpp">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjEnemy_8.cpp">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClCompile>
     <ClCompile Include="ObjEPI.cpp">
       <Filter>ゲームソースコード\システム</Filter>
     </ClCompile>
@@ -77,21 +62,6 @@
       <Filter>ゲームソースコード\ギミック</Filter>
     </ClCompile>
     <ClCompile Include="ObjGimmick3.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick4.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick5.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick6.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick7.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjGimmick8.cpp">
       <Filter>ゲームソースコード\ギミック</Filter>
     </ClCompile>
     <ClCompile Include="objheal.cpp">
@@ -195,9 +165,6 @@
     <ClInclude Include="ObjClickTitle.h">
       <Filter>ゲームソースコード\システム</Filter>
     </ClInclude>
-    <ClInclude Include="ObjEnemy_8.h">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClInclude>
     <ClInclude Include="ObjEnemy.h">
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClInclude>
@@ -205,18 +172,6 @@
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClInclude>
     <ClInclude Include="ObjEnemy_3.h">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_4.h">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_5.h">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_6.h">
-      <Filter>ゲームソースコード\敵キャラクター</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjEnemy_7.h">
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClInclude>
     <ClInclude Include="ObjEPI.h">
@@ -241,21 +196,6 @@
       <Filter>ゲームソースコード\ギミック</Filter>
     </ClInclude>
     <ClInclude Include="ObjGimmick3.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick4.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick5.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick6.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick7.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
-    </ClInclude>
-    <ClInclude Include="ObjGimmick8.h">
       <Filter>ゲームソースコード\ギミック</Filter>
     </ClInclude>
     <ClInclude Include="objheal.h">

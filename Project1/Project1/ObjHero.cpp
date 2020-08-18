@@ -256,65 +256,71 @@ void CObjHero::Action()
 	m_vx += -(m_vx*0.098f);
 	m_vy += -(m_vy*0.098f);
 
-	//高速移動によるblock判定
-	bool b;
-	float pxx, pyy, r;
-	CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
+	////高速移動によるblock判定
+	//bool b;
+	//float pxx, pyy, r;
+	//CObjMain* pbb = (CObjMain*)Objs::GetObj(OBJ_MAIN);
 
-	if (pbb->GetScrollX() > 0)
-		pbb->SetScrollX(0);
+	//if (pbb->GetScrollX() > 0)
+	//	pbb->SetScrollX(0);
 
-	//移動方向にrayを飛ばす
-	float vx;
-	float vy;
+	////移動方向にrayを飛ばす
+	//float vx;
+	//float vy;
 
-	if (m_vx > 0)
-		vx = 500 - pbb->GetScrollX();
-	else
-		vx = -500 - pbb->GetScrollX();
-	if (m_vy > 0)
-		vy = 400 - pbb->GetScrollY();
-	else
-		vy = 400 - pbb->GetScrollY();
+	//if (m_vx > 0)
+	//	vx = 500 - pbb->GetScrollX();
+	//else
+	//	vx = -500 - pbb->GetScrollX();
 
-	//ray判定
-	b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, vy, &pxx, &pyy, &r);
+	//if (m_vy > 0)
+	//	vy = 500 - pbb->GetScrollY();
+	//else
+	//	vy = -500 - pbb->GetScrollY();
 
-	if (b == true)
-	{
-		//交点取得
-		px = pxx + pbb->GetScrollX();
-		py = pyy - pbb->GetScrollY();
+	////ray判定
+	//b = pbb->HeroBlockCrossPoint(m_px - pbb->GetScrollX() + 32, m_py - pbb->GetScrollY() + 32, vx, vy, &pxx, &pyy, &r);
 
-		float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
-		float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
-		float cc = (m_py)-py;
-		float dd = (m_py + m_vy) - py;
-		//主人公の幅分オフセット
-		if (vx > 0)
-			px += -64;
-		else
-			px += 2;
-		if (vy > 0)
+	//if (b == true)
+	//{
+	//	//交点取得
+	//	px = pxx + pbb->GetScrollX();
+	//	py = pyy - pbb->GetScrollY();
 
+	//	float aa = (m_px)-px;//A（交点→主人公の位置）ベクトル
+	//	float bb = (m_px + m_vx) - px;//B（交点→主人公の移動先位置）ベクトル
+	//	float cc = (m_py)-py;
+	//	float dd = (m_py + m_vy) - py;
+	//	//主人公の幅分オフセット
+	//	if (vx > 0)
+	//		px += -64;
+	//	else
+	//		px += 2;
+	//	if (vy > 0)
+	//		py += -64;
+	//	else
+	//		py += 2;
 
-		
+	//	//AとBが逆を向いている（主人公が移動先の壁を越えている）
+	//	if (aa*bb < 0)
+	//	{
+	//		//移動ベクトルを（交点→主人公の位置）ベクトルにする
+	//		m_vx = px - m_px;
+	//	}
+	//	if (cc*dd < 0)
+	//	{
+	//		m_vy = py - m_py;
+	//	}
 
-		//AとBが逆を向いている（主人公が移動先の壁を越えている）
-		if (aa*bb < 0)
-		{
-			//移動ベクトルを（交点→主人公の位置）ベクトルにする
-			m_vx = px - m_px;
-		}
+	//}
+	//else
+	//{
+	/*px = 0.0f;
+	py = 0.0f;*/
+	/*}*/
+	
 
-	}
-	else
-	{
-		px = 0.0f;
-		py = 0.0f;
-	}
-
-	Main->BlockHit(&m_px, &m_py, true, true,
+	Main->MapHit(&m_px, &m_py, true, true,
 		&m_hit_up, &m_hit_down, &m_hit_left, &m_hit_right, &m_vx, &m_vy,
 		&m_block_type, &m_id, &k_id
 	);

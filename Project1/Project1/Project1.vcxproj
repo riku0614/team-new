@@ -134,11 +134,6 @@
     <ClInclude Include="ObjEnemy.h" />
     <ClInclude Include="ObjEnemy_2.h" />
     <ClInclude Include="ObjEnemy_3.h" />
-    <ClInclude Include="ObjEnemy_4.h" />
-    <ClInclude Include="ObjEnemy_5.h" />
-    <ClInclude Include="ObjEnemy_6.h" />
-    <ClInclude Include="ObjEnemy_7.h" />
-    <ClInclude Include="ObjEnemy_8.h" />
     <ClInclude Include="ObjEPI.h" />
     <ClInclude Include="ObjFastEnemy.h" />
     <ClInclude Include="ObjGameClear.h" />
@@ -147,11 +142,6 @@
     <ClInclude Include="ObjGimmick.h" />
     <ClInclude Include="ObjGimmick2.h" />
     <ClInclude Include="ObjGimmick3.h" />
-    <ClInclude Include="ObjGimmick4.h" />
-    <ClInclude Include="ObjGimmick5.h" />
-    <ClInclude Include="ObjGimmick6.h" />
-    <ClInclude Include="ObjGimmick7.h" />
-    <ClInclude Include="ObjGimmick8.h" />
     <ClInclude Include="objheal.h" />
     <ClInclude Include="ObjHero.h" />
     <ClInclude Include="ObjItem.h" />
@@ -190,11 +180,6 @@
     <ClCompile Include="ObjEnemy.cpp" />
     <ClCompile Include="ObjEnemy_2.cpp" />
     <ClCompile Include="ObjEnemy_3.cpp" />
-    <ClCompile Include="ObjEnemy_4.cpp" />
-    <ClCompile Include="ObjEnemy_5.cpp" />
-    <ClCompile Include="ObjEnemy_6.cpp" />
-    <ClCompile Include="ObjEnemy_7.cpp" />
-    <ClCompile Include="ObjEnemy_8.cpp" />
     <ClCompile Include="ObjEPI.cpp" />
     <ClCompile Include="ObjFastEnemy.cpp" />
     <ClCompile Include="ObjGameClear.cpp" />
@@ -203,11 +188,6 @@
     <ClCompile Include="ObjGimmick.cpp" />
     <ClCompile Include="ObjGimmick2.cpp" />
     <ClCompile Include="ObjGimmick3.cpp" />
-    <ClCompile Include="ObjGimmick4.cpp" />
-    <ClCompile Include="ObjGimmick5.cpp" />
-    <ClCompile Include="ObjGimmick6.cpp" />
-    <ClCompile Include="ObjGimmick7.cpp" />
-    <ClCompile Include="ObjGimmick8.cpp" />
     <ClCompile Include="objheal.cpp" />
     <ClCompile Include="ObjHero.cpp" />
     <ClCompile Include="ObjItem.cpp" />
