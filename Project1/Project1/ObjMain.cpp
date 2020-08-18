@@ -2289,7 +2289,7 @@ void CObjMain::Draw()
 	//'E'表示フラグ
 	if (searchpoint_font_flg == true)
 	{
-		Font::StrDraw(L"E", hero->GetX(), hero->GetY() + 64.0f, 5, c);
+		Font::StrDraw(L"E", hero->GetX() + 26.0f, hero->GetY() - 20.0f, 25, c);
 	}
 	//バールのようなもの持ってない状態で特殊なドアを調べると出るフォント
 	if (font_close_flg == true && m_time <= 100)
