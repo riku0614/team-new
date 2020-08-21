@@ -149,6 +149,7 @@
     <ClInclude Include="ObjMenu.h" />
     <ClInclude Include="ObjPRO.h" />
     <ClInclude Include="ObjSpawnEnemy.h" />
+    <ClInclude Include="ObjTelop.h" />
     <ClInclude Include="ObjText.h" />
     <ClInclude Include="ObjTitle.h" />
     <ClInclude Include="SceneEPI.h" />
@@ -159,6 +160,7 @@
     <ClInclude Include="SceneMenu.h" />
     <ClInclude Include="ScenePRO.h" />
     <ClInclude Include="SceneTitle.h" />
+    <ClInclude Include="SceneTelop.h" />
     <ClInclude Include="UtilityModule.h" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +197,7 @@
     <ClCompile Include="ObjMenu.cpp" />
     <ClCompile Include="ObjPRO.cpp" />
     <ClCompile Include="ObjSpawnEnemy.cpp" />
+    <ClCompile Include="ObjTelop.cpp" />
     <ClCompile Include="ObjText.cpp" />
     <ClCompile Include="ObjTitle.cpp" />
     <ClCompile Include="SceneEPI.cpp" />
@@ -205,6 +208,7 @@
     <ClCompile Include="SceneMenu.cpp" />
     <ClCompile Include="ScenePRO.cpp" />
     <ClCompile Include="SceneTitle.cpp" />
+    <ClCompile Include="SceneTelop.cpp" />
     <ClCompile Include="UtilityModule.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

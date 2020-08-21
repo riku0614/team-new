@@ -10,6 +10,7 @@ enum OBJ_NAME
 	OBJ_CLICK_TITLE,
 	OBJ_PRO,
 	OBJ_EPI,
+	OBJ_TELOP,
 	OBJ_HERO,
 	OBJ_ENEMY,
 	OBJ_ENEMY2,
@@ -182,6 +183,7 @@ enum ROOM_NUMBER
 #include "ObjMain.h"
 #include "ObjPRO.h"
 #include "ObjEPI.h"
+#include "ObjTelop.h"
 
 #include "ObjEnemy.h"
 #include "ObjEnemy_2.h"
@@ -217,6 +219,7 @@ enum ROOM_NUMBER
 #include "SceneMenu.h"
 #include "ScenePRO.h"
 #include "SceneEPI.h"
+#include "SceneTelop.h"
 
 //-----------------------------------------------
 

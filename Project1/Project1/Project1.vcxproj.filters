@@ -133,6 +133,12 @@
     <ClCompile Include="ObjPRO.cpp">
       <Filter>ゲームソースコード\敵キャラクター</Filter>
     </ClCompile>
+    <ClCompile Include="SceneTelop.cpp">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTelop.cpp">
+      <Filter>ゲームソースコード\システム</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameL\Audio.h">
@@ -266,6 +272,12 @@
     </ClInclude>
     <ClInclude Include="UtilityModule.h">
       <Filter>ゲームソースコード\関数</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneTelop.h">
+      <Filter>ゲームソースコード\シーン</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTelop.h">
+      <Filter>ゲームソースコード\システム</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
