@@ -32,27 +32,25 @@ CObjMain::CObjMain(int map[ROOM_X][ROOM_Y])
 //イニシャライズ
 void CObjMain::Init()
 {
-	m_scroll_x = -64.0f*7;
-	m_scroll_y = -64.0f*7;
+	m_scroll_x = -BLOCK_SIZE_X*INIT_SCROLL;
+	m_scroll_y = -BLOCK_SIZE_Y*INIT_SCROLL;
 
 	room_chg_stop = false;
 
 	map_chg = 0;
 	room_chg = 0;
-	stop_flg = true;
-	spawn_pointX[7] = NULL;
-	spawn_pointY[7] = NULL;
+	Placement_flg = true;
+	spawn_pointX[SPAWN_POINT_ARRAY_SIZE] = NULL;
+	spawn_pointY[SPAWN_POINT_ARRAY_SIZE] = NULL;
 	room_in = true;
 	delete_flg = false;
 	first_stop = true;
 
-	m_ani_time = 4;
-	m_ani_max_time = 4;
+	m_ani_time = ANIME_TIME;
+	m_ani_max_time = ANIME_TIME;
 
 	switch_flg = true;
 
-	pepepe = false;
-	pepepe_2 = false;
 	room_chg_stop = false;
 
 	nothing_flg = false;
@@ -85,38 +83,38 @@ void CObjMain::Action()
 	searchpoint_font_flg = false;
 
 	//ステージ強制移動コマンド
-	if (Input::GetVKey(VK_SPACE) == true)
-	{
-		//廊下マップ→次の廊下マップ
-		if (switch_flg == true&&room_in==false)
-		{
-			stop_flg = true;
-			stop_flg2 = true;
-			first_stop = true;
-			
-			nothing_flg = false;
-			map_chg++;
-			if (map_chg == GAME_CLEAR)
-			{
-				Scene::SetScene(new CSceneEPI);
-			}
-			switch_flg = false;
-		}
-		//教室マップ→廊下マップ
-		else if (switch_flg == true && room_in == true)
-		{
-			room_in = false;
-			stop_flg = true;
+	//if (Input::GetVKey(VK_SPACE) == true)
+	//{
+	//	//廊下マップ→次の廊下マップ
+	//	if (switch_flg == true&&room_in==false)
+	//	{
+	//		Placement_flg = true;
+	//		Placement_Gmmick_flg = true;
+	//		first_stop = true;
+	//		
+	//		nothing_flg = false;
+	//		map_chg++;
+	//		if (map_chg == GAME_CLEAR)
+	//		{
+	//			Scene::SetScene(new CSceneEPI);
+	//		}
+	//		switch_flg = false;
+	//	}
+	//	//教室マップ→廊下マップ
+	//	else if (switch_flg == true && room_in == true)
+	//	{
+	//		room_in = false;
+	//		Placement_flg = true;
 
-			switch_flg = false;
-		}
-	
-	}
+	//		switch_flg = false;
+	//	}
+	//
+	//}
 	//入力重複阻止フラグ
-	else
-	{
-		switch_flg = true;
-	}
+	//else
+	//{
+	//	switch_flg = true;
+	//}
 	//教室マップを６回回したらセーブしたマップへのロードに切り替える
 	if (room_chg >= ROOM_LIMIT)
 	{
@@ -127,7 +125,7 @@ void CObjMain::Action()
 	if (map_chg == FLOOR8)
 	{
 		//廊下マップから教室マップへの切り替え処理
-		if (room_chg >= ROOM_1 && room_in == true && stop_flg == true)
+		if (room_chg >= ROOM_1 && room_in == true && Placement_flg == true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(4, L"4教室扉SE.wav", SOUND_TYPE::EFFECT);
@@ -161,7 +159,7 @@ void CObjMain::Action()
 			}
 		}
 		//初期の教室から廊下へのマップ切り替え（１度しか回さない）
-		if (room_in == false && stop_flg == true && first_stop == true)
+		if (room_in == false && Placement_flg == true && first_stop == true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
@@ -175,7 +173,7 @@ void CObjMain::Action()
 			//主人公の初期位置を変更
 			CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 			hero->SetX(0.0f);
-			hero->SetY(BLOCK_SIZE_Y * 4);
+			hero->SetY(BLOCK_SIZE_Y * INIT_POS);
 			m_scroll_x = 0.0f;
 			m_scroll_y = 0.0f;
 
@@ -184,7 +182,7 @@ void CObjMain::Action()
 
 			first_stop = false;
 		}
-		else if (room_in == false && stop_flg == true)
+		else if (room_in == false && Placement_flg == true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
@@ -199,7 +197,7 @@ void CObjMain::Action()
 	//７階以降のマップの処理
 	if (map_chg >= FLOOR7)
 	{
-		if (map_chg >=1 && stop_flg == true&&first_stop==true)
+		if (map_chg >=1 && Placement_flg == true&&first_stop==true)
 		{
 			//音楽情報の読み込み
 			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
@@ -225,12 +223,12 @@ void CObjMain::Action()
 
 			first_stop = false;
 		}
-		else if(stop_flg==true&&room_in==false)
+		else if(Placement_flg ==true&&room_in==false)
 		{
 			memcpy(m_map, save_map, sizeof(int)*(MAP_X*MAP_Y));
 		}
 		//廊下マップからマップへの切り替え処理
-		else if (room_chg >= 1 && room_in == true && stop_flg == true)
+		else if (room_chg >= 1 && room_in == true && Placement_flg == true)
 		{
 			//音楽情報の読み込み
    			Audio::LoadAudio(5, L"5マップ切り替えSE.wav", SOUND_TYPE::EFFECT);
@@ -300,60 +298,19 @@ void CObjMain::Action()
 	
 	
 	//ギミックのヒットボックスをマップごとに変更する処理
-	if (stop_flg == true)
+	if (Placement_flg == true)
 	{
 		
 
 		HitBoxChanger(map_chg, m_map, room_in, room_chg, r_map);
 		EnemySpawnChanger(map_chg, m_map, room_in);
 
-		stop_flg2 = false;
+		Placement_Gmmick_flg = false;
 
 
-	}
-
-	//敵が出現するフラグ（ヒットボックス）生成処理：縦ライン
-	for (int i = 0; i < MAP_X; i++)
-	{
-		for (int j = 0; j < MAP_Y; j++)
-		{
-			if (m_map[i][j] == SPAWN_ENEMY_Y)
-			{
-				if ((j*BLOCK_SIZE_X) + BLOCK_SIZE_X >= hero->GetX() && (j * BLOCK_SIZE_X) - BLOCK_SIZE_X <= hero->GetX())
-				{
-
-					
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * BLOCK_SIZE_X) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
-
-					//生成ポイントを床に変更
-					m_map[i][j] = FLOOR_0;
-				}
-			}
-		}
-	}
-	
-	//敵が出現するフラグ（ヒットボックス）生成処理：横ライン
-	for (int i = 0; i < MAP_X; i++)
-	{
-		for (int j = 0; j < MAP_Y; j++)
-		{
-			if (m_map[i][j] == SPAWN_ENEMY_X)
-			{
-				if ((i*BLOCK_SIZE_Y) + BLOCK_SIZE_Y >= hero->GetY() && (i *BLOCK_SIZE_Y) - BLOCK_SIZE_Y <= hero->GetY())
-				{
-
-					
-					CObjSpwanEnemy* objf = new CObjSpwanEnemy(hx + -(m_scroll_x), hy + (5 * BLOCK_SIZE_X) + -(m_scroll_y));
-					Objs::InsertObj(objf, OBJ_SPWANENEMY, 38);
-					//生成ポイントを床に変更
-					m_map[i][j] = FLOOR_0;
-				}
-			}
-		}
 	}
 	//アイテム「鍵」の生成処理：教室用
-	if (stop_flg == true && room_in == true)
+	if (Placement_flg == true && room_in == true)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
@@ -371,7 +328,7 @@ void CObjMain::Action()
 		}
 	}
 	//アイテム「鍵」の生成処理：廊下用
-	if (stop_flg == true && room_in == false)
+	if (Placement_flg == true && room_in == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
@@ -393,7 +350,7 @@ void CObjMain::Action()
 		}
 	}
 	//アイテム「薬」の表示処理：廊下用
-	if (room_in == false && stop_flg == true)
+	if (room_in == false && Placement_flg == true)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
@@ -420,7 +377,7 @@ void CObjMain::Action()
 
 
 	//アイテム「薬」の表示処理：教室用
-	if (stop_flg == true && room_in == true)
+	if (Placement_flg == true && room_in == true)
 	{
 
 		for (int i = 0; i < ROOM_X; i++)
@@ -444,7 +401,7 @@ void CObjMain::Action()
 
 	}
 	//アイテム「バールのようなもの」の表示処理：廊下用
-	if (stop_flg == true && room_in == false)
+	if (Placement_flg == true && room_in == false)
 	{
 		for (int i = 0; i < MAP_X; i++)
 		{
@@ -466,7 +423,7 @@ void CObjMain::Action()
 		}
 	}
 	//アイテム「バールのようなもの」の表示処理：教室用
-	if (room_in == true && stop_flg == true)
+	if (room_in == true && Placement_flg == true)
 	{
 		for (int i = 0; i < ROOM_X; i++)
 		{
@@ -509,7 +466,7 @@ void CObjMain::Action()
 		}
 	}
 
-		stop_flg = false;
+	Placement_flg = false;
 	
 }
 	
@@ -814,60 +771,65 @@ void CObjMain::MapHit(
 
 						//角度を求める
 						float r = atan2(rvy, rvx);
-						r = r * 180.0f / 3.14f;
+						r = r * HALF_DEGREES /PI;
 
 						if(r <= 0.0f)
 							r = abs(r);
 						else
-							r = 360.0f - abs(r);
+							r = FULL_DEGREES - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < LENGTH_NUM)
 						{
 							//角度で左右を判定
-							if ((r < 45 && r >= 0) || r > 315)
+							if ((r < RIGHT_HIT_ANGLE2 && r >= RIGHT_HIT_ANGLE1) || r > RIGHT_HIT_ANGLE3)
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx) * 0.1f; //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM; //-VX*反発係数
 								
-								//階段
+								//階段（次のステージへの移動処理）
  								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
+									//マップ切り替えの値が３ならばゲームクリア画面に移行する
 									if (map_chg == GAME_CLEAR)
 									{
 										Scene::SetScene(new CSceneEPI);
 									}
-									stop_flg = true;
-									
-									stop_flg2 = true;
+									//オブジェクトの再配置
+									Placement_flg = true;
+									Placement_Gmmick_flg = true;
+									//マップデータを変更する処理を一度だけ行うためのフラグをオンにする
 									first_stop = true;
+									//教室のランダムの初期化
 									room_chg_stop = false;
+									//鍵アイテムを消去
 									*k_id = ITEM_NULL;
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 									
+
 									nothing_flg = false;
 
 								}
 								//扉
 								else if (m_map[i][j] == DOOR_LEFT  && *c_id == CHAR_HERO)
 								{
+									//廊下から教室への移動処理
 									if (room_in == false)
 									{
+										//教室内への切り替えフラグをオンにする
 										room_in = true;
-										stop_flg = true;
-
-										//item->SetFlag(true);
-										
+										//オブジェクトの再配置
+										Placement_flg = true;
 										room_chg++;
 								
-									
+								        //主人公の頭上に’E’と表示するフラグをオンにする
 										searchpoint_font_flg = true;
 
-
+										//現在の廊下の情報をセーブする
 										save_x[map_chg][0] = hero->GetX()+BLOCK_SIZE_X;
 										save_y[map_chg][0] = hero->GetY()+ BLOCK_SIZE_Y;
 										save_scroll_x[map_chg][0] = main->GetScrollX();
@@ -880,7 +842,7 @@ void CObjMain::MapHit(
 								
 								
 							}
-							if (r > 45 && r < 135)
+							if (r > UP_HIT_ANGLE1 && r < UP_HIT_ANGLE2)
 							{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
@@ -903,8 +865,8 @@ void CObjMain::MapHit(
 									hero->SetUseItem(true);
 									UI->Settakeflag(false);
 
-									stop_flg = true;
-									stop_flg2 = true;
+									Placement_flg = true;
+									Placement_Gmmick_flg = true;
 									first_stop = true;
 									room_chg_stop = false;
 									nothing_flg = false;
@@ -925,12 +887,12 @@ void CObjMain::MapHit(
 								
 								*vy = 0.0f;
 							}
-							if (r > 135 && r < 225)
+							if (r > LEFT_HIT_ANGLE1 && r < LEFT_HIT_ANGLE2)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx) * 0.1f;  //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM;  //-VX*反発係数
 
 								//階段
 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
@@ -942,8 +904,8 @@ void CObjMain::MapHit(
 										Scene::SetScene(new CSceneEPI);
 									}
 
-									stop_flg = true;
-									stop_flg2 = true;
+									Placement_flg = true;
+									Placement_Gmmick_flg = true;
 									first_stop = true;
 									nothing_flg = false;
 
@@ -958,7 +920,7 @@ void CObjMain::MapHit(
 									if (room_in == false)
 									{
 										room_in = true;
-										stop_flg = true;
+										Placement_flg = true;
 
 										room_chg++;
 										searchpoint_font_flg = true;
@@ -974,7 +936,7 @@ void CObjMain::MapHit(
 								}
 								
 							}
-							if (r > 225 && r < 315)
+							if (r > DOWN_HIT_ANGLE1 && r < DOWN_HIT_ANGLE2)
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
@@ -995,8 +957,8 @@ void CObjMain::MapHit(
 										Scene::SetScene(new CSceneEPI);
 									}
 
-									stop_flg = true;
-									stop_flg2 = true;
+									Placement_flg = true;
+									Placement_Gmmick_flg = true;
 									first_stop = true;
 									room_chg_stop = false;
 									nothing_flg = false;
@@ -1070,23 +1032,23 @@ void CObjMain::MapHit(
 
 						//角度を求める
 						float r = atan2(rvy, rvx);
-						r = r * 180.0f / 3.14f;
+						r = r * HALF_DEGREES / PI;
 
 						if (r <= 0.0f)
 							r = abs(r);
 						else
-							r = 360.0f - abs(r);
+							r = FULL_DEGREES - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < LENGTH_NUM)
 						{
 							//角度で左右を判定
-							if ((r < 45 && r > 0) || r > 315)
+							if ((r < RIGHT_HIT_ANGLE2 && r > RIGHT_HIT_ANGLE2) || r > RIGHT_HIT_ANGLE3)
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								*vx = -(*vx) * 0.1f; //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM; //-VX*反発係数
 								
 								//本を開く処理本を開く処理
 								if (r_map[i][j] == BOOK && Input::GetVKey(VK_RETURN) == true)
@@ -1108,7 +1070,7 @@ void CObjMain::MapHit(
 									if (room_in == true && room_chg >= ROOM_1)
 									{
 										room_in = false;
-										stop_flg = true;
+										Placement_flg = true;
 
 										searchpoint_font_flg = true;
 										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
@@ -1147,7 +1109,7 @@ void CObjMain::MapHit(
 											hero->SetBarID(ITEM_NULL);
 
 											room_in = false;
-											stop_flg = true;
+											Placement_flg = true;
 
 
 										}
@@ -1158,7 +1120,7 @@ void CObjMain::MapHit(
 							}
 						}
 
-						if (r > 45 && r < 135)
+						if (r > UP_HIT_ANGLE1 && r < UP_HIT_ANGLE2)
 						{
 							//上
 							*down = true;//主人公から見て、下の部分が衝突している
@@ -1182,14 +1144,14 @@ void CObjMain::MapHit(
 								hero->SetHeroStop(true);
 							}
 							//通常の扉
-							else if (r_map[i][j] == DOOR_DOWN && *c_id == CHAR_HERO && Input::GetVKey('E'))
+							else if (r_map[i][j] == DOOR_DOWN && *c_id == CHAR_HERO )
 							{
 								if (room_in == true && room_chg >= ROOM_1)
 								{
 									searchpoint_font_flg = true;
 
 									room_in = false;
-									stop_flg = true;
+									Placement_flg = true;
 
 									//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 									CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -1215,15 +1177,15 @@ void CObjMain::MapHit(
 							}
 							
 						}
-							if (r > 135 && r < 225 )
+							if (r > LEFT_HIT_ANGLE1 && r < LEFT_HIT_ANGLE2 )
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅]
-								*vx = -(*vx) * 0.1f;  //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM;  //-VX*反発係数
 								
 								//本を開く処理
-								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
+								if (r_map[i][j] == BOOK && Input::GetVKey(VK_RETURN) == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1236,14 +1198,14 @@ void CObjMain::MapHit(
 									hero->SetHeroStop(true);
 								}
 								//通常の時
-								else if (r_map[i][j] == DOOR_RIGHT && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (r_map[i][j] == DOOR_RIGHT && *c_id == CHAR_HERO)
 								{
 									if (room_in == true && open_flg==true)
 									{
 										
 
 										room_in = false;
-										stop_flg = true;
+										Placement_flg = true;
 
 										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -1304,7 +1266,7 @@ void CObjMain::MapHit(
 								
 
 							}
-							if (r > 225 && r < 315)
+							if (r > DOWN_HIT_ANGLE1 && r < DOWN_HIT_ANGLE2)
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
@@ -1358,7 +1320,7 @@ void CObjMain::MapHit(
 									{
 										searchpoint_font_flg = true;
 										room_in = false;
-										stop_flg = true;
+										Placement_flg = true;
 
 										//主人公が扉に当たった瞬間に保存していた位置とスクロール情報を代入する。
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
@@ -1467,25 +1429,25 @@ void CObjMain::ItemHit(
 
 						//角度を求める
 						float r = atan2(rvy, rvx);
-						r = r * 180.0f / 3.14f;
+						r = r * HALF_DEGREES / PI;
 
 						if (r <= 0.0f)
 							r = abs(r);
 						else
-							r = 360.0f - abs(r);
+							r = FULL_DEGREES - abs(r);
 
 						//lenがある一定の長さのより短い場合判定に入る
-						if (len < 88.0f)
+						if (len < LENGTH_NUM)
 						{
 							//角度で左右を判定
-							if ((r < 45 && r>0) || r > 315)
+							if ((r < RIGHT_HIT_ANGLE2 && r>RIGHT_HIT_ANGLE1) || r > RIGHT_HIT_ANGLE3)
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx = -(*vx) * 0.1f; //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM; //-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1504,7 +1466,7 @@ void CObjMain::ItemHit(
 
 								
 							}
-							else if (r > 45 && r < 135)
+							else if (r > UP_HIT_ANGLE1 && r < UP_HIT_ANGLE2)
 							{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
@@ -1530,14 +1492,14 @@ void CObjMain::ItemHit(
 								}
 								
 							}
-							else if (r > 135 && r < 225)
+							else if (r > LEFT_HIT_ANGLE1 && r < LEFT_HIT_ANGLE2)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx = -(*vx) * 0.1f;  //-VX*反発係数
+								*vx = -(*vx) * BOUND_NUM;  //-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1556,7 +1518,7 @@ void CObjMain::ItemHit(
 								}
 								
 							}
-							else if (r > 225 && r < 315)
+							else if (r > DOWN_HIT_ANGLE1&& r < DOWN_HIT_ANGLE2)
 							{
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
@@ -1660,26 +1622,26 @@ void CObjMain::ItemHit(
 
 						//角度を求める
 						float r = atan2(rvy, rvx);
-						r = r * 180.0f / 3.14f;
+						r = r * HALF_DEGREES / PI;
 
 						if (r <= 0.0f)
 							r = abs(r);
 						else
-							r = 360.0f - abs(r);
+							r = FULL_DEGREES  - abs(r);
 
 
 					 //lenがある一定の長さのより短い場合判定に入る
-					 if (len < 88.0f)
+					 if (len < LENGTH_NUM)
 					 {  
 					 	 //角度で左右を判定
-						 if ((r < 45 && r > 0) || r > 315)
+						 if ((r < RIGHT_HIT_ANGLE2 && r > RIGHT_HIT_ANGLE1) || r > RIGHT_HIT_ANGLE3)
 						 {
 							 //右
 							 *right = true;//主人公から見て、左の部分が衝突している
 							 *x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の
 							 ix = bx / BLOCK_SIZE_X;
 							 iy = by / BLOCK_SIZE_Y;
-
+							 *vx = -(*vx) * BOUND_NUM; //-VX*反発係数
 							 if (delete_flg == true)
 							 {
 								 //音楽情報の読み込み
@@ -1697,7 +1659,7 @@ void CObjMain::ItemHit(
 						 }
 
 							
-						if (r > 45 && r < 135)
+						if (r > UP_HIT_ANGLE1&& r < UP_HIT_ANGLE2)
 						{
 								//上
 								*down = true;//主人公から見て、下の部分が衝突している
@@ -1720,14 +1682,14 @@ void CObjMain::ItemHit(
 
 								
 						}
-							if (r > 135 && r < 225)
+							if (r > LEFT_HIT_ANGLE1 && r < LEFT_HIT_ANGLE2)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-
+								*vx = -(*vx) * BOUND_NUM; //-VX*反発係数
 								if (delete_flg == true)
 								{
 									//音楽情報の読み込み
@@ -1743,7 +1705,7 @@ void CObjMain::ItemHit(
 							}
 							
 						
-						if (r > 225 && r < 315)
+						if (r > DOWN_HIT_ANGLE1 && r < DOWN_HIT_ANGLE2)
 						{
 							//下
 							*up = true;//主人公から見て、上の部分が衝突している

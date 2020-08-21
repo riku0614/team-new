@@ -30,8 +30,24 @@ using namespace GameL;
 #define ROOM_SPAWN_Y (4.0f)
 #define ROOM_SPAWN_SCROLL_X (-15.0f)
 #define ROOM_SPAWN_SCROLL_Y (-5.0f)
-
-
+#define LENGTH_NUM (88.0f)
+#define SPAWN_POINT_ARRAY_SIZE (7)
+#define ANIME_TIME (4)
+#define INIT_SCROLL (7)
+#define INIT_POS (4)
+#define FULL_DEGREES (360.0f)
+#define HALF_DEGREES (180.0f)
+#define PI (3.14f)
+#define RIGHT_HIT_ANGLE1 (0)
+#define RIGHT_HIT_ANGLE2 (45)
+#define RIGHT_HIT_ANGLE3 (315)
+#define UP_HIT_ANGLE1 (45)
+#define UP_HIT_ANGLE2 (135)
+#define LEFT_HIT_ANGLE1 (135)
+#define LEFT_HIT_ANGLE2 (225)
+#define DOWN_HIT_ANGLE1 (225)
+#define DOWN_HIT_ANGLE2 (315)
+#define BOUND_NUM (0.1f)
 
 //オブジェクト：メイン
 class CObjMain : public CObj
@@ -66,9 +82,9 @@ class CObjMain : public CObj
 
 		int MapChangeData() { return map_chg; }//現在のステージデータ
 
-		bool GetFlug() { return stop_flg; }//マップ切り替えやギミックや敵キャラ、アイテムを配置する処理用
+		bool GetFlug() { return Placement_flg; }//マップ切り替えやギミックや敵キャラ、アイテムを配置する処理用
 
-		bool GetFlug2() { return stop_flg2; }//↑のギミック用
+		bool GetFlug2() { return Placement_Gmmick_flg; }//↑のギミック用
 
 		
 		//マップ上のアイテムデータをアイテムオブジェクトに送る用の関数(インライン関数)
@@ -114,13 +130,11 @@ class CObjMain : public CObj
 
 		unsigned int rand_map;//ランダムにマップを呼ぶ用の変数
 
-		bool stop_flg;    //マップ切り替えやギミックや敵キャラ、アイテムを配置する処理を一度だけ回す用のフラグ
-		bool stop_flg2;   //↑のギミック切り替え用
+		bool Placement_flg;    //マップ切り替えや敵キャラ、アイテムを配置する処理を一度だけ回す用のフラグ
+		bool Placement_Gmmick_flg;   //↑のギミック切り替え用
 		bool first_stop;  //廊下マップデータを変数に移す処理を一度だけ回す用のフラグ
 		bool room_in;     //教室マップへの切り替えのフラグ
 		bool delete_flg;  //アイテム消去用フラグ
-		bool pepepe;
-		bool pepepe_2;
 		bool room_chg_stop;//教室マップデータを変数へ書き写す処理の停止フラグ
 		
 
