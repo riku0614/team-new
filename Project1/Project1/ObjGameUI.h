@@ -44,4 +44,6 @@ private:
 	int m_id;	//key用変数
 	int h_id;	//Heal用変数
 	int b_id;	//bar用変数
+	float damage_effect_feed1;//ダメージエフェクトフェードアウト用変数１
+	float damage_effect_feed2;//ダメージエフェクトフェードアウト用変数２
 };

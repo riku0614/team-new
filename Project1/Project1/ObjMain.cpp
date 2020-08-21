@@ -775,7 +775,7 @@ void CObjMain::MapHit(
 	CObjClickTitle* Title = (CObjClickTitle*)Objs::GetObj(OBJ_CLICK_TITLE);
 	CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 
-	//m=mapの全要素にアクセス
+	//mapの全要素にアクセス
 	//廊下用
 	if (room_in == false)
 	{
@@ -830,10 +830,10 @@ void CObjMain::MapHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-
-								//*vx = -(*vx)*0.5f;//-VX*反発係数
+								*vx = -(*vx) * 0.1f; //-VX*反発係数
+								
 								//階段
- 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E')==true)
+ 								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY )
 								{
 									map_chg++;
 									if (map_chg == GAME_CLEAR)
@@ -853,7 +853,7 @@ void CObjMain::MapHit(
 
 								}
 								//扉
-								else if (m_map[i][j] == DOOR_LEFT  && *c_id == CHAR_HERO && Input::GetVKey('E') == true)
+								else if (m_map[i][j] == DOOR_LEFT  && *c_id == CHAR_HERO)
 								{
 									if (room_in == false)
 									{
@@ -888,7 +888,7 @@ void CObjMain::MapHit(
 								
 								
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
 									map_chg++;
 
@@ -912,7 +912,7 @@ void CObjMain::MapHit(
 									
 								}
 							    //扉
-								else if (m_map[i][j] == DOOR_DOWN  && *c_id == CHAR_HERO&&Input::GetVKey('E'))
+								else if (m_map[i][j] == DOOR_DOWN  && *c_id == CHAR_HERO)
 								{
 									if (room_in == false)
 									{
@@ -923,15 +923,17 @@ void CObjMain::MapHit(
 
 								}
 								
-							
+								*vy = 0.0f;
 							}
 							if (r > 135 && r < 225)
 							{
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
+								*vx = -(*vx) * 0.1f;  //-VX*反発係数
+
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
 									map_chg++;
 
@@ -951,7 +953,7 @@ void CObjMain::MapHit(
 									UI->Settakeflag(false);
 								}
 								//扉
-								else if (m_map[i][j] == DOOR_RIGHT&& *c_id == CHAR_HERO && Input::GetVKey('E') == true)
+								else if (m_map[i][j] == DOOR_RIGHT&& *c_id == CHAR_HERO)
 								{
 									if (room_in == false)
 									{
@@ -977,13 +979,13 @@ void CObjMain::MapHit(
 								//下
 								*up = true;//主人公から見て、上の部分が衝突している
 								*y =by + BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の
-								//反発係数
+								
 								if (*vy < 0)
 								{
-									*vy = 1.0f;
+									*vy = 0.0f;
 								}
 								//階段
-								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY && Input::GetVKey('E') == true)
+								if (m_map[i][j] == STAIRS && *c_id == CHAR_HERO && *k_id == ITEM_KEY)
 								{
 
 									map_chg++;
@@ -1012,7 +1014,7 @@ void CObjMain::MapHit(
 									
 								}
 							    //扉
-								else if (m_map[i][j] == DOOR_UP && *c_id == CHAR_HERO && Input::GetVKey('E'))
+								else if (m_map[i][j] == DOOR_UP && *c_id == CHAR_HERO)
 								{
 									if (room_in == false)
 									{
@@ -1084,10 +1086,10 @@ void CObjMain::MapHit(
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
-								
+								*vx = -(*vx) * 0.1f; //-VX*反発係数
 								
 								//本を開く処理本を開く処理
-								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
+								if (r_map[i][j] == BOOK && Input::GetVKey(VK_RETURN) == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1132,7 +1134,7 @@ void CObjMain::MapHit(
 									else if (room_in == true && room_chg == ROOM_0)
 									{
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
-										if (hero->Getflag_3() == true && Input::GetVKey('E'))
+										if (hero->Getflag_3() == true)
 										{
 											searchpoint_font_flg = true;
 											CObjGameUI* gui = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
@@ -1162,10 +1164,10 @@ void CObjMain::MapHit(
 							*down = true;//主人公から見て、下の部分が衝突している
 							*y = by - BLOCK_SIZE_X + (scroll_y);//ブロックの位置-主人公の幅
 							
-
+							*vy = 0.0f;
 							
 							//本を開く処理
-							if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
+							if (r_map[i][j] == BOOK && Input::GetVKey(VK_RETURN) == true)
 							{
 								searchpoint_font_flg = true;
 
@@ -1218,7 +1220,7 @@ void CObjMain::MapHit(
 								//左
 								*left = true;//主人公から見て、右の部分が衝突している
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅]
-								
+								*vx = -(*vx) * 0.1f;  //-VX*反発係数
 								
 								//本を開く処理
 								if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
@@ -1267,7 +1269,7 @@ void CObjMain::MapHit(
 									{
 										CObjHero* hero = (CObjHero*)Objs::GetObj(OBJ_HERO);
 										
-										if (hero->Getflag_3() == true && Input::GetVKey('E'))
+										if (hero->Getflag_3() == true)
 										{
 											searchpoint_font_flg = true;
 											//音楽情報の読み込み
@@ -1310,7 +1312,7 @@ void CObjMain::MapHit(
 							    
 
 								//本棚から鍵を取る処理
-								if (r_map[i][j] == BOOK_SHELF && Input::GetVKey('E') == true&&nothing_flg==false)
+								if (r_map[i][j] == BOOK_SHELF && Input::GetVKey(VK_RETURN) == true&&nothing_flg==false)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
@@ -1334,7 +1336,7 @@ void CObjMain::MapHit(
 									font_nothing_flg = true;
 								}
 								//本を開く処理
-								else if (r_map[i][j] == BOOK && Input::GetVKey('E') == true)
+								else if (r_map[i][j] == BOOK && Input::GetVKey(VK_RETURN) == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(12, L"12謎の手記SE.wav", SOUND_TYPE::EFFECT);
@@ -1387,6 +1389,10 @@ void CObjMain::MapHit(
 							if (r_map[i][j] == BOOK || r_map[i][j] == DOOR_UP || r_map[i][j] == DOOR_DOWN || r_map[i][j] == DOOR_LEFT || r_map[i][j] == DOOR_RIGHT || r_map[i][j] == BOOK_SHELF)
 							{
 								searchpoint_font_flg = true;
+							}
+							if (*vy < 0)
+							{
+								*vy = 0.0f;
 							}
 						
 					}
@@ -1472,14 +1478,14 @@ void CObjMain::ItemHit(
 						if (len < 88.0f)
 						{
 							//角度で左右を判定
-							if ((r < 45 && r>=0) || r > 315)
+							if ((r < 45 && r>0) || r > 315)
 							{
 								//右
 								*right = true;//主人公から見て、左の部分が衝突している
 								*x = bx + ITEM_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx = (*vx)*0.1f;//-VX*反発係数
+								*vx = -(*vx) * 0.1f; //-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1505,7 +1511,7 @@ void CObjMain::ItemHit(
 								*y = by - BLOCK_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-
+								*vy = 0.0f;
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1531,7 +1537,7 @@ void CObjMain::ItemHit(
 								*x = bx - BLOCK_SIZE_X + (scroll_x);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								*vx= (*vx)*0.1f;//-VX*反発係数
+								*vx = -(*vx) * 0.1f;  //-VX*反発係数
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1557,10 +1563,6 @@ void CObjMain::ItemHit(
 								*y = by + ITEM_SIZE_Y + (scroll_y);//ブロックの位置-主人公の幅
 								ix = bx / BLOCK_SIZE_X;
 								iy = by / BLOCK_SIZE_Y;
-								if (*vy < 0)
-								{
-									*vy = 0.0f;
-								}
 								//アイテムを取得した際にアイテムを消す処理
 								if (delete_flg == true)
 								{
@@ -1577,7 +1579,10 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								
+								if (*vy < 0)
+								{
+									*vy = 0.0f;
+								}
 
 							}
 							//鍵
@@ -1667,7 +1672,7 @@ void CObjMain::ItemHit(
 					 if (len < 88.0f)
 					 {  
 					 	 //角度で左右を判定
-						 if ((r < 45 && r >= 0) || r > 315)
+						 if ((r < 45 && r > 0) || r > 315)
 						 {
 							 //右
 							 *right = true;//主人公から見て、左の部分が衝突している
@@ -1713,7 +1718,7 @@ void CObjMain::ItemHit(
 									delete_flg = false;
 								}
 
-								*vy = 0.0f;
+								
 						}
 							if (r > 135 && r < 225)
 							{
@@ -1746,7 +1751,7 @@ void CObjMain::ItemHit(
 							ix = bx / BLOCK_SIZE_X;
 							iy = by / BLOCK_SIZE_X;
 
-								if (delete_flg == true)
+							if (delete_flg == true)
 								{
 									//音楽情報の読み込み
 									Audio::LoadAudio(10, L"10アイテム入手.wav", SOUND_TYPE::EFFECT);
@@ -1758,10 +1763,7 @@ void CObjMain::ItemHit(
 
 									delete_flg = false;
 								}
-								if (*vy < 0)
-								{
-									*vy = 1.0f;
-								}
+								
 
 
 						}

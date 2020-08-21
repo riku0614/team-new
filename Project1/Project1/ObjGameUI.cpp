@@ -26,6 +26,10 @@ void CObjGameUI::Init()
 	m_id = 99;
 	h_id = 99;
 	b_id = 99;
+
+	damage_effect_feed1 = 1.0f;
+	damage_effect_feed2 = 1.0f;
+	
 }
 
 //アクション
@@ -127,6 +131,10 @@ void CObjGameUI::Draw()
 		/*ダメージエフェクト*/
 		if (hero->action_flag() == true && hero->GetLife() == 2)
 		{
+			
+			
+
+			float Damage_Effect_1[4] = { 1.0f,1.0f,1.0f,damage_effect_feed1 };
 			//切り取り位置の設定
 			src.m_top = 0.0f;
 			src.m_left = 0.0f;
@@ -141,10 +149,21 @@ void CObjGameUI::Draw()
 
 			//描画設定
 
-			Draw::Draw(47, &src, &dst, c, 0.0f);
+			Draw::Draw(47, &src, &dst, Damage_Effect_1, 0.0f);
+
+			if (damage_effect_feed1 != 0.0f)
+			{
+				damage_effect_feed1 -= 0.01;
+			}
+			
+			
 		}
 		if (hero->action_flag2() == true && hero->GetLife() == 1)
 		{
+			
+
+			float Damage_Effect_2[4] = { 1.0f,1.0f,1.0f,damage_effect_feed2 };
+
 			//切り取り位置の設定
 			src.m_top = 0.0f;
 			src.m_left = 0.0f;
@@ -159,7 +178,13 @@ void CObjGameUI::Draw()
 
 			//描画設定
 
-			Draw::Draw(48, &src, &dst, c, 0.0f);
+			Draw::Draw(48, &src, &dst, Damage_Effect_2, 0.0f);
+
+			if (damage_effect_feed2 != 0.0f)
+			{
+				damage_effect_feed2 -= 0.01;
+			}
+			
 		}
 
 		//切り取り位置の設定

@@ -51,7 +51,7 @@ void CObjHero::Init()
 
 	m_block_type = 0;
 
-
+	friction_flag = true;
 
 	m_ani_time = 4;
 	m_time = 10;
@@ -81,7 +81,7 @@ void CObjHero::Action()
 {
 	//自身のhitboxを持ってくる
 	CHitBox* hit = Hits::GetHitBox(this);
-	hit->SetInvincibility(true);
+	
 
 
 	//ゲームメインにフラグをセットする
@@ -106,7 +106,7 @@ void CObjHero::Action()
 		{
 
 			//ダッシュ時の速度
-			m_speed_power = 5.5f;
+			m_speed_power = 12.0f;
 			m_ani_max_time = 4;
 
 			m_stamina_limid -= 0.5f;
@@ -114,7 +114,7 @@ void CObjHero::Action()
 		else
 		{
 			//通常速度
-			m_speed_power = 5.0f;
+			m_speed_power = 10.0f;
 			m_ani_max_time = 4;
 
 			if (m_stamina_limid < 90.0f)
@@ -132,24 +132,28 @@ void CObjHero::Action()
 			m_vx -= m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
+			friction_flag = false;
 		}
 		if (Input::GetVKey('W') == true && Input::GetVKey('S') != true)
 		{
 			m_vy -= m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
+			friction_flag = false;
 		}
 		if (Input::GetVKey('S') == true && Input::GetVKey('W') != true)
 		{
 			m_vy += m_speed_power;
 			m_posture = 1.0f;
 			m_ani_time += 1;
+			friction_flag = false;
 		}
 		if (Input::GetVKey('D') == true && Input::GetVKey('A') != true)
 		{
 			m_vx += m_speed_power;
 			m_posture = 0.0f;
 			m_ani_time += 1;
+			friction_flag = false;
 		}
 	}
 	else if (m_hero_stop == true && Input::GetVKey(VK_RETURN) == true)
@@ -166,10 +170,11 @@ void CObjHero::Action()
 	r = sqrt(r);
 
 	//長さが0かどうか調べる
-	if (r != 0.0f)
+	if (r != 0.0f&&friction_flag==false)
 	{
 		m_vx = m_speed_power / r * m_vx;
 		m_vy = m_speed_power / r * m_vy;
+		friction_flag = true;
 	}
 	
 	//摩擦
@@ -181,6 +186,8 @@ void CObjHero::Action()
 	m_px += m_vx+m_speed_power;
 	m_py += m_vy+m_speed_power;
 
+
+	
 	//主人公のアイテムと当たったフラグを持ってくる
 	CObjGameUI* UI = (CObjGameUI*)Objs::GetObj(OBJ_GAME_UI);
 

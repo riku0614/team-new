@@ -120,6 +120,9 @@ private:
 	bool Conflict_flag; //敵と当たったかを判断するフラグ
 	bool Conflict_flag2; 
 
+	//摩擦係数用フラグ
+	bool friction_flag;
+
 	float px, py;//交点
 
 	bool stey_flg1;
