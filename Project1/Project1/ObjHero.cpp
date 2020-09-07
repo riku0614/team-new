@@ -100,9 +100,11 @@ void CObjHero::Action()
 			dash_stop = false;
 		}
 
-		//Zキー入力で速度アップ
-		if (m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_LSHIFT) == true ||
-			m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_RSHIFT) == true)
+		//WASD入力 ＋ シフトキーで速度アップ
+		if (m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_LSHIFT) == true 
+			&& (Input::GetVKey('A') || Input::GetVKey('S') || Input::GetVKey('W') || Input::GetVKey('D') )
+			|| m_stamina_limid > 0 && dash_stop == false && Input::GetVKey(VK_RSHIFT) == true
+			&& (Input::GetVKey('A') || Input::GetVKey('S') || Input::GetVKey('W') || Input::GetVKey('D')))
 		{
 
 			//ダッシュ時の速度
@@ -117,6 +119,7 @@ void CObjHero::Action()
 			m_speed_power = 10.0f;
 			m_ani_max_time = 4;
 
+			//スタミナゲージが減っている場合、スタミナゲージが回復
 			if (m_stamina_limid < 90.0f)
 			{
 				m_stamina_limid += 0.5f;
@@ -407,8 +410,8 @@ void CObjHero::Draw()
 		src.m_bottom = 64.0f;
 
 		dst.m_top = 0.0f + m_py+64.0f;
-		dst.m_left = 0.0f+ m_px;
-		dst.m_right = m_stamina_limid + m_px;
+		dst.m_left = -8.0f+ m_px;
+		dst.m_right = m_stamina_limid + m_px - 8.0f;
 		dst.m_bottom = 64.0f + m_py+64.0f;
 
 		//1番目に登録したグラフィックをsrc.dst.cの情報を元に描画

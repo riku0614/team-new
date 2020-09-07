@@ -56,13 +56,13 @@
       <Filter>ゲームソースコード\システム</Filter>
     </ClCompile>
     <ClCompile Include="ObjGimmick.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClCompile>
     <ClCompile Include="ObjGimmick2.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClCompile>
     <ClCompile Include="ObjGimmick3.cpp">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClCompile>
     <ClCompile Include="objheal.cpp">
       <Filter>ゲームソースコード\アイテム</Filter>
@@ -196,13 +196,13 @@
       <Filter>ゲームソースコード\システム</Filter>
     </ClInclude>
     <ClInclude Include="ObjGimmick.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClInclude>
     <ClInclude Include="ObjGimmick2.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClInclude>
     <ClInclude Include="ObjGimmick3.h">
-      <Filter>ゲームソースコード\ギミック</Filter>
+      <Filter>ゲームソースコード\シーン\ギミック</Filter>
     </ClInclude>
     <ClInclude Include="objheal.h">
       <Filter>ゲームソースコード\アイテム</Filter>
@@ -302,9 +302,6 @@
     <Filter Include="ゲームソースコード\敵キャラクター">
       <UniqueIdentifier>{cb51eb52-12ce-4fcc-b5cd-fd6e21a1c960}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ゲームソースコード\ギミック">
-      <UniqueIdentifier>{5ebab5e1-ce7f-424c-883e-65147f1621d6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ゲームソースコード\主人公">
       <UniqueIdentifier>{bac82c0f-47b4-4c3d-acdf-584595057cd5}</UniqueIdentifier>
     </Filter>
@@ -316,6 +313,9 @@
     </Filter>
     <Filter Include="ゲームソースコード\関数">
       <UniqueIdentifier>{3b98d1b4-5be1-4fe8-8759-185e949892d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ゲームソースコード\シーン\ギミック">
+      <UniqueIdentifier>{5ebab5e1-ce7f-424c-883e-65147f1621d6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
